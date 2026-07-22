@@ -23,7 +23,7 @@ jobs:
   privacy-guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Scan index.html for forbidden personal identifiers
         shell: bash
         run: |
@@ -62,7 +62,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Stage only index.html for publishing
         run: |
           mkdir -p _site
