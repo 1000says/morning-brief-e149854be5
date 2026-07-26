@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>モーニングブリーフ</title>
 <style>
@@ -13,140 +13,113 @@
     --sans:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  .band{width:100%;padding:56px 24px}
-  .top{background:var(--wash);border-bottom:1px solid var(--line)}
-  .bottom{background:var(--bg)}
-  .inner{max-width:860px;margin:0 auto}
-
-  .daydate{font-family:var(--sans);font-size:14px;letter-spacing:.02em;
-    color:var(--ink-soft);margin-bottom:14px}
-  .headline{font-family:var(--serif);font-weight:600;font-style:normal;
-    font-size:40px;line-height:1.34;color:var(--ink);letter-spacing:.01em;
-    max-width:760px}
-
-  .drawing{margin:38px 0 6px}
+  html,body{background:var(--bg)}
+  body{font-family:var(--sans);color:var(--ink-soft);-webkit-font-smoothing:antialiased;line-height:1.7}
+  .band{width:100%}
+  .band-top{background:var(--wash);border-bottom:1px solid var(--line)}
+  .band-bottom{background:var(--bg)}
+  .inner{max-width:860px;margin:0 auto;padding:56px 40px}
+  .daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:14px}
+  .headline{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:40px;line-height:1.35;letter-spacing:.01em}
+  .drawing{margin:40px 0 8px}
   .drawing svg{display:block;width:100%;height:auto}
-
-  .acts{display:flex;gap:0;margin-top:10px}
-  .act{flex:1;padding:22px 24px 4px;position:relative}
+  .acts{display:flex;gap:0;margin-top:8px}
+  .act{flex:1;padding:0 26px}
+  .act:first-child{padding-left:0}
+  .act:last-child{padding-right:0}
   .act + .act{border-left:1px solid var(--hairline)}
-  .act .time{font-family:var(--sans);font-weight:700;font-size:14px;
-    color:var(--ink);letter-spacing:.03em;margin-bottom:8px}
-  .act .say{font-family:var(--sans);font-size:14.5px;line-height:1.7;
-    color:var(--ink-soft);max-width:22em}
-
-  .list{margin-top:8px}
-  .list + .list{margin-top:44px}
-  .list h2{font-family:var(--sans);font-weight:700;font-size:13px;
-    letter-spacing:.09em;color:var(--ink);text-transform:none;margin-bottom:22px}
-  .item{display:flex;gap:18px;padding:16px 0;border-top:1px solid var(--hairline)}
-  .item:first-of-type{border-top:none}
-  .item .n{font-family:var(--sans);font-size:14px;color:var(--ink-grey);
-    min-width:22px;padding-top:2px;font-variant-numeric:tabular-nums}
-  .item .body{flex:1}
-  .item .title{font-family:var(--sans);font-weight:700;font-size:16px;
-    line-height:1.5;color:var(--ink);margin-bottom:5px}
-  .item .desc{font-family:var(--sans);font-size:14.5px;line-height:1.72;
-    color:var(--ink-soft)}
-  .item .src{color:var(--ink-soft);
-    text-decoration:underline;text-decoration-color:var(--ink-grey);
-    text-underline-offset:2px;text-decoration-thickness:1px}
-  .calm{font-family:var(--sans);font-size:15px;color:var(--ink-soft);
-    padding:8px 0}
-
+  .act .time{font-weight:700;color:var(--ink);font-size:14px;letter-spacing:.02em;margin-bottom:8px}
+  .act .say{font-size:15px;color:var(--ink-soft);line-height:1.65}
+  .list{margin-bottom:44px}
+  .list:last-child{margin-bottom:0}
+  .list h2{font-family:var(--sans);font-weight:600;color:var(--ink);font-size:15px;letter-spacing:.06em;margin-bottom:22px}
+  .item{display:flex;gap:18px;margin-bottom:24px}
+  .item:last-child{margin-bottom:0}
+  .num{font-family:var(--sans);color:var(--ink-grey);font-size:15px;font-weight:600;min-width:18px;padding-top:1px}
+  .item .body .title{font-weight:700;color:var(--ink);font-size:16px;margin-bottom:4px;line-height:1.5}
+  .item .body .say{font-size:15px;color:var(--ink-soft);line-height:1.68}
+  .src{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--ink-grey);text-underline-offset:2px}
+  .calm{font-size:16px;color:var(--ink-soft)}
   @media (max-width:640px){
-    .band{padding:40px 20px}
+    .inner{padding:40px 22px}
     .headline{font-size:30px}
     .acts{flex-direction:column}
-    .act{padding:20px 0}
-    .act + .act{border-left:none;border-top:1px solid var(--hairline)}
+    .act{padding:0;border-left:none!important;border-top:1px solid var(--hairline);padding-top:18px;margin-top:18px}
+    .act:first-child{border-top:none;margin-top:0;padding-top:0}
   }
 </style>
 </head>
 <body>
-
-  <section class="band top">
+  <section class="band band-top">
     <div class="inner">
-      <div class="daydate">金曜日 · 2026年7月24日</div>
-      <h1 class="headline">午前はまるごと空いてる、秀平さん。手をつけたかった作業に、静かな時間を。</h1>
-
+      <div class="daydate">2026年7月27日（月）</div>
+      <h1 class="headline">早朝を越えれば、あとは秀平さんの時間です。</h1>
       <div class="drawing">
         <svg viewBox="0 0 840 170" role="img" aria-label="今日の一日の地形">
-          <g stroke="#2E2C27" stroke-width="1.4" fill="none" stroke-linecap="round">
-            <circle cx="140" cy="50" r="13"/>
-            <line x1="140" y1="26" x2="140" y2="18"/>
-            <line x1="140" y1="82" x2="140" y2="74"/>
-            <line x1="116" y1="50" x2="108" y2="50"/>
-            <line x1="164" y1="50" x2="172" y2="50"/>
-            <line x1="122" y1="32" x2="117" y2="27"/>
-            <line x1="158" y1="32" x2="163" y2="27"/>
-            <line x1="122" y1="68" x2="117" y2="73"/>
-            <line x1="158" y1="68" x2="163" y2="73"/>
+          <path d="M112 34 a15 15 0 1 0 12 26 a12 12 0 1 1 -12 -26 z" fill="none" stroke="#B4B3A8" stroke-width="1.6"/>
+          <circle cx="700" cy="50" r="13" fill="none" stroke="#C6613F" stroke-width="1.8"/>
+          <g stroke="#C6613F" stroke-width="1.6" stroke-linecap="round">
+            <line x1="700" y1="26" x2="700" y2="32"/>
+            <line x1="723" y1="50" x2="729" y2="50"/>
+            <line x1="671" y1="50" x2="677" y2="50"/>
+            <line x1="717" y1="33" x2="721" y2="29"/>
+            <line x1="683" y1="33" x2="679" y2="29"/>
           </g>
-          <path d="M0,124 C 110,122 210,120 300,118 C 372,116 400,98 452,102 C 556,110 636,122 720,122 C 772,122 812,123 840,123"
-                fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="440" cy="100" r="10" fill="#2E2C27"/>
-          <line x1="752" y1="122" x2="752" y2="78" stroke="#2E2C27" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M752,79 L779,85 L752,93 Z" fill="#C6613F"/>
+          <path d="M754 60 q7 -7 14 0 M768 60 q7 -7 14 0" fill="none" stroke="#B4B3A8" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M0 126 C60 123 100 101 140 101 C188 101 244 119 300 121 C356 123 392 113 420 113 C486 113 566 122 648 123 L840 123"
+                fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="140" cy="101" r="9" fill="#2E2C27"/>
+          <circle cx="420" cy="113" r="8" fill="#2E2C27"/>
         </svg>
       </div>
-
       <div class="acts">
         <div class="act">
-          <div class="time">9:00 – 14:00</div>
-          <div class="say">会議のない午前。カレンダーは午後まで空白のまま、まとまった時間が続く。</div>
+          <div class="time">2:00 – 8:00</div>
+          <div class="say">夜間育児で早朝がふさがる。静かな時間帯。</div>
         </div>
         <div class="act">
-          <div class="time">14:00 – 16:00</div>
-          <div class="say">午後は来客が2時間。今日の予定は、ここが唯一の軸になる。</div>
+          <div class="time">9:00 – 12:00</div>
+          <div class="say">午前は在宅で配送を受け取る枠がひとつ。</div>
         </div>
         <div class="act">
-          <div class="time">21:00 –</div>
-          <div class="say">夜9時に注文の締切。今週分は、そこで一区切り。</div>
+          <div class="time">12:00 以降</div>
+          <div class="say">予定は開いている。手の空く午後。</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band bottom">
+  <section class="band band-bottom">
     <div class="inner">
-
       <div class="list">
-        <h2>気にかけておくこと</h2>
-
+        <h2>いま必要なこと</h2>
         <div class="item">
-          <div class="n">1</div>
+          <div class="num">1</div>
           <div class="body">
-            <div class="title">AWS 無料プランが明日終了</div>
-            <div class="desc"><span class="src">受信トレイの通知</span>で、7月25日に無料プラン期間が終了。残クレジットと現行リソースへのアクセスが失効するため、継続するかどうかは今日のうちに決めておきたい。</div>
+            <div class="title">野菜の配送を受け取る</div>
+            <div class="say"><span class="src">カレンダー</span>に午前の枠で入っている。在宅での受け取りが必要。</div>
           </div>
         </div>
-
         <div class="item">
-          <div class="n">2</div>
+          <div class="num">2</div>
           <div class="body">
-            <div class="title">注文の締切は今夜21時</div>
-            <div class="desc"><span class="src">カレンダーの予定</span>で、今週分の締切が21時。確定するなら日中のうちに、内容を見ておくと安心。</div>
+            <div class="title">今日は重めの筋トレ日</div>
+            <div class="say"><span class="src">タスク</span>で、数日おきのデッドリフト・レッグカール・ハックスクワットが今日そろって並ぶ。日課のストレッチとは別枠。</div>
           </div>
         </div>
       </div>
 
       <div class="list">
-        <h2>片づいたこと</h2>
-
+        <h2>もう片づいたこと</h2>
         <div class="item">
-          <div class="n">1</div>
+          <div class="num">1</div>
           <div class="body">
-            <div class="title">ネットスーパーの配達が完了</div>
-            <div class="desc"><span class="src">受信トレイの通知</span>によると、昨夕、注文したネットスーパーの品が配達完了。受け取りは済んでいる。</div>
+            <div class="title">宅配便は今日届く予定</div>
+            <div class="say"><span class="src">配送通知</span>によると、荷物が置き配指定で今日中に到着する。受け取りの手間はかからない。</div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
-
 </body>
 </html>
