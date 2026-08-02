@@ -6,122 +6,124 @@
 <meta name="robots" content="noindex, nofollow">
 <title>モーニングブリーフ</title>
 <style>
-:root{
-  --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
-  --ink-grey:#B4B3A8; --hairline:#E4E3DC; --line:#E1E1DF; --clay:#C6613F;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--ink);
-  font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.band{width:100%;padding:56px 24px}
-.top{background:var(--wash);border-bottom:1px solid var(--line)}
-.bottom{background:var(--bg)}
-.inner{max-width:860px;margin:0 auto}
-.daydate{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:14px}
-.headline{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
-  font-weight:600;font-size:40px;line-height:1.28;color:var(--ink);letter-spacing:.01em;max-width:20em}
-.drawing{margin:34px 0 6px}
-.drawing svg{display:block;width:100%;height:auto}
-.acts{display:flex;gap:0;margin-top:12px}
-.act{flex:1;padding:20px 22px}
-.act + .act{border-left:1px solid var(--hairline)}
-.act .t{font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.02em}
-.act .s{margin-top:9px;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
-.section-h{font-size:12.5px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink);margin:0 0 20px}
-.bottom .block + .block{margin-top:44px}
-.item{display:flex;gap:16px;padding:15px 0;border-top:1px solid var(--hairline)}
-.item:first-of-type{border-top:none}
-.num{font-size:13px;color:var(--ink-grey);min-width:20px;padding-top:2px;
-  font-variant-numeric:tabular-nums}
-.item .body .ti{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.45}
-.item .body .ds{margin-top:6px;font-size:14.5px;line-height:1.62;color:var(--ink-soft)}
-.src{border-bottom:1px solid var(--ink-grey);color:var(--ink-soft)}
-@media (max-width:640px){
-  .band{padding:40px 20px}
-  .headline{font-size:30px}
-  .acts{flex-direction:column}
-  .act{padding:18px 0}
-  .act + .act{border-left:none;border-top:1px solid var(--hairline)}
-}
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
+    --ink-grey:#B4B3A8; --hairline:#E4E3DC; --line:#E1E1DF; --clay:#C6613F;
+    --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
+    --sans:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.7}
+  .band{width:100%}
+  .top{background:var(--wash);border-bottom:1px solid var(--line)}
+  .bottom{background:var(--bg)}
+  .inner{max-width:860px;margin:0 auto;padding:54px 40px}
+  .daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:16px}
+  h1{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.32;
+    color:var(--ink);letter-spacing:.01em;max-width:26em}
+  .draw{margin:34px 0 8px}
+  .draw svg{width:100%;height:auto;display:block}
+  .acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:14px}
+  .act{padding:4px 26px 4px 0;position:relative}
+  .act + .act{border-left:1px solid var(--hairline);padding-left:26px}
+  .act .t{font-weight:700;font-size:13.5px;color:var(--ink);letter-spacing:.03em;margin-bottom:7px}
+  .act .s{font-size:14px;color:var(--ink-soft)}
+  h2{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.08em;
+    color:var(--ink);margin-bottom:22px}
+  .list{list-style:none;margin-bottom:46px}
+  .item{display:grid;grid-template-columns:30px 1fr;gap:6px;padding:15px 0;
+    border-top:1px solid var(--hairline)}
+  .item:last-child{border-bottom:1px solid var(--hairline)}
+  .num{font-size:15px;color:var(--ink-grey);font-variant-numeric:tabular-nums;padding-top:1px}
+  .ttl{font-weight:600;font-size:16px;color:var(--ink);margin-bottom:3px}
+  .desc{font-size:14.5px;color:var(--ink-soft)}
+  .src{text-decoration:underline;text-decoration-color:var(--ink-grey);text-underline-offset:2px}
+  @media (max-width:640px){
+    .inner{padding:40px 22px}
+    h1{font-size:30px}
+    .acts{grid-template-columns:1fr}
+    .act,.act + .act{border-left:none;border-top:1px solid var(--hairline);
+      padding:16px 0 4px 0}
+    .act:first-child{border-top:none}
+  }
 </style>
 </head>
 <body>
-<div class="band top">
-  <div class="inner">
-    <div class="daydate">金曜日 · 7月31日 2026</div>
-    <div class="headline">午前はあなたの時間、しゅうへいさん。昼から夜までは外の予定でうまる一日。</div>
-    <div class="drawing">
-      <svg viewBox="0 0 840 170" role="img" aria-label="一日の起伏">
-        <circle cx="140" cy="44" r="12" fill="none" stroke="#C6613F" stroke-width="2"/>
-        <g stroke="#C6613F" stroke-width="2" stroke-linecap="round">
-          <line x1="140" y1="20" x2="140" y2="27"/>
-          <line x1="118" y1="44" x2="125" y2="44"/>
-          <line x1="155" y1="44" x2="162" y2="44"/>
-          <line x1="123" y1="27" x2="128" y2="32"/>
-          <line x1="157" y1="27" x2="152" y2="32"/>
-        </g>
-        <g stroke="#2E2C27" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="720" y1="82" x2="720" y2="46"/>
-          <path d="M720 48 L744 54 L720 60 Z" fill="#2E2C27" stroke="none"/>
-        </g>
-        <path d="M0 108 C40 104 96 101 140 103 C196 105 240 92 264 78
-                 C300 60 344 52 396 52 C458 52 520 54 550 56
-                 C592 58 632 66 660 74 C690 81 706 79 720 82
-                 C770 90 812 97 840 100"
-              fill="none" stroke="#2E2C27" stroke-width="2.4"
-              stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="264" cy="78" r="11" fill="#2E2C27"/>
-        <circle cx="396" cy="52" r="8" fill="#B4B3A8"/>
-        <circle cx="550" cy="56" r="9" fill="#2E2C27"/>
-      </svg>
-    </div>
-    <div class="acts">
-      <div class="act">
-        <div class="t">5:00 – 11:00</div>
-        <div class="s">夜間の育児対応が8:00に明け、外出までは在宅の静かな時間。午前中はほぼ予定が入っていない。</div>
+  <section class="band top">
+    <div class="inner">
+      <div class="daydate">日曜日 ・ 8月2日 2026</div>
+      <h1>予定のない日曜日。手が空いた時間を、ずっと気になっていたことへ。</h1>
+
+      <div class="draw">
+        <svg viewBox="0 0 840 170" role="img" aria-label="一日の地形図">
+          <path d="M0,116 C120,112 240,118 360,114 C480,110 600,117 720,113 C780,111 810,113 840,112"
+                fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
+          <g>
+            <path d="M118,114.5 A22,22 0 0 1 162,114.5" fill="none" stroke="#C6613F" stroke-width="2" stroke-linecap="round"/>
+            <line x1="140" y1="80" x2="140" y2="70" stroke="#C6613F" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="119" y1="88" x2="112" y2="82" stroke="#C6613F" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="161" y1="88" x2="168" y2="82" stroke="#C6613F" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="104" y1="103" x2="95" y2="100" stroke="#C6613F" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="176" y1="103" x2="185" y2="100" stroke="#C6613F" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <circle cx="140" cy="114.5" r="6" fill="#2E2C27"/>
+          <g stroke="#6B6A63" stroke-width="1.6" fill="none" stroke-linecap="round">
+            <path d="M604,58 q9,-8 18,0"/>
+            <path d="M622,58 q9,-8 18,0"/>
+            <path d="M660,70 q7,-6 14,0"/>
+          </g>
+        </svg>
       </div>
-      <div class="act">
-        <div class="t">11:00 – 17:30</div>
-        <div class="s">11:00から終日の外出。昼から夕方までは移動と用事で埋まり、日中に空きはほぼ残らない。</div>
-      </div>
-      <div class="act">
-        <div class="t">17:30 以降</div>
-        <div class="s">夕方は新宿で夕食。20:00に帰宅し、そのあとは夜間の育児対応へ。</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="band bottom">
-  <div class="inner">
-    <div class="block">
-      <div class="section-h">気にかけること</div>
-      <div class="item">
-        <div class="num">1</div>
-        <div class="body">
-          <div class="ti">シッターが仮予約のまま</div>
-          <div class="ds"><span class="src">カレンダー上</span>で14:00–17:00に入っているシッターは「予約申請中」の状態で、同席予定の相手は不参加の返答。終日の外出と重なる時間帯のため、確定状況の確認が要りそう。</div>
+
+      <div class="acts">
+        <div class="act">
+          <div class="t">2:00 – 8:00 AM</div>
+          <div class="s">夜間の対応が明けて、朝はゆっくり始められる。</div>
         </div>
-      </div>
-      <div class="item">
-        <div class="num">2</div>
-        <div class="body">
-          <div class="ti">食材宅配の注文締切は今夜21:00</div>
-          <div class="ds"><span class="src">カレンダー上</span>に21:00–22:00で注文締切。今日中に閉じる注文の窓なので、外出から戻ったあとに間に合わせる形になる。</div>
+        <div class="act">
+          <div class="t">日中</div>
+          <div class="s">入っている予定はない。日曜の体組成計測日にあたる。</div>
+        </div>
+        <div class="act">
+          <div class="t">夕方以降</div>
+          <div class="s">手つかずの時間。あす朝の工事に向けて整えておける。</div>
         </div>
       </div>
     </div>
-    <div class="block">
-      <div class="section-h">片づいたこと</div>
-      <div class="item">
-        <div class="body">
-          <div class="ti">注文した食材が納品完了</div>
-          <div class="ds">昨日注文した食材（豚肉）について、<span class="src">メール</span>で昨日「配達完了」の連絡。今日の調理に使える食材は手元に届いている。</div>
-        </div>
-      </div>
+  </section>
+
+  <section class="band bottom">
+    <div class="inner">
+      <h2>手を入れておきたいこと</h2>
+      <ul class="list">
+        <li class="item">
+          <div class="num">01</div>
+          <div>
+            <div class="ttl">あす午前の設置工事に在宅</div>
+            <div class="desc"><span class="src">カレンダー</span>では、あす 9:00 – 12:00 に自宅で設置工事。午前は在宅の時間を空けておくと当日あわてずに済む。</div>
+          </div>
+        </li>
+        <li class="item">
+          <div class="num">02</div>
+          <div>
+            <div class="ttl">週次の体組成を計測する</div>
+            <div class="desc">日曜の計測タスク。前回からの脂肪と除脂肪の減少比、体重の週ペース、内臓脂肪レベルの推移を確認しておく。</div>
+          </div>
+        </li>
+      </ul>
+
+      <h2>片づいたこと</h2>
+      <ul class="list">
+        <li class="item">
+          <div class="num">01</div>
+          <div>
+            <div class="ttl">注文していた食材の納品が完了</div>
+            <div class="desc"><span class="src">メール</span>に、きのう出荷された食材の配達完了通知。中身に問題がなければ対応は不要。</div>
+          </div>
+        </li>
+      </ul>
     </div>
-  </div>
-</div>
+  </section>
 </body>
 </html>
