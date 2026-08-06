@@ -15,12 +15,11 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",
 .daydate{font-size:13px;color:var(--soft);letter-spacing:.04em;margin-bottom:14px;}
 h1{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;font-weight:600;font-size:40px;line-height:1.32;color:var(--ink);letter-spacing:.005em;}
 .drawing{margin:34px 0 8px;}
-.acts{display:flex;gap:0;margin-top:14px;}
+.acts{display:flex;margin-top:14px;}
 .act{flex:1;padding:18px 20px;border-left:1px solid var(--hair);}
 .act:first-child{border-left:none;padding-left:0;}
-.atime{font-weight:700;font-size:13.5px;letter-spacing:.03em;color:var(--ink);margin-bottom:7px;}
+.atime{font-weight:700;font-size:13.5px;letter-spacing:.03em;margin-bottom:7px;}
 .act p{font-size:14px;color:var(--soft);}
-.bottom{background:var(--bg);}
 .listwrap{margin-bottom:40px;}
 h2{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);margin-bottom:18px;}
 ul{list-style:none;}
@@ -31,14 +30,29 @@ li:first-of-type{border-top:none;}
 .ttl{font-weight:600;font-size:15.5px;color:var(--ink);text-decoration:none;}
 a.ttl:hover{text-decoration:underline;}
 .body p{font-size:14px;color:var(--soft);margin-top:3px;}
-.src{color:var(--soft);text-decoration:underline;text-decoration-color:var(--grey);text-underline-offset:2px;}
-a.src{color:var(--soft);}
+.arcwrap{border-top:1px solid var(--hair);}
+details.arc{border-bottom:1px solid var(--hair);}
+details.arc>summary{list-style:none;cursor:pointer;padding:15px 0 15px 26px;position:relative;}
+details.arc>summary::-webkit-details-marker{display:none;}
+details.arc>summary::before{content:"";position:absolute;left:4px;top:24px;width:7px;height:7px;border-right:1.6px solid var(--grey);border-bottom:1.6px solid var(--grey);transform:rotate(-45deg);transition:transform .18s ease;}
+details.arc[open]>summary::before{transform:rotate(45deg);top:22px;}
+.adate{display:block;font-size:12.5px;color:var(--grey);letter-spacing:.04em;}
+.ahead{display:block;font-size:15px;font-weight:600;color:var(--ink);margin-top:2px;}
+.abody{padding:2px 0 20px 26px;}
+.arow{display:flex;gap:14px;font-size:13.5px;color:var(--soft);padding:3px 0;}
+.atm{min-width:112px;font-weight:700;color:var(--ink);font-size:12.5px;padding-top:1px;}
+.asub{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin:14px 0 4px;}
+ul.amini li{display:block;border:none;padding:5px 0;font-size:13.5px;font-weight:600;color:var(--ink);}
+ul.amini li span{display:block;font-weight:400;color:var(--soft);}
+.anote{font-size:13.5px;color:var(--soft);margin-top:10px;}
 @media (max-width:640px){
  .inner{padding:36px 22px;}
  h1{font-size:30px;}
  .acts{flex-direction:column;}
  .act{border-left:none;border-top:1px solid var(--hair);padding:16px 0;}
  .act:first-child{border-top:none;}
+ .arow{flex-direction:column;gap:0;}
+ .atm{min-width:0;}
 }
 </style>
 </head>
@@ -64,8 +78,9 @@ a.src{color:var(--soft);}
 <div class="acts"><div class="act"><div class="atime">9:00 – 12:00</div><p>朝いちばんに受け取りがひとつ。動き出しで一度、家に留まる。</p></div><div class="act"><div class="atime">12:00 – 18:00</div><p>昼から夕方まで予定はなし。まとまった時間が取れる。</p></div><div class="act"><div class="atime">18:00 –</div><p>日が暮れると用事が戻る。夜にかけて、ふたつだけ。</p></div></div>
 </div></div>
 <div class="band bottom"><div class="inner">
-<div class="listwrap"><h2>Needs attention</h2><ul><li><span class="num">01</span><div class="body"><span class="ttl">コープの注文は今夜21:00締切</span><p><span class="src">カレンダーに</span>、今日21:00の注文締切。今週ぶんはこの時間まで。</p></div></li><li><span class="num">02</span><div class="body"><span class="ttl">クール便が夕方18:00〜20:00に到着</span><p><span class="src">カレンダーに</span>、冷蔵の宅急便が夕方着。受け取りに在宅を。</p></div></li><li><span class="num">03</span><div class="body"><span class="ttl">クレソンが午前9:00〜12:00に到着</span><p><span class="src">カレンダーに</span>、生鮮の配送が午前中。届いたら受け取りを。</p></div></li><li><span class="num">04</span><div class="body"><span class="ttl">スタバで受取</span><p><span class="src">Todoistに</span>、今日期限のひとつ。外出のついでに。</p></div></li></ul></div>
-<div class="listwrap"><h2>Resolved</h2><ul><li><span class="num">01</span><div class="body"><span class="ttl">昨日のコープ配達は終了</span><p><span class="src">カレンダーで</span>、昨日16:00〜17:00の配達枠が過ぎた。</p></div></li></ul></div>
+<div class="listwrap"><h2>Needs attention</h2><ul><li><span class="num">01</span><div class="body"><span class="ttl">コープの注文は今夜21:00締切</span><p>今日21:00の注文締切。今週ぶんはこの時間まで。</p></div></li><li><span class="num">02</span><div class="body"><span class="ttl">冷蔵の荷物が夕方18:00〜20:00に到着</span><p>受け取りに在宅を。</p></div></li><li><span class="num">03</span><div class="body"><span class="ttl">生鮮が午前9:00〜12:00に到着</span><p>届いたら受け取りを。</p></div></li><li><span class="num">04</span><div class="body"><span class="ttl">スタバで受取</span><p>今日期限のひとつ。外出のついでに。</p></div></li></ul></div>
+<div class="listwrap"><h2>Resolved</h2><ul><li><span class="num">01</span><div class="body"><span class="ttl">昨日のコープ配達は終了</span><p>昨日16:00〜17:00の配達枠が過ぎた。</p></div></li></ul></div>
+<div class="listwrap"><h2>これまでのブリーフ</h2><div class="arcwrap"><details class="arc" id="d-2026-08-06"><summary><span class="adate">木曜日 · 8月6日 2026</span><span class="ahead">きょうは、ほとんどがあなたの時間です、しゅうへい。</span></summary><div class="abody"><div class="arow"><span class="atm">9:00 – 12:00</span><span>午前は生鮮食材の配達。青菜が、正午までに届きます。</span></div><div class="arow"><span class="atm">14:00 – 17:00</span><span>2時に土の回収、4時に定期便の配達。午後は受け取りが続きます。</span></div><div class="arow"><span class="atm">17:00 –</span><span>予定は入っていません。あたためてきたことに向けられる時間です。</span></div><p class="anote">けさ、あなたの手を必要とするものはありません。</p></div></details></div></div>
 </div></div>
 </body>
 </html>
