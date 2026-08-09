@@ -1,218 +1,99 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
+<html lang="ja"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>モーニングブリーフ</title>
+<title>Morning Brief · 月曜日 · 8月10日 2026</title>
 <style>
-  :root{
-    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
-    --ink-grey:#B4B3A8; --hairline:#E4E3DC; --line:#E1E1DF; --clay:#C6613F;
-    --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
-    --sans:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html{color-scheme:light;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;}
-  .band{width:100%;}
-  .band--top{background:var(--wash);border-bottom:1px solid var(--line);}
-  .band--bottom{background:var(--bg);}
-  .inner{max-width:860px;margin:0 auto;padding:56px 32px;}
-  .daydate{font-family:var(--sans);font-size:13px;letter-spacing:.02em;color:var(--ink-soft);margin:0 0 14px;}
-  .headline{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.28;
-    color:var(--ink);margin:0 0 34px;font-style:normal;letter-spacing:.01em;}
-  .drawing{width:100%;height:auto;display:block;margin:0 0 8px;}
-  .acts{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:10px;}
-  .act{padding:22px 22px 6px;border-left:1px solid var(--hairline);}
-  .act:first-child{border-left:none;padding-left:4px;}
-  .act .t{font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.03em;
-    color:var(--ink);margin:0 0 8px;}
-  .act .s{font-size:14px;color:var(--ink-soft);margin:0;}
-  h2.section{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.08em;
-    text-transform:none;color:var(--ink);margin:0 0 20px;}
-  .lists .list + .list{margin-top:44px;}
-  ol.items{list-style:none;margin:0;padding:0;}
-  ol.items li{display:grid;grid-template-columns:34px 1fr;gap:6px;padding:16px 0;
-    border-top:1px solid var(--hairline);}
-  ol.items li:first-child{border-top:none;}
-  .num{font-family:var(--sans);font-size:14px;color:var(--ink-grey);padding-top:2px;}
-  .it .title{font-family:var(--sans);font-weight:700;font-size:15.5px;color:var(--ink);margin:0 0 4px;}
-  .it .body{font-size:14.5px;color:var(--ink-soft);margin:0;}
-  .src{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--ink-grey);
-    text-underline-offset:2px;}
-  .calm{font-size:16px;color:var(--ink-soft);font-family:var(--serif);margin:0;}
-  .archive{margin-top:52px;}
-  details.day{border-top:1px solid var(--hairline);}
-  details.day:last-of-type{border-bottom:1px solid var(--hairline);}
-  details.day > summary{list-style:none;cursor:pointer;padding:16px 2px;display:block;}
-  details.day > summary::-webkit-details-marker{display:none;}
-  .sum-date{font-family:var(--sans);font-size:12px;color:var(--ink-grey);margin:0 0 3px;}
-  .sum-head{font-family:var(--serif);font-size:16px;color:var(--ink);margin:0;}
-  .day-body{padding:6px 2px 22px;}
-  .day-body .grp{margin-top:16px;}
-  .day-body .grp h3{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.06em;
-    color:var(--ink-soft);margin:0 0 8px;}
-  .day-body .row{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
-  .day-body .row b{color:var(--ink);font-weight:700;}
-  @media (max-width:640px){
-    .inner{padding:40px 20px;}
-    .headline{font-size:30px;}
-    .acts{grid-template-columns:1fr;}
-    .act{border-left:none;border-top:1px solid var(--hairline);padding:18px 4px 6px;}
-    .act:first-child{border-top:none;}
-  }
-</style>
-</head>
-<body>
-  <div class="band band--top">
-    <div class="inner">
-      <p class="daydate">日曜日 · 8月9日 2026</p>
-      <h1 class="headline">日曜はほとんどが自由、しゅうへい。午後に友達が集まるまで、時間はまるごと空いている。</h1>
-
-      <svg class="drawing" viewBox="0 0 840 170" role="img" aria-label="穏やかな一日の地形">
-        <path d="M0,122 C120,120 220,120 300,117 C356,112 384,84 420,82 C462,84 500,110 600,116 C700,120 764,120 840,119"
-              fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
-        <g stroke="#C6613F" stroke-width="1.6" stroke-linecap="round">
-          <circle cx="130" cy="52" r="11" fill="none"/>
-          <line x1="130" y1="30" x2="130" y2="36"/>
-          <line x1="130" y1="68" x2="130" y2="74"/>
-          <line x1="108" y1="52" x2="114" y2="52"/>
-          <line x1="146" y1="52" x2="152" y2="52"/>
-          <line x1="113" y1="35" x2="117" y2="39"/>
-          <line x1="143" y1="65" x2="147" y2="69"/>
-          <line x1="147" y1="35" x2="143" y2="39"/>
-          <line x1="117" y1="65" x2="113" y2="69"/>
-        </g>
-        <circle cx="420" cy="82" r="10" fill="#2E2C27"/>
-        <g stroke="#2E2C27" stroke-width="1.6" fill="none" stroke-linecap="round">
-          <path d="M676,54 C682,48 688,48 694,54"/>
-          <path d="M694,54 C700,48 706,48 712,54"/>
-          <path d="M708,66 C712,62 716,62 720,66"/>
-          <path d="M720,66 C724,62 728,62 732,66"/>
-        </g>
-      </svg>
-
-      <div class="acts">
-        <div class="act">
-          <p class="t">– 13:00</p>
-          <p class="s">午前はまるごと空いている。昼まで、手つかずの時間が続く。</p>
-        </div>
-        <div class="act">
-          <p class="t">13:00 – 16:00</p>
-          <p class="s">午後は友達との時間。ビデオ通話のリンクもついている。</p>
-        </div>
-        <div class="act">
-          <p class="t">16:00 –</p>
-          <p class="s">夕方からはまた自由。夜に予定は入っていない。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="band band--bottom">
-    <div class="inner lists">
-      <div class="list">
-        <h2 class="section">今日、手を向けること</h2>
-        <ol class="items">
-          <li>
-            <span class="num">1</span>
-            <div class="it">
-              <p class="title">今日の配達が3件</p>
-              <p class="body"><span class="src">カレンダー</span>に今日ぶんの配達が3件（製菓用チョコチップ・インスタントコーヒー・バルサミコ酢）。在宅なら受け取りを。</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <div class="list">
-        <h2 class="section">片づいたこと</h2>
-        <ol class="items">
-          <li>
-            <span class="num">1</span>
-            <div class="it">
-              <p class="title">製菓用品が届いた</p>
-              <p class="body">注文していたケーキクーラーとシュガーパウダーが昨日、配達完了。<span class="src">配達通知</span>より。</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <div class="archive">
-        <h2 class="section">これまでのブリーフ</h2>
-
-        <details class="day">
-          <summary>
-            <p class="sum-date">土曜日 · 8月8日 2026</p>
-            <p class="sum-head">きょうは午後がまるごと空く、しゅうへい。午前の受け取りを終えたら、明日の来客の支度へ。</p>
-          </summary>
-          <div class="day-body">
-            <div class="grp">
-              <h3>一日の流れ</h3>
-              <p class="row"><b>8:00 – 14:00</b> 宅配と生鮮の受け取りが午前に重なる。動き出しは家で。</p>
-              <p class="row"><b>14:00 – 18:00</b> 昼を過ぎると予定が空く。まとまった時間がそのまま残る。</p>
-              <p class="row"><b>18:00 –</b> 夜は静か。明日の来客に向けた仕込みは、今日のうちに。</p>
-            </div>
-            <div class="grp">
-              <h3>手を向けること</h3>
-              <p class="row"><b>午前は受け取りが続く</b> — 宅配便と生鮮が8:00 – 14:00に集中。受け取りのため在宅を。</p>
-              <p class="row"><b>明日13:00から来客、仕込みは今日</b> — 献立とソースの仕込みは今日のうちに。</p>
-            </div>
-            <div class="grp">
-              <h3>片づいたこと</h3>
-              <p class="row"><b>コープの注文締切は過ぎた</b> — 昨夜21:00が今週の注文締切。そこで締まった。</p>
-              <p class="row"><b>昨夜の冷蔵便の受け取り枠は終了</b> — 昨日18:00 – 20:00の枠が過ぎた。</p>
-            </div>
-          </div>
-        </details>
-
-        <details class="day">
-          <summary>
-            <p class="sum-date">金曜日 · 8月7日 2026</p>
-            <p class="sum-head">会議のない一日、しゅうへい。動くのは荷物の受け取りと、夜の締切だけ。</p>
-          </summary>
-          <div class="day-body">
-            <div class="grp">
-              <h3>一日の流れ</h3>
-              <p class="row"><b>9:00 – 12:00</b> 朝いちばんに受け取りがひとつ。動き出しで一度、家に留まる。</p>
-              <p class="row"><b>12:00 – 18:00</b> 昼から夕方まで予定はなし。まとまった時間が取れる。</p>
-              <p class="row"><b>18:00 –</b> 日が暮れると用事が戻る。夜にかけて、ふたつだけ。</p>
-            </div>
-            <div class="grp">
-              <h3>手を向けること</h3>
-              <p class="row"><b>コープの注文は今夜21:00締切</b> — 今週ぶんはこの時間まで。</p>
-              <p class="row"><b>冷蔵の荷物が夕方18:00 – 20:00に到着</b> — 受け取りに在宅を。</p>
-              <p class="row"><b>生鮮が午前9:00 – 12:00に到着</b> — 届いたら受け取りを。</p>
-              <p class="row"><b>受取がひとつ</b> — 今日期限。外出のついでに。</p>
-            </div>
-            <div class="grp">
-              <h3>片づいたこと</h3>
-              <p class="row"><b>昨日のコープ配達は終了</b> — 昨日16:00 – 17:00の配達枠が過ぎた。</p>
-            </div>
-          </div>
-        </details>
-
-        <details class="day">
-          <summary>
-            <p class="sum-date">木曜日 · 8月6日 2026</p>
-            <p class="sum-head">きょうは、ほとんどがあなたの時間です、しゅうへい。</p>
-          </summary>
-          <div class="day-body">
-            <div class="grp">
-              <h3>一日の流れ</h3>
-              <p class="row"><b>9:00 – 12:00</b> 午前は生鮮食材の配達。青菜が、正午までに届く。</p>
-              <p class="row"><b>14:00 – 17:00</b> 2時に回収、4時に定期便の配達。午後は受け取りが続く。</p>
-              <p class="row"><b>17:00 –</b> 予定は入っていない。あたためてきたことに向けられる時間。</p>
-            </div>
-            <div class="grp">
-              <h3>この日</h3>
-              <p class="row">けさ、あなたの手を必要とするものはありません。</p>
-            </div>
-          </div>
-        </details>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+    :root{--bg:#FCFCFB;--wash:#F9F9F7;--ink:#2E2C27;--soft:#6B6A63;--grey:#B4B3A8;--hair:#E4E3DC;--line:#E1E1DF;--clay:#C6613F;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+      font-family:-apple-system,"Segoe UI","Noto Sans JP","Noto Sans CJK JP",sans-serif;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+    .band{width:100%;}
+    .top{background:var(--wash);border-bottom:1px solid var(--line);}
+    .bottom{background:var(--bg);}
+    .wrap{max-width:860px;margin:0 auto;padding:44px 40px;}
+    .daydate{font-size:13px;letter-spacing:.04em;color:var(--soft);margin:0 0 14px;}
+    h1{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;font-weight:600;font-style:normal;
+      font-size:40px;line-height:1.34;letter-spacing:.005em;color:var(--ink);margin:0 0 30px;}
+    .draw{margin:6px 0 4px;}
+    .draw svg{display:block;}
+    .acts{display:flex;gap:0;margin-top:12px;}
+    .act{flex:1;padding:16px 22px 4px;border-left:1px solid var(--hair);}
+    .act:first-child{border-left:none;padding-left:2px;}
+    .act-time{font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--ink);margin-bottom:7px;}
+    .act-sent{font-size:14px;line-height:1.6;color:var(--soft);}
+    .lst{margin:0 0 34px;}
+    .lst h2,.archive h2{font-family:-apple-system,"Segoe UI","Noto Sans JP","Noto Sans CJK JP",sans-serif;
+      font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--ink);text-transform:none;
+      margin:0 0 18px;padding-bottom:0;}
+    .item{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--hair);}
+    .item:first-of-type{border-top:none;}
+    .num{font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;padding-top:3px;min-width:20px;}
+    .itembody{flex:1;}
+    .ititle{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:5px;line-height:1.4;}
+    .isent{font-size:14px;line-height:1.62;color:var(--soft);}
+    .src{color:var(--soft);text-decoration:underline;text-decoration-color:var(--grey);
+      text-underline-offset:2px;}
+    a.src{cursor:pointer;}
+    .srcwrap{color:var(--soft);}
+    .archive{margin-top:30px;padding-top:26px;border-top:1px solid var(--hair);}
+    details{border-top:1px solid var(--hair);padding:12px 0;}
+    details:first-of-type{border-top:none;}
+    summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:4px;}
+    summary::-webkit-details-marker{display:none;}
+    .ar-day{font-size:12px;color:var(--grey);letter-spacing:.03em;}
+    .ar-head{font-size:14px;color:var(--ink);line-height:1.5;}
+    details p,details ul{margin:10px 0 4px;}
+    .ar-acts{font-size:13px;color:var(--soft);line-height:1.6;}
+    .ar-sub{font-size:11px;letter-spacing:.06em;color:var(--grey);margin-top:12px;}
+    details ul{padding-left:18px;}
+    details li{font-size:13px;color:var(--soft);line-height:1.6;margin-bottom:5px;}
+    details li b{color:var(--ink);font-weight:700;}
+    .ar-empty{font-size:13px;color:var(--soft);}
+    @media (max-width:640px){
+      .wrap{padding:34px 22px;}
+      h1{font-size:30px;}
+      .acts{flex-direction:column;}
+      .act{border-left:none;border-top:1px solid var(--hair);padding:16px 2px 4px;}
+      .act:first-child{border-top:none;}
+    }
+    </style>
+</head><body>
+<div class="band top"><div class="wrap">
+      <p class="daydate">月曜日 · 8月10日 2026</p>
+      <h1>きょうはほとんどが自由、しゅうへい。午前に受け取りをひとつ済ませたら、あとの時間はまるごと残る。</h1>
+      <div class="draw"><svg viewBox="0 0 840 170" width="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- sun: single clay accent, over the open afternoon -->
+  <g stroke="#C6613F" stroke-width="1.7" fill="none" stroke-linecap="round">
+    <circle cx="452" cy="44" r="15"/>
+    <line x1="452" y1="17" x2="452" y2="8"/>
+    <line x1="452" y1="80" x2="452" y2="71"/>
+    <line x1="425" y1="44" x2="416" y2="44"/>
+    <line x1="488" y1="44" x2="479" y2="44"/>
+    <line x1="433" y1="25" x2="427" y2="19"/>
+    <line x1="471" y1="25" x2="477" y2="19"/>
+    <line x1="433" y1="63" x2="427" y2="69"/>
+    <line x1="471" y1="63" x2="477" y2="69"/>
+  </g>
+  <!-- birds: room to breathe, over the quiet evening -->
+  <g stroke="#B4B3A8" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M672,52 q9,-8 18,0"/>
+    <path d="M690,52 q9,-8 18,0"/>
+    <path d="M706,44 q7,-6 14,0"/>
+  </g>
+  <!-- terrain: one unbroken calm stroke, a soft morning rise then still water -->
+  <path d="M0,124 C70,124 104,101 140,102 C176,103 208,123 262,124 C440,127 640,123 840,123"
+        fill="none" stroke="#2E2C27" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- morning delivery marker: soft, grey (a receipt window, not a hard meeting) -->
+  <circle cx="140" cy="102" r="6" fill="#B4B3A8"/>
+</svg></div>
+      <div class="acts"><div class="act"><div class="act-time">9:00 – 12:00</div><div class="act-sent">午前は青果の配達枠がひとつ。正午までに届く見込み。</div></div><div class="act"><div class="act-time">12:00 – 18:00</div><div class="act-sent">昼を過ぎると予定は空く。まとまった時間がそのまま残る。</div></div><div class="act"><div class="act-time">18:00 –</div><div class="act-sent">夜は静か。明日も予定は入っていない。</div></div></div>
+    </div></div>
+    <div class="band bottom"><div class="wrap">
+      <section class="lst"><h2>要対応</h2><div class="item"><span class="num">01</span><div class="itembody"><div class="ititle">午前に青果の配達枠</div><div class="isent">9:00 – 12:00に青果の定期便が届く。受け取りのため、午前は在宅を。<span class="srcwrap">（<span class="src">カレンダー</span>より）</span></div></div></div><div class="item"><span class="num">02</span><div class="itembody"><div class="ititle">バルサミコクリームを仕込む</div><div class="isent">先日届いたバルサミコ酢を使う一品。今日ぶんのタスクに入っている。<span class="srcwrap">（<span class="src">タスク</span>より）</span></div></div></div></section>
+      <section class="lst"><h2>片付いたこと</h2><div class="item"><span class="num">01</span><div class="itembody"><div class="ititle">昨日の配達が届いた</div><div class="isent">製菓用チョコチップ・コーヒー・バルサミコ酢の3件が昨日、配達完了。<span class="srcwrap">（<span class="src">配達通知</span>より）</span></div></div></div><div class="item"><span class="num">02</span><div class="itembody"><div class="ititle">友達との集まりが終わった</div><div class="isent">昨日13:00 – 16:00の来客。ビデオ通話も併用した。<span class="srcwrap">（<span class="src">カレンダー</span>より）</span></div></div></div></section>
+      <section class="archive"><h2>これまでのブリーフ</h2><details><summary><span class="ar-day">日曜日 · 8月9日 2026</span><span class="ar-head">日曜はほとんどが自由、しゅうへい。午後に友達が集まるまで、時間はまるごと空いている。</span></summary><p class="ar-acts">– 13:00 午前はまるごと空いている。昼まで、手つかずの時間が続く。 / 13:00 – 16:00 午後は友達との時間。ビデオ通話のリンクもついている。 / 16:00 – 夕方からはまた自由。夜に予定は入っていない。</p><div class="ar-sub">要対応</div><ul><li><b>今日の配達が3件</b> — カレンダーに今日ぶんの配達が3件（製菓用チョコチップ・インスタントコーヒー・バルサミコ酢）。在宅なら受け取りを。</li></ul><div class="ar-sub">片付いたこと</div><ul><li><b>製菓用品が届いた</b> — 注文していたケーキクーラーとシュガーパウダーが昨日、配達完了。配達通知より。</li></ul></details><details><summary><span class="ar-day">土曜日 · 8月8日 2026</span><span class="ar-head">きょうは午後がまるごと空く、しゅうへい。午前の受け取りを終えたら、明日の来客の支度へ。</span></summary><p class="ar-acts">8:00 – 14:00 宅配と生鮮の受け取りが午前に重なる。動き出しは家で。 / 14:00 – 18:00 昼を過ぎると予定が空く。まとまった時間がそのまま残る。 / 18:00 – 夜は静か。明日の来客に向けた仕込みは、今日のうちに。</p><div class="ar-sub">要対応</div><ul><li><b>午前は受け取りが続く</b> — 宅配便と生鮮が8:00 – 14:00に集中。受け取りのため在宅を。</li><li><b>明日13:00から来客、仕込みは今日</b> — 明日の昼に来客の予定。献立（ピッツァ、焼きナスと甘海老、クレソンとグレープフルーツ）とサルサロッサ、バルサミコクリームの仕込みは今日のうちに。</li></ul><div class="ar-sub">片付いたこと</div><ul><li><b>コープの注文締切は過ぎた</b> — 昨夜21:00が今週の注文締切。そこで締まった。</li><li><b>昨夜の冷蔵便の受け取り枠は終了</b> — 昨日18:00 – 20:00の枠が過ぎた。</li></ul></details><details><summary><span class="ar-day">金曜日 · 8月7日 2026</span><span class="ar-head">会議のない一日、しゅうへい。動くのは荷物の受け取りと、夜の締切だけ。</span></summary><p class="ar-acts">9:00 – 12:00 朝いちばんに受け取りがひとつ。動き出しで一度、家に留まる。 / 12:00 – 18:00 昼から夕方まで予定はなし。まとまった時間が取れる。 / 18:00 – 日が暮れると用事が戻る。夜にかけて、ふたつだけ。</p><div class="ar-sub">要対応</div><ul><li><b>コープの注文は今夜21:00締切</b> — 今日21:00の注文締切。今週ぶんはこの時間まで。</li><li><b>冷蔵の荷物が夕方18:00 – 20:00に到着</b> — 受け取りに在宅を。</li><li><b>生鮮が午前9:00 – 12:00に到着</b> — 届いたら受け取りを。</li><li><b>受取がひとつ</b> — 今日期限のひとつ。外出のついでに。</li></ul><div class="ar-sub">片付いたこと</div><ul><li><b>昨日のコープ配達は終了</b> — 昨日16:00 – 17:00の配達枠が過ぎた。</li></ul></details><details><summary><span class="ar-day">木曜日 · 8月6日 2026</span><span class="ar-head">きょうは、ほとんどがあなたの時間です、しゅうへい。</span></summary><p class="ar-acts">9:00 – 12:00 午前は生鮮食材の配達。青菜が、正午までに届きます。 / 14:00 – 17:00 2時に回収、4時に定期便の配達。午後は受け取りが続きます。 / 17:00 – 予定は入っていません。あたためてきたことに向けられる時間です。</p><p class="ar-empty">けさ、あなたの手を必要とするものはありません。</p></details></section>
+    </div></div>
+</body></html>
