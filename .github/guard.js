@@ -30,7 +30,7 @@ function guardPatterns_() {
     { name: 'geo_coords',      re: /[0-9]{1,3}\.[0-9]{4,},\s?[0-9]{1,3}\.[0-9]{4,}/ },
     { name: 'map_url',         re: /(maps\.google|goo\.gl\/maps|google\.[a-z.]+\/maps)/i },
     { name: 'address_words',   re: /(丁目|番地|号室|マンション|アパート|〒)/ },
-    { name: 'digit_run',       re: /[0-9]{3}-?[0-9]{4}(?!\s*円)/ }
+    { name: 'digit_run',       re: /[0-9]{3}-?[0-9]{4}(?!\s*円(?![\u4E00-\u9FFF]))/ }
   ];
 }
 
