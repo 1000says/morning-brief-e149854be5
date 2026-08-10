@@ -7,7 +7,8 @@
 
 1. 生成側が `index.html` を `main` へ push する。
 2. push で GitHub Actions（`.github/workflows/pages.yml`）が起動する。
-3. `privacy-guard` ジョブが `index.html` を禁止パターン（郵便番号・電話・メール・追跡番号・座標・地図URL・住所語）で走査する。
+3. `privacy-guard` ジョブが `node .github/guard.js index.html` を実行し、禁止パターン 9 種
+   （メール・国際/国内電話・追跡番号・座標・地図URL・住所語・7 桁以上の連続数字）で走査する。
    - 検出したら **deploy をブロック**（fail-closed）。Actions が失敗し、GitHub の既定で repo owner に失敗メールが届く。
    - クリーンなら `index.html` のみを `_site/` にステージして GitHub Pages へ deploy する。
 
@@ -21,7 +22,9 @@
 
 ## 運用メモ
 
-- **禁止パターンの調整/一時無効化:** `.github/workflows/pages.yml` の `privacy-guard` を編集する。
+- **禁止パターンの実体:** `.github/guard.js`。**ここだけを編集してはいけない**——
+  中継側（Apps Script）と**文字列として同一**であることが不変条件で、片側だけ変えると中継側の
+  テスト（`INV-C3`）が FAIL する。両側を同時に更新すること。
   誤検知で更新が止まる場合は該当パターンを緩めるか、当該ジョブを一時的に無効化する（無効化中は衛生ネットが外れる点に注意）。
 - **失敗通知:** guard 失敗＝更新停止に気付けるよう、GitHub の Actions 失敗通知を有効にしておく。
 - **識別情報を repo に足さない:** `index.html` 以外（この README・ワークフロー・description）に個人情報を書かない。
