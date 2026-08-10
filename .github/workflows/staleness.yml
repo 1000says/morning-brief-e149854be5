@@ -9,6 +9,9 @@ name: Staleness watchdog
 #                     → **push は成功したが CI が発火せず deploy されていない**（実在の経路）
 #                        deploy job の失敗・Pages 障害・CDN の取り残しも同時に覆う
 #
+#   SLI-3 通知一致  : notify-state.json の ymd が最新ブリーフの日付と一致し、ok=true / degraded=false
+#                     → LINE 通知の停止・トークン失効・link-only への恒常 degrade を検知（MB-014）
+#
 # SLI-1 だけでは SLI-2 の事象を構造的に検知できない（commit は新しいまま Pages だけ古くなるため）。
 # 失敗すると GitHub から Actions 失敗通知メールが repo owner に届く。
 # deploy を巻き込まないよう pages.yml とは別 workflow にしている。
@@ -114,6 +117,51 @@ jobs:
             fi
           fi
 
+
+          # ---------- SLI-3: 通知一致（MB-014） ----------
+          # !!! .ymd だけを見ないこと。失敗時も ymd を書くなら、トークン失効で 1 通も届かない日も
+          #     一致して PASS する。**機能が死ぬときこそ否定ゲートは確実に緑になる**（CE-04b ⑫）。
+          if [ -f notify-state.json ]; then
+            n_ymd=$(jq -r '.ymd // empty' notify-state.json)
+            n_ok=$(jq -r '.ok // false' notify-state.json)
+            n_deg=$(jq -r '.degraded // false' notify-state.json)
+            n_en=$(jq -r '.enabled // false' notify-state.json)
+            b_ymd=$(git log -1 --format=%s --grep='^brief: ' -- index.html | sed -n 's/^brief: \([0-9-]\{10\}\).*/\1/p')
+            echo "SLI-3 notify ymd=$n_ymd ok=$n_ok degraded=$n_deg enabled=$n_en / brief ymd=$b_ymd"
+
+            # 停止中は skip する。ただし **永久 skip にしない** ——
+            # enabled を書く主体が壊れたら誰も気づけなくなるため、3 日以上古ければ WARN を出す。
+            if [ "$n_en" != "true" ]; then
+              stale_days=99
+              if [ -n "$n_ymd" ]; then
+                stale_days=$(( ( $(date -u +%s) - $(date -u -d "$n_ymd" +%s) ) / 86400 ))
+              fi
+              if [ "$stale_days" -ge 3 ]; then
+                echo "::warning::${TAG}SLI-3 通知は無効（enabled=false）だが、状態が ${stale_days} 日更新されていない。中継が state を書けていない可能性がある。"
+                echo "| 通知一致 | 無効・状態が ${stale_days} 日古い | 🟡 要確認 |" >> "$GITHUB_STEP_SUMMARY"
+              else
+                echo "| 通知一致 | 無効（enabled=false） | ⚪ skip |" >> "$GITHUB_STEP_SUMMARY"
+              fi
+            elif [ -z "$b_ymd" ]; then
+              echo "::error::${TAG}SLI-3 index.html に 'brief: ' commit が無く突合できない。"
+              echo "| 通知一致 | brief commit 不在 | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif [ "$n_ymd" != "$b_ymd" ]; then
+              echo "::error::${TAG}SLI-3 MISMATCH: 最新ブリーフは $b_ymd だが通知は $n_ymd までしか出ていない。LINE 配信が止まっている。"
+              echo "| 通知一致 | brief \`$b_ymd\` / notify \`$n_ymd\` | 🔴 STALE |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif [ "$n_ok" != "true" ]; then
+              echo "::error::${TAG}SLI-3 送信が失敗している（ok=false）。トークン失効・ブロック等を疑う。"
+              echo "| 通知一致 | 送信失敗（ok=false） | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif [ "$n_deg" = "true" ]; then
+              # degrade は「異常だが配信は続く」。FAIL にはしないが**無音にはしない**。
+              echo "::warning::${TAG}SLI-3 通知が link-only へ degrade している（本文を載せられていない）。"
+              echo "| 通知一致 | link-only へ degrade | 🟡 |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "| 通知一致 | \`$n_ymd\` 送信済 | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
           if [ "$fail" = "1" ]; then
             {
               echo ""
