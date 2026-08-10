@@ -3,7 +3,7 @@ name: Staleness watchdog
 # 配信の死活監視（PLAN-MB-009 P5 / G2 MUST-2・R02 反映）。
 #
 # SLI を 2 本持つ。**公開実体（Pages が実際に配信しているバイト列）を一次とする。**
-#   SLI-1 配信鮮度  : repo の index.html の最終 commit が閾値より古い
+#   SLI-1 配信鮮度  : repo の index.html への **`brief: ` で始まる最終 commit** が閾値より古い
 #                     → 中継の停止・トリガ消失・PAT 失効・生成（Cowork）の停止 を検知
 #   SLI-2 配信一致  : 公開 URL が返すバイト列の git blob sha が repo HEAD の index.html と一致しない
 #                     → **push は成功したが CI が発火せず deploy されていない**（実在の経路）
@@ -56,10 +56,19 @@ jobs:
           fail=0
 
           # ---------- SLI-1: repo 上の配信物の鮮度 ----------
-          last_iso=$(git log -1 --format=%cI -- index.html)
+          # !!! commit メッセージで **実ブリーフの publish に限定**する。
+          #     単に `-- index.html` の最終 commit を見ると、doc 修正や検証用の commit が
+          #     鮮度の時計をリセットし、**最大 26 時間 watchdog を盲目にする**。
+          #     2026-08-11 に実発生: D8 検証用の test commit が、30.7h 前の実ブリーフを 9.6h に見せていた。
+          #     接頭辞 `brief: ` は中継の commitMessage_ が付ける（relay/src/コード.js）。
+          #     生産側と消費側の一致は relay/test/invariants.test.js の INV-C9 が突合する。
+          last_iso=$(git log -1 --format=%cI --grep='^brief: ' -- index.html)
           if [ -z "$last_iso" ]; then
-            echo "::error::index.html has no commit history"; exit 1
+            echo "::error::index.html に 'brief: ' で始まる commit が 1 件も無い。中継が一度も publish していないか、接頭辞が変わった可能性がある（fail-closed）。"; exit 1
           fi
+          # 実ブリーフより新しい commit（人手/検証由来）があるなら、サマリに注記する。
+          # これを黙っていると、受信側は「なぜこの時刻が基準なのか」を追えない。
+          newest_iso=$(git log -1 --format=%cI -- index.html)
           # 分で計算する。時間の整数除算にすると実効閾値が +1h ずれる（30 指定で 31h まで PASS）。
           age_min=$(( ( $(date -u +%s) - $(date -u -d "$last_iso" +%s) ) / 60 ))
           max_min=$(( MAX_AGE_HOURS * 60 ))
@@ -74,11 +83,15 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
           if [ "$age_min" -gt "$max_min" ]; then
-            echo "::error::${TAG}SLI-1 STALE: index.html は ${age_h} 時間更新されていない（閾値 ${MAX_AGE_HOURS}h）。中継（Apps Script）または生成（Cowork）が停止している可能性が高い。"
+            echo "::error::${TAG}SLI-1 STALE: 実ブリーフの publish が ${age_h} 時間無い（閾値 ${MAX_AGE_HOURS}h）。中継（Apps Script）または生成（Cowork）が停止している可能性が高い。"
             echo "| 配信鮮度 | 最終更新 \`$last_iso\`（${age_h}h 経過） | 🔴 STALE |" >> "$GITHUB_STEP_SUMMARY"
             fail=1
           else
-            echo "| 配信鮮度 | 最終更新 \`$last_iso\`（${age_h}h 経過） | 🟢 fresh |" >> "$GITHUB_STEP_SUMMARY"
+            echo "| 配信鮮度 | 最終ブリーフ \`$last_iso\`（${age_h}h 経過） | 🟢 fresh |" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "$newest_iso" != "$last_iso" ]; then
+            echo "::notice::index.html に実ブリーフより新しい commit がある（$newest_iso）。鮮度は実ブリーフ基準で判定している。"
+            echo "| ※ | index.html の最新 commit \`$newest_iso\` はブリーフ以外 | ℹ️ |" >> "$GITHUB_STEP_SUMMARY"
           fi
 
           # ---------- SLI-2: 公開実体が repo HEAD と一致するか ----------
