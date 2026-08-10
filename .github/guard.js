@@ -5,7 +5,7 @@
 //     relay/test/invariants.test.js の INV-C1/C2/C3 が両者を突合し、片側だけ変更した瞬間に FAIL する。
 //
 // なぜ grep ではなく node なのか（PLAN-MB-004 v1.1.0 §2.2）:
-//   パターンに後読み `(?<!…)` と先読み `(?!\s*円)` を使う。POSIX ERE にはどちらも無いため、
+//   パターンに後読み `(?<!…)` を使う（phone_intl）。POSIX ERE には無いため、
 //   grep のままでは中継側とパターンを同一にできない。エンジンを揃えることで
 //   「2 つの実装を同期させ続ける」のをやめ、構造的に一致させる。
 //
@@ -22,7 +22,7 @@ const PATTERN_COUNT = 9;   // リテラルでピン。抽出・定義が壊れ�
 
 function guardPatterns_() {
   return [
-    { name: 'email',           re: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/ },
+    { name: 'email',           re: /[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/ },
     { name: 'phone_intl',      re: /(?<![0-9.])\+[0-9]{1,3}[-\s][0-9]{1,4}[-\s]?[0-9]{1,4}[-\s]?[0-9]{3,4}(?![0-9])/ },
     { name: 'phone_hyphen',    re: /0[0-9]{1,4}-[0-9]{1,4}-[0-9]{4}/ },
     { name: 'phone_plain',     re: /0[0-9]{9,10}(?![0-9])/ },
@@ -30,7 +30,7 @@ function guardPatterns_() {
     { name: 'geo_coords',      re: /[0-9]{1,3}\.[0-9]{4,},\s?[0-9]{1,3}\.[0-9]{4,}/ },
     { name: 'map_url',         re: /(maps\.google|goo\.gl\/maps|google\.[a-z.]+\/maps)/i },
     { name: 'address_words',   re: /(丁目|番地|号室|マンション|アパート|〒)/ },
-    { name: 'digit_run',       re: /[0-9]{3}-?[0-9]{4}(?!\s*円(?![\u4E00-\u9FFF]))/ }
+    { name: 'digit_run',       re: /[0-9]{3}-?[0-9]{4}/ }
   ];
 }
 
@@ -67,6 +67,9 @@ function selfTest() {
       ['phone_intl',      '<html><body>国際 +81-3-1234-5678</body></html>'],
       ['geo_coords',      '<html><body>座標 35.6895,139.6917</body></html>'],
     ];
+    // !!! 床（CE-04b ⑧⑨）: positives を空にすると encoding fail-open（latin1 化）まで
+    //     不可視になり、日本語住所入り HTML が `guard passed` で exit 0 する（実測された連鎖）。
+    if (positives.length < 5) problems.push('self-test fixtures shrunk: ' + positives.length);
     for (const [expected, body] of positives) {
       const f = path.join(dir, 'pos-' + expected + '.html');
       fs.writeFileSync(f, body, { encoding: 'utf8' });
@@ -104,7 +107,15 @@ function main() {
     process.exit(1);
   }
 
-  // 2) 本走査
+  // 2) サイズ上限（中継の MAX_BYTES と揃える）。email の後退が O(n^2) 的に劣化するため、
+  //    巨大な入力を黙って走査しない（露出ではなく可用性の問題）。
+  const bytes = fs.statSync(file).size;
+  if (bytes > 512 * 1024) {
+    console.log('::error::' + file + ' too large: ' + bytes + ' B (limit 524288)');
+    process.exit(1);
+  }
+
+  // 3) 本走査
   const hits = scanFile(file);
   if (hits.length) {
     hits.forEach(h => console.log('::error::Forbidden pattern detected in ' + file + ': ' + h.name + ' (例: ' + h.sample + ')'));
