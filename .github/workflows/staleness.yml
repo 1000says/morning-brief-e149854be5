@@ -121,6 +121,10 @@ jobs:
           # ---------- SLI-3: 通知一致（MB-014） ----------
           # !!! .ymd だけを見ないこと。失敗時も ymd を書くなら、トークン失効で 1 通も届かない日も
           #     一致して PASS する。**機能が死ぬときこそ否定ゲートは確実に緑になる**（CE-04b ⑫）。
+          if [ ! -f notify-state.json ]; then
+            # **無音にしない。** 行が出ないと「SLI-3 が存在しない」のか「未導入」のかを受信側が区別できない。
+            echo "| 通知一致 | notify-state.json 未導入（MB-014 未有効化） | ⚪ 未導入 |" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f notify-state.json ]; then
             n_ymd=$(jq -r '.ymd // empty' notify-state.json)
             n_ok=$(jq -r '.ok // false' notify-state.json)
