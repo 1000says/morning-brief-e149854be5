@@ -1,0 +1,107 @@
+name: Staleness watchdog
+
+# 配信の死活監視（PLAN-MB-009 P5 / G2 MUST-2・R02 反映）。
+#
+# SLI を 2 本持つ。**公開実体（Pages が実際に配信しているバイト列）を一次とする。**
+#   SLI-1 配信鮮度  : repo の index.html の最終 commit が閾値より古い
+#                     → 中継の停止・トリガ消失・PAT 失効・生成（Cowork）の停止 を検知
+#   SLI-2 配信一致  : 公開 URL が返すバイト列の git blob sha が repo HEAD の index.html と一致しない
+#                     → **push は成功したが CI が発火せず deploy されていない**（実在の経路）
+#                        deploy job の失敗・Pages 障害・CDN の取り残しも同時に覆う
+#
+# SLI-1 だけでは SLI-2 の事象を構造的に検知できない（commit は新しいまま Pages だけ古くなるため）。
+# 失敗すると GitHub から Actions 失敗通知メールが repo owner に届く。
+# deploy を巻き込まないよう pages.yml とは別 workflow にしている。
+#
+# 既知の限界（正直開示）: scheduled workflow は「60 日間 commit が無い」と自動的に無効化される。
+
+on:
+  schedule:
+    - cron: '0 4 * * *'      # 04:00 UTC = 13:00 JST
+    # 閾値 26h の根拠（G3 M3）: 判定時刻が 13:00 固定なので、前回公開が t 時なら翌 13:00 の age は (37 - t) 時間。
+    #   健全（当日公開済み）の age は最大でも約 13h。
+    #   1 日欠測したときの age は最小で 28.6h（前回公開が 08:27 の場合）。
+    #   → 閾値は 13h と 28.6h の間である必要がある。30h では 08:21 以降に公開された翌日の欠測を取り逃がす。
+  workflow_dispatch:
+    inputs:
+      max_age_hours:
+        description: 'index.html がこの時間を超えて更新されていなければ失敗させる（既定 26）'
+        required: false
+        default: '26'
+
+permissions:
+  contents: read
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0        # index.html の最終コミット日時を読むために履歴が要る
+
+      - name: SLI-1 / SLI-2
+        shell: bash
+        run: |
+          set -uo pipefail
+          MAX_AGE_HOURS="${{ github.event.inputs.max_age_hours || '26' }}"
+          PAGES_URL="https://1000says.github.io/morning-brief-e149854be5/"
+          fail=0
+
+          # ---------- SLI-1: repo 上の配信物の鮮度 ----------
+          last_iso=$(git log -1 --format=%cI -- index.html)
+          if [ -z "$last_iso" ]; then
+            echo "::error::index.html has no commit history"; exit 1
+          fi
+          # 分で計算する。時間の整数除算にすると実効閾値が +1h ずれる（30 指定で 31h まで PASS）。
+          age_min=$(( ( $(date -u +%s) - $(date -u -d "$last_iso" +%s) ) / 60 ))
+          max_min=$(( MAX_AGE_HOURS * 60 ))
+          age_h=$(( age_min / 60 ))
+          echo "SLI-1 last commit=$last_iso age=${age_min}min threshold=${max_min}min"
+
+          {
+            echo "### モーニングブリーフ 配信監視"
+            echo ""
+            echo "| SLI | 観測 | 判定 |"
+            echo "|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$age_min" -gt "$max_min" ]; then
+            echo "::error::SLI-1 STALE: index.html は ${age_h} 時間更新されていない（閾値 ${MAX_AGE_HOURS}h）。中継（Apps Script）または生成（Cowork）が停止している可能性が高い。"
+            echo "| 配信鮮度 | 最終更新 \`$last_iso\`（${age_h}h 経過） | 🔴 STALE |" >> "$GITHUB_STEP_SUMMARY"
+            fail=1
+          else
+            echo "| 配信鮮度 | 最終更新 \`$last_iso\`（${age_h}h 経過） | 🟢 fresh |" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          # ---------- SLI-2: 公開実体が repo HEAD と一致するか ----------
+          # curl は 3 回まで再試行する（CDN の一時エラーで偽陽性を出さないため）
+          http=$(curl -sS -o live.html -w '%{http_code}' --retry 3 --retry-delay 5 --max-time 30 "$PAGES_URL" || echo 000)
+          if [ "$http" != "200" ]; then
+            echo "::error::SLI-2 公開 URL が HTTP $http を返した（期待 200）。Pages が配信できていない。"
+            echo "| 配信一致 | 公開 URL が HTTP \`$http\` | 🔴 DOWN |" >> "$GITHUB_STEP_SUMMARY"
+            fail=1
+          else
+            repo_sha=$(git hash-object index.html)
+            live_sha=$(git hash-object live.html)
+            echo "SLI-2 repo=$repo_sha live=$live_sha"
+            if [ "$repo_sha" != "$live_sha" ]; then
+              echo "::error::SLI-2 MISMATCH: repo の index.html ($repo_sha) と公開中のバイト列 ($live_sha) が一致しない。push は成功したが deploy されていない可能性が高い（CI 未発火・deploy 失敗・CDN 取り残し）。"
+              echo "| 配信一致 | repo \`${repo_sha:0:12}\` ≠ live \`${live_sha:0:12}\` | 🔴 NOT DEPLOYED |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            else
+              echo "| 配信一致 | repo = live \`${repo_sha:0:12}\` | 🟢 deployed |" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
+
+          if [ "$fail" = "1" ]; then
+            {
+              echo ""
+              echo "**調査手順**: Apps Script プロジェクト \`Github_PAT\` の Web App \`?op=status\` で"
+              echo "\`lastTriggerAt\`（無人発火の証拠）・\`lastResult\`・\`generations\` を確認する。"
+              echo "\`lastTriggerAt\` が 2 時間以上進んでいなければ、トリガが停止／自動無効化された疑い。"
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "🟢 すべて正常" >> "$GITHUB_STEP_SUMMARY"
