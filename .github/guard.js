@@ -41,11 +41,21 @@ function guardPatterns_() {
 var GUARD_ENTITIES_ = {
   amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', middot: '\u00b7',
   commat: '@', period: '.', num: '#', sol: '/', lowbar: '_', plus: '+', colon: ':',
-  hyphen: '-', dash: '-', minus: '-', ndash: '\u2013', mdash: '\u2014'
+  hyphen: '-', dash: '-', minus: '-', ndash: '\u2013', mdash: '\u2014',
+  // 不可視文字の**名前付き**参照（MB-021）。同じ文字の数値形 `&#8203;` は既に塞いでいたのに
+  // 名前付き `&ZeroWidthSpace;` だけ素通りしていた＝同一文字の 3 符号化のうち 1 つだけ穴という
+  // 内部不整合だった。ここで文字へ戻せば normalizeForGuard_ (2) の不可視除去がそのまま消す
+  // （新しい経路を作らない）。HTML5 の zero-width/invisible 名前付き参照の閉じた集合。
+  shy: '\u00AD', SHY: '\u00AD',
+  ZeroWidthSpace: '\u200B', NegativeVeryThinSpace: '\u200B', NegativeThinSpace: '\u200B',
+  NegativeMediumSpace: '\u200B', NegativeThickSpace: '\u200B',
+  zwnj: '\u200C', zwj: '\u200D', NoBreak: '\u2060',
+  ApplyFunction: '\u2061', af: '\u2061', InvisibleTimes: '\u2062', it: '\u2062',
+  InvisibleComma: '\u2063', ic: '\u2063'
 };
 
 function decodeEntitiesOnce_(s) {
-  return String(s).replace(/&(#[xX][0-9A-Fa-f]+|#[0-9]+|[A-Za-z][A-Za-z0-9]{1,10});?/g, function (m, b) {
+  return String(s).replace(/&(#[xX][0-9A-Fa-f]+|#[0-9]+|[A-Za-z][A-Za-z0-9]{1,30});?/g, function (m, b) {
     if (b.charAt(0) === '#') {
       var hex = b.charAt(1) === 'x' || b.charAt(1) === 'X';
       var cp = hex ? parseInt(b.slice(2), 16) : parseInt(b.slice(1), 10);
@@ -67,7 +77,7 @@ function normalizeForGuard_(s) {
     t = d;
   }
   // (2) 不可視文字。コピペ由来の ZWSP は `taro@exam<ZWSP>ple.co.jp` を素通りさせる。
-  t = t.replace(/[\u200B-\u200D\u2060\uFEFF\u00AD]/g, '');
+  t = t.replace(/[\u200B-\u200D\u2060-\u2064\uFEFF\u00AD]/g, '');
   // (3) 全角 ASCII。U+FF0D はここで '-' になる。
   t = t.replace(/[\uFF01-\uFF5E]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); });
   t = t.replace(/\u3000/g, ' ');
