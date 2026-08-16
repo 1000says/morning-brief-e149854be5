@@ -18,7 +18,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const PATTERN_COUNT = 9;   // リテラルでピン。抽出・定義が壊れたら 0 件ではなく即 FAIL させる
+const PATTERN_COUNT = 10;   // リテラルでピン。抽出・定義が壊れたら 0 件ではなく即 FAIL させる
 
 function guardPatterns_() {
   return [
@@ -30,6 +30,7 @@ function guardPatterns_() {
     { name: 'geo_coords',      re: /[0-9]{1,3}\.[0-9]{4,},\s?[0-9]{1,3}\.[0-9]{4,}/ },
     { name: 'map_url',         re: /(maps\.google|goo\.gl\/maps|google\.[a-z.]+\/maps)/i },
     { name: 'address_words',   re: /(丁目|番地|号室|マンション|アパート|〒|\uFF8F\uFF9D\uFF7C\uFF6E\uFF9D|\uFF71\uFF8A\uFF9F\uFF70\uFF84)/ },
+    { name: 'identifier_label', re: /(?:マイナンバー|個人番号|カード番号|クレジットカード|口座番号|伝票番号|追跡番号|お問い合わせ番号|会員番号|注文番号|予約番号)[ \u3000:：]{0,2}(?!(?:(?:19|20)[0-9]{2}[ \u3000])+(?:19|20)[0-9]{2}(?![0-9]))[0-9]{3,4}(?:[ \u3000][0-9]{3,4})+/ },
     { name: 'digit_run',       re: /[0-9]{3}-?[0-9]{4}/ }
   ];
 }
@@ -151,10 +152,11 @@ function selfTest() {
       ['phone_hyphen',    '<html><body>電話 ０３－１２３４－５６７８</body></html>'],
       ['email',           '<html><body>連絡は taro&#64;example.co.jp</body></html>'],
       ['address_words',   '<html><body>受取 ｻﾝﾌﾟﾙﾏﾝｼｮﾝ 3F</body></html>'],
+      ['identifier_label', '<html><body>口座番号 1234 5678</body></html>'],
     ];
     // !!! 床（CE-04b ⑧⑨）: positives を空にすると encoding fail-open（latin1 化）まで
     //     不可視になり、日本語住所入り HTML が `guard passed` で exit 0 する（実測された連鎖）。
-    if (positives.length < 8) problems.push('self-test fixtures shrunk: ' + positives.length);
+    if (positives.length < 9) problems.push('self-test fixtures shrunk: ' + positives.length);
     // !!! 総数の床は天井にならない（G3-01）。正規化を**弁別できる**フィクスチャだけを別に数える。
     //     この 3 件が消えると、公開側 guard が生バイト走査へ戻っても selfTest が緑のままになる。
     const NORM_DEPENDENT = ['０３－', 'taro&#64;', 'ｻﾝﾌﾟﾙﾏﾝｼｮﾝ'];
@@ -177,8 +179,10 @@ function selfTest() {
       '<html><body>会計年度 2026–2027 の予定</body></html>',
       '<html><body>費用は 100–2000 の範囲</body></html>',
       '<html><body>本日の要点 ①②③④⑤⑥⑦ を確認</body></html>',
+      '<html><body>予約 0900 1200 1500 の3枠</body></html>',
+      '<html><body>マイナンバー制度 2016 2020 改正</body></html>',
     ];
-    if (negatives.length < 4) problems.push('self-test negatives shrunk: ' + negatives.length);
+    if (negatives.length < 6) problems.push('self-test negatives shrunk: ' + negatives.length);
     negatives.forEach((body, i) => {
       const negFile = path.join(dir, 'neg-' + i + '.html');
       fs.writeFileSync(negFile, body, { encoding: 'utf8' });
