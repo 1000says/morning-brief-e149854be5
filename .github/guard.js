@@ -10,8 +10,10 @@
 //   「2 つの実装を同期させ続ける」のをやめ、構造的に一致させる。
 //
 // !!! fail-open の防止（実測された経路）:
-//   fs.readFileSync の encoding を落とす／latin1 にすると **address_words（日本語）が例外も出さずに無一致**
-//   になり、住所を含む index.html が「guard passed」で通過する。
+//   fs.readFileSync に **latin1 等の 1 バイト系 encoding** を指定すると address_words（日本語）が
+//   例外も出さずに無一致になり、住所を含む index.html が「guard passed」で通過する。
+//   !!! 一方 **encoding を省略した場合（Buffer）は検出が壊れない**（実測 2026-08-17: `String(buf)` が
+//       UTF-8 で復号するため一致する）。省略と latin1 化を同一視していた旧記述は誤りだった（G3-09）。
 //   しかも **in-memory の自己テストでは検出できない**ため、自己テストは一時ファイルを実際に読ませる。
 'use strict';
 const fs = require('fs');
@@ -72,7 +74,12 @@ function normalizeForGuard_(s) {
   var t = String(s == null ? '' : s);
   // (1) 実体参照の有界不動点。1 パスだと `&amp;#64;` が素通りするが、Pages が描画する文字列は
   //     `&#64;` で読者はアドレスを完全に復元できる＝それは露出である。
-  for (var i = 0; i < 4; i++) {
+  // !!! 上限は 16（MB-021・G2 MUST-1）。**4 だった頃は 5 段以上の入れ子が素通りしていた**——
+  //     それは検証装置の穴ではなく公開ゲートの穴で、塞ぐ費用は実測ゼロだった
+  //     （cap 4→16: コーパス 19 世代の判定差 0・良性 10 形の差 0・500KB 走査 1.7ms で cap4 と同等・
+  //      多重エンコードだけを 286KB 詰めた悪意入力でも 4ms→9ms）。ループは d===t で break するため、
+  //     現実の入力では上限まで回らない。**17 段以上は残る穴**（`T-37` の entity-deep16 で境界を固定）。
+  for (var i = 0; i < 16; i++) {
     var d = decodeEntitiesOnce_(t);
     if (d === t) break;
     t = d;
@@ -107,7 +114,11 @@ function stripTagsForGuard_(html) {
 /** ファイルを読んで走査する。**encoding を明示すること**（落とすと日本語が無一致になる）。 */
 function scanFile(file) {
   const html = fs.readFileSync(file, { encoding: 'utf8' });
-  // encoding を落とすと Buffer が返る。黙って進ませない（fail-closed）。
+  // !!! これは fail-open の防止ではなく **canary**（G3-09 / G2 NIT-2 の実測）。
+  //     Buffer でも検出自体は壊れないので、この throw を消しても出力は変わらない＝**等価変異**。
+  //     契約に無い assert を捏造せず「観測不能である機序」を記録する側へ倒す（CE-04b ⑪）。
+  //     役割は「encoding 指定が消えたことを即座に落として気づかせる」こと
+  //     （実測: encoding を省略すると selfTest 内でここが throw し、スタックトレースで exit 1 になる）。
   if (typeof html !== 'string') throw new Error('scanFile: encoding を明示していない（Buffer が返った）');
   // !!! 一致した**中身を返さない**（MB-020）。配信 repo は Public ＝ Actions のログも
   //     run summary も誰でも閲覧でき 90 日残る。guard が止めた PII を guard 自身が
