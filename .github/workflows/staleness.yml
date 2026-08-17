@@ -183,10 +183,18 @@ jobs:
           #     exit 1**（SLI-1/2/3 は緑だったのに summary も出ない＝WARN で済ませる設計が成立していなかった）。
           sli4_tag="$(grep -o '<meta[^>]*brief-sources[^>]*>' index.html | head -1 || true)"
           marker="$(printf '%s' "$sli4_tag" | sed -n 's/.*content="\([^"]*\)".*/\1/p')"
+          # 単一引用符の書き方も拾う。二重引用符だけを見ると content='...' を「マーカー無し」と
+          # 誤判定する（属性順の偽陰性と同型＝D46「同じ欠陥形が当たる隣を塞ぐ」）。
           if [ -z "$marker" ]; then
-            # 移行期（生成側が未対応）は WARN。切替後に FAIL へ上げる場合は下行を error に変える。
-            echo "::warning::${TAG}SLI-4 brief-sources マーカーが無い（生成側が MB-023 未適用か、指示が失われた）。"
-            echo "| 参照ソース | マーカー無し | 🟡 未導入/未適用 |" >> "$GITHUB_STEP_SUMMARY"
+            marker="$(printf '%s' "$sli4_tag" | sed -n "s/.*content='\([^']*\)'.*/\1/p")"
+          fi
+          if [ -z "$marker" ]; then
+            # 2026-08-18: 移行完了（公開ページに marker 実在を実測）につき WARN -> FAIL へ昇格。
+            # WARN のままだと「生成側が MB-023 を失った」状態が緑で通り続ける＝
+            # 12 カレンダー化も redaction 契約も消えたのに誰も気づかない（最も危険な沈黙）。
+            echo "::error::${TAG}SLI-4 brief-sources マーカーが無い。生成側の指示文が上書き・切り詰められ、MB-023 の redaction 契約ごと失われた疑いがある。"
+            echo "| 参照ソース | マーカー無し | 🔴 指示が失われた疑い |" >> "$GITHUB_STEP_SUMMARY"
+            fail=1
           else
             m_cal="$(echo "$marker" | sed -n 's/.*cal=\([0-9]\{1,\}\).*/\1/p')"
             m_ok="$(echo "$marker" | sed -n 's/.*ok=\([0-9]\{1,\}\).*/\1/p')"
@@ -206,6 +214,13 @@ jobs:
               echo "::error::${TAG}SLI-4 参照カレンダーが減った（cal=$m_cal < 期待 $EXPECT_CAL）。生成側の指示が上書き・切り詰められた可能性が高い。"
               echo "| 参照ソース | cal=$m_cal（期待 $EXPECT_CAL） | 🔴 縮小 |" >> "$GITHUB_STEP_SUMMARY"
               fail=1
+            elif [ "$m_cal" -gt "$EXPECT_CAL" ]; then
+              # **増加は縮小より危険**。縮小＝欠測（可逆）だが、増加＝無審査のカレンダーが
+              # Public へ流れた（不可逆）。従来は -lt しか見ておらず、
+              # 「可逆な失敗は hard FAIL・不可逆な失敗は素通り」という逆立ちした計器だった。
+              echo "::error::${TAG}SLI-4 参照カレンダーが増えた（cal=$m_cal > 期待 $EXPECT_CAL）。allowlist に無いカレンダーが公開対象に入った可能性がある＝露出は不可逆。"
+              echo "| 参照ソース | cal=$m_cal（期待 $EXPECT_CAL） | 🔴 **拡大** |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
             elif [ "$m_ok" -lt "$m_cal" ]; then
               # 部分失敗は「配信は続くが取りこぼしている」。FAIL にはしないが**無音にはしない**。
               echo "::warning::${TAG}SLI-4 部分失敗: $m_cal 件中 $m_ok 件しか取得できていない（権限・ID 失効・タイムアウトを疑う）。"
@@ -222,8 +237,10 @@ jobs:
               echo "\`lastTriggerAt\`（無人発火の証拠）・\`lastResult\`・\`generations\` を確認する。"
               echo "\`lastTriggerAt\` が 2 時間以上進んでいなければ、トリガが停止／自動無効化された疑い。"
               echo ""
-              echo "SLI-4 が鳴った場合は Cowork 側の定期タスク指示文を確認する"
-              echo "（\`docs/handoff/cowork/COWORK-PROMPT.md\` の「カレンダーの読み方」が失われていないか）。"
+              echo "SLI-4 が鳴った場合は **claude.ai の定期タスク本文**を確認する"
+              echo "（実効 SoT はそこにしかない。リポジトリ側の COWORK-PROMPT.md は stale＝D49）。"
+              echo "稼働値の写しは docs/handoff/cowork/COWORK-TASK-LIVE.md、貼り替え用は COWORK-TASK-NEXT.md。"
+              echo "**読み戻しは必ず別会話で行う**（同一会話の自己申告は証拠にならない＝D50）。"
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
