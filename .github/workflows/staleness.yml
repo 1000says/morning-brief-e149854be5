@@ -176,7 +176,12 @@ jobs:
           EXPECT_CAL="${EXPECT_CAL:-12}"
           # タグ全体を取ってから content を抜く（**属性順に依存しない**。
           # `content=` が先に来る書き方で検出できず「未導入」と誤判定するのを防ぐ＝実測で修正）。
-          sli4_tag="$(grep -o '<meta[^>]*brief-sources[^>]*>' index.html | head -1)"
+          # !!! `|| true` が要る。GitHub Actions の既定シェルは **`-e` 付き**（`bash --noprofile --norc -e -o pipefail`）で、
+          #     staleness.yml 自身の `set -uo pipefail` には `-e` が無いため手元では再現しない。
+          #     grep は **no-match で exit 1** を返すので、マーカー不在（＝移行期の正常状態）で
+          #     この代入がジョブごと落とす。**実測 2026-08-17: run 31997349481 が SLI-4 の出力を 1 行も出さずに
+          #     exit 1**（SLI-1/2/3 は緑だったのに summary も出ない＝WARN で済ませる設計が成立していなかった）。
+          sli4_tag="$(grep -o '<meta[^>]*brief-sources[^>]*>' index.html | head -1 || true)"
           marker="$(printf '%s' "$sli4_tag" | sed -n 's/.*content="\([^"]*\)".*/\1/p')"
           if [ -z "$marker" ]; then
             # 移行期（生成側が未対応）は WARN。切替後に FAIL へ上げる場合は下行を error に変える。
