@@ -166,12 +166,59 @@ jobs:
               echo "| 通知一致 | \`$n_ymd\` 送信済 | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY"
             fi
           fi
+          # ---------- SLI-4: 参照ソースの網羅（MB-023） ----------
+          # 生成側の拡張（12 カレンダー参照）が効いているかは**こちら側からは確認できない**
+          # ——実効は Cowork のタスク文にのみ宿り、上書き・切り詰め・スキル側の無視はすべて無音で起きる。
+          # 生成側契約（INTEGRATION-SPEC §5.5）で <meta name="brief-sources"> を必須にし、ここで検査する。
+          #   cal = 対象カレンダー数（allowlist の固定値）
+          #   ok  = 実際に応答が返った数（**cal だけでは 11 件失敗しても正常に見える**ため必須）
+          # **無音にしない**: マーカーが無い場合も行を出す（未導入と正常を受信側が区別できるように）。
+          EXPECT_CAL="${EXPECT_CAL:-12}"
+          # タグ全体を取ってから content を抜く（**属性順に依存しない**。
+          # `content=` が先に来る書き方で検出できず「未導入」と誤判定するのを防ぐ＝実測で修正）。
+          sli4_tag="$(grep -o '<meta[^>]*brief-sources[^>]*>' index.html | head -1)"
+          marker="$(printf '%s' "$sli4_tag" | sed -n 's/.*content="\([^"]*\)".*/\1/p')"
+          if [ -z "$marker" ]; then
+            # 移行期（生成側が未対応）は WARN。切替後に FAIL へ上げる場合は下行を error に変える。
+            echo "::warning::${TAG}SLI-4 brief-sources マーカーが無い（生成側が MB-023 未適用か、指示が失われた）。"
+            echo "| 参照ソース | マーカー無し | 🟡 未導入/未適用 |" >> "$GITHUB_STEP_SUMMARY"
+          else
+            m_cal="$(echo "$marker" | sed -n 's/.*cal=\([0-9]\{1,\}\).*/\1/p')"
+            m_ok="$(echo "$marker" | sed -n 's/.*ok=\([0-9]\{1,\}\).*/\1/p')"
+            m_ev="$(echo "$marker" | sed -n 's/.*ev=\([0-9]\{1,\}\).*/\1/p')"
+            echo "SLI-4 marker='$marker' cal=$m_cal ok=$m_ok ev=$m_ev expect_cal=$EXPECT_CAL"
+            if [ -z "$m_cal" ] || [ -z "$m_ok" ]; then
+              echo "::error::${TAG}SLI-4 マーカーの形式が不正（cal と ok の整数が読めない）: '$marker'"
+              echo "| 参照ソース | 形式不正 \`$marker\` | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif printf '%s' "$marker" | grep -q 'ev=' && [ -z "$m_ev" ]; then
+              # `ev=N` のようにテンプレートの literal が残っている＝生成側が指示どおり数えていない。
+              # 放置すると「マーカーはあるが中身が偽」という最も気づきにくい状態になる。
+              echo "::error::${TAG}SLI-4 ev が整数でない（テンプレートの literal が残っている）: '$marker'"
+              echo "| 参照ソース | ev が非整数 \`$marker\` | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif [ "$m_cal" -lt "$EXPECT_CAL" ]; then
+              echo "::error::${TAG}SLI-4 参照カレンダーが減った（cal=$m_cal < 期待 $EXPECT_CAL）。生成側の指示が上書き・切り詰められた可能性が高い。"
+              echo "| 参照ソース | cal=$m_cal（期待 $EXPECT_CAL） | 🔴 縮小 |" >> "$GITHUB_STEP_SUMMARY"
+              fail=1
+            elif [ "$m_ok" -lt "$m_cal" ]; then
+              # 部分失敗は「配信は続くが取りこぼしている」。FAIL にはしないが**無音にはしない**。
+              echo "::warning::${TAG}SLI-4 部分失敗: $m_cal 件中 $m_ok 件しか取得できていない（権限・ID 失効・タイムアウトを疑う）。"
+              echo "| 参照ソース | ok=$m_ok / cal=$m_cal・ev=${m_ev:-?} | 🟡 部分失敗 |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "| 参照ソース | cal=$m_cal ok=$m_ok ev=${m_ev:-?} | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
+
           if [ "$fail" = "1" ]; then
             {
               echo ""
               echo "**調査手順**: Apps Script プロジェクト \`Github_PAT\` の Web App \`?op=status\` で"
               echo "\`lastTriggerAt\`（無人発火の証拠）・\`lastResult\`・\`generations\` を確認する。"
               echo "\`lastTriggerAt\` が 2 時間以上進んでいなければ、トリガが停止／自動無効化された疑い。"
+              echo ""
+              echo "SLI-4 が鳴った場合は Cowork 側の定期タスク指示文を確認する"
+              echo "（\`docs/handoff/cowork/COWORK-PROMPT.md\` の「カレンダーの読み方」が失われていないか）。"
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
