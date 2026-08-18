@@ -165,6 +165,19 @@ jobs:
             else
               echo "| 通知一致 | \`$n_ymd\` 送信済 | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY"
             fi
+            # ---- MB-025: LINE 形式の生存行（warning-only・判定式は上のまま）----
+            # flex が text へ縮退しても通知自体は成功なので上の判定は緑のまま。**縮退を無音にしない**ため
+            # format と reason を 1 行で出す（fail は立てない・G2 MUST-4）。format が無い＝MB-025 未配備。
+            n_fmt=$(jq -r '.format // empty' notify-state.json)
+            n_rsn=$(jq -r '.reason // empty' notify-state.json)
+            if [ -z "$n_fmt" ]; then
+              echo "| LINE 形式 | （format 未記録＝MB-025 未配備） | ⚪ |" >> "$GITHUB_STEP_SUMMARY"
+            elif [ "$n_fmt" = "text" ] && [ -n "$n_rsn" ]; then
+              echo "::warning::${TAG}LINE カードが text へ縮退している（reason=$n_rsn）。history.json の形式・同期・guard を疑う。"
+              echo "| LINE 形式 | text（$n_rsn） | 🟡 flex 縮退 |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "| LINE 形式 | $n_fmt | 🟢 |" >> "$GITHUB_STEP_SUMMARY"
+            fi
           fi
           # ---------- SLI-4: 参照ソースの網羅（MB-023） ----------
           # 生成側の拡張（12 カレンダー参照）が効いているかは**こちら側からは確認できない**
