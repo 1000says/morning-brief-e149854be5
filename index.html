@@ -1,170 +1,213 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="brief-sources" content="cal=12;ok=12;ev=51">
-  <title>モーニングブリーフ</title>
-  <style>
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#FCFCFB;color:#2E2C27;font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
- font-size:15px;line-height:1.75;font-feature-settings:"palt" 1}
-.band-top{background:#F9F9F7;border-bottom:1px solid #E1E1DF}
-.inner{max-width:860px;margin:0 auto;padding:52px 28px 44px}
-.band-bottom .inner{padding:44px 28px 64px}
-.daydate{color:#6B6A63;font-size:13px;letter-spacing:.04em;margin:0 0 14px}
-h1{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;font-weight:600;font-size:40px;line-height:1.34;
- margin:0 0 34px;letter-spacing:.01em}
-.terrain{display:block;width:100%;height:auto;max-width:840px;margin:0 0 30px}
-.acts{display:grid;grid-template-columns:1fr 1fr 1fr}
-.act{padding:0 22px}
-.act:first-child{padding-left:0}
-.act:last-child{padding-right:0}
-.act+.act{border-left:1px solid #E4E3DC}
-.act-time{font-weight:600;font-size:13px;letter-spacing:.03em;margin:0 0 7px}
-.act-text{color:#6B6A63;font-size:14px;margin:0}
-h2{font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;font-weight:600;font-size:13px;letter-spacing:.09em;
- color:#2E2C27;margin:0 0 18px;text-transform:none}
-section{margin:0 0 40px}
-section:last-child{margin-bottom:0}
-.sched{margin:0;padding:0;list-style:none}
-.sched li{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid #E4E3DC;
- font-size:14px;color:#6B6A63}
-.sched li:last-child{border-bottom:none}
-.sched .k{flex:0 0 4.5em;color:#B4B3A8;font-size:12.5px;letter-spacing:.06em;
- padding-top:2px}
-.sched .v{flex:1 1 auto}
-ol.items{margin:0;padding:0;list-style:none;counter-reset:it}
-ol.items>li{counter-increment:it;display:flex;gap:16px;padding:15px 0;
- border-bottom:1px solid #E4E3DC}
-ol.items>li:last-child{border-bottom:none}
-ol.items>li::before{content:counter(it,decimal-leading-zero);color:#B4B3A8;
- font-size:12px;flex:0 0 1.6em;padding-top:4px;letter-spacing:.04em}
-.it-title{font-weight:600;font-size:15px;margin:0 0 4px}
-.it-text{color:#6B6A63;font-size:14px;margin:0}
-details{border-bottom:1px solid #E4E3DC}
-details>summary{cursor:pointer;list-style:none;padding:14px 0;font-size:14px}
-details>summary::-webkit-details-marker{display:none}
-details>summary::before{content:"＋";color:#B4B3A8;margin-right:12px;font-size:12px}
-details[open]>summary::before{content:"－"}
-.sum-date{color:#B4B3A8;font-size:12px;letter-spacing:.05em;margin-right:10px}
-.arc{padding:0 0 18px 30px}
-.arc p{margin:0 0 9px;color:#6B6A63;font-size:13.5px}
-.arc .t{color:#2E2C27;font-weight:600}
-@media (max-width:640px){
- .inner{padding:38px 20px 34px}
- .band-bottom .inner{padding:34px 20px 48px}
- h1{font-size:30px;margin-bottom:26px}
- .acts{grid-template-columns:1fr}
- .act{padding:16px 0}
- .act+.act{border-left:none;border-top:1px solid #E4E3DC}
- .act:first-child{padding-top:0}
- .sched li{flex-direction:column;gap:2px}
- .sched .k{flex:none}
-}
-@media (prefers-color-scheme:dark){
- body{background:#141311;color:#EDEBE5}
- .band-top{background:#191816;border-bottom-color:#2C2A26}
- h1,.it-title,.arc .t,h2{color:#EDEBE5}
- .daydate,.act-text,.it-text,.sched li,.arc p{color:#A8A69D}
- .act+.act,ol.items>li,.sched li,details,.sched li:last-child{border-color:#2C2A26}
- .terrain path[stroke="#2E2C27"]{stroke:#EDEBE5}
- .terrain circle[fill="#2E2C27"]{fill:#EDEBE5}
-}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="brief-sources" content="cal=12;ok=12;ev=53">
+<title>モーニングブリーフ · 8月20日</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --soft:#6B6A63;
+    --grey:#B4B3A8; --hair:#E4E3DC; --line:#E1E1DF; --clay:#C6613F; --clayh:#AE5133;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  body{font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.7;}
+  .band{width:100%;}
+  .top{background:var(--wash);border-bottom:1px solid var(--line);}
+  .bottom{background:var(--bg);}
+  .inner{max-width:860px;margin:0 auto;padding:40px 34px;}
+  .daydate{font-size:13px;color:var(--soft);letter-spacing:.02em;margin-bottom:10px;}
+  h1.head{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
+    font-weight:600;font-size:31px;line-height:1.45;margin:0 0 22px;letter-spacing:.01em;color:var(--ink);}
+  .terrain{margin:6px 0 4px;}
+  .acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:14px;}
+  .act{padding:16px 18px;border-left:1px solid var(--hair);}
+  .act:first-child{border-left:none;padding-left:2px;}
+  .act .t{font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--ink);margin-bottom:6px;}
+  .act .s{font-size:13.5px;color:var(--soft);line-height:1.65;}
+  .const{margin:2px 0 26px;font-size:13.5px;color:var(--soft);}
+  .const .clabel{font-weight:700;color:var(--ink);font-size:12px;letter-spacing:.06em;
+    display:block;margin-bottom:4px;text-transform:uppercase;}
+  .lists section{margin-bottom:30px;}
+  .lists h2{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink);margin:0 0 14px;padding-bottom:0;}
+  ul.items{list-style:none;margin:0;padding:0;}
+  li.item{display:flex;gap:14px;padding:12px 0;border-top:1px solid var(--hair);}
+  li.item:first-child{border-top:none;}
+  .num{color:var(--grey);font-size:12px;font-weight:600;min-width:20px;padding-top:3px;
+    font-variant-numeric:tabular-nums;}
+  .body{flex:1;}
+  .ititle{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:3px;line-height:1.5;}
+  .isent{font-size:13.5px;color:var(--soft);line-height:1.66;}
+  .archive h2{margin-top:6px;}
+  details.arch{border-top:1px solid var(--hair);padding:0;}
+  details.arch summary{list-style:none;cursor:pointer;padding:12px 0;display:flex;flex-direction:column;gap:2px;}
+  details.arch summary::-webkit-details-marker{display:none;}
+  .a-day{font-size:12px;color:var(--grey);letter-spacing:.02em;}
+  .a-head{font-size:14px;color:var(--ink);font-weight:600;line-height:1.5;}
+  .a-inner{padding:2px 0 16px;}
+  .a-acts{margin-bottom:10px;}
+  .a-act{display:flex;gap:10px;padding:3px 0;font-size:12.5px;}
+  .a-time{color:var(--ink);font-weight:700;min-width:118px;}
+  .a-text{color:var(--soft);}
+  .a-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--soft);margin:8px 0 4px;}
+  .a-inner ul{margin:0 0 4px;padding-left:18px;}
+  .a-inner li{font-size:12.5px;color:var(--soft);line-height:1.6;margin-bottom:3px;}
+  .a-inner li b{color:var(--ink);font-weight:600;}
+  @media (max-width:640px){
+    .inner{padding:30px 20px;}
+    h1.head{font-size:24px;}
+    .acts{grid-template-columns:1fr;}
+    .act{border-left:none;border-top:1px solid var(--hair);padding:14px 2px;}
+    .act:first-child{border-top:none;}
+    .a-time{min-width:96px;}
+  }
 </style>
 </head>
 <body>
-<div class="band-top"><div class="inner">
-<p class="daydate">水曜日 · 8月19日 2026</p>
-<h1>今日は予定表が空いています、秀平さん。まとまった時間を、待っている一つに使えます。</h1>
-<svg class="terrain" viewBox="0 0 840 170" width="840" height="170" role="img" aria-label="今日の起伏">
-  <path d="M0,126 C70,124 130,121 210,119 C300,117 352,105 430,106 C508,107 562,118 640,117 C720,116 782,121 840,119"
-        fill="none" stroke="#2E2C27" stroke-width="1.6" stroke-linecap="round"/>
-  <g stroke="#C6613F" stroke-width="1.4" fill="none" stroke-linecap="round">
-    <circle cx="140" cy="52" r="15"/>
-    <path d="M140,26 L140,18 M140,86 L140,78 M114,52 L106,52 M174,52 L166,52
-             M122,34 L116,28 M158,70 L164,76 M158,34 L164,28 M122,70 L116,76"/>
-  </g>
-  <circle cx="210" cy="119" r="8" fill="#2E2C27"/>
-  <circle cx="430" cy="106" r="11" fill="#2E2C27"/>
-  <circle cx="640" cy="117" r="7" fill="#2E2C27"/>
-</svg>
-<div class="acts">
-<div class="act"><p class="act-time">5 – 12 PM</p><p class="act-text">日課は5時台から動き出し、午前に会議はひとつも入っていない。</p></div>
-<div class="act"><p class="act-time">12 – 4 PM</p><p class="act-text">昼の育児対応が4時間続く。連続した作業時間は午前側に寄せると取りやすい。</p></div>
-<div class="act"><p class="act-time">4 PM onward</p><p class="act-text">夕方以降は日課が続くだけで、外に出る予定は入っていない。</p></div>
-</div>
-</div></div>
-<div class="band-bottom"><div class="inner">
-<section><h2>予定</h2><ul class="sched">
-<li><span class="k">常設</span><span class="v">夜間の育児対応（深夜〜朝） / 昼の育児対応（12:00 – 16:00） / 日課（トレーニング・体調記録・スキンケア）</span></li>
-<li><span class="k">終日</span><span class="v">サブスクの解約期限（8/21まで）</span></li>
-<li><span class="k">明日</span><span class="v">3:00 – 5:00　サッカーの試合　·　9:00 – 12:30　設備点検の訪問　·　15:00 – 16:00　配達の受け取り　·　15:30 – 17:30　予防接種</span></li>
-</ul></section>
-<section><h2>気にかけること</h2><ol class="items">
-<li><div><p class="it-title">明日は訪問と外出が重なる</p><p class="it-text">カレンダーで、明日は午前に設備点検の訪問、夕方に予防接種。在宅の時間帯と移動の順番を今日のうちに決めておくと動きやすい。</p></div></li>
-<li><div><p class="it-title">節電の対象時間が今日</p><p class="it-text">契約中のエネルギー会社からの案内で、対象は今日の13:30 – 20:00。事前のエントリーがないと対象外になる。</p></div></li>
-<li><div><p class="it-title">サブスクの解約期限が8/21</p><p class="it-text">家族のカレンダーに終日予定として入っており、残りは3日。今日を含めて動かせる日は限られる。</p></div></li>
-<li><div><p class="it-title">粗大ごみの収集が8/21</p><p class="it-text">Todoistに明日期限で登録されている。当日ではなく前日までに出す準備が要る。</p></div></li>
-<li><div><p class="it-title">今夜19時に3日ごとの評価</p><p class="it-text">Todoistで優先度の高い一件。直近3日分の記録をまとめて見る回にあたる。</p></div></li>
-</ol></section>
-<section><h2>片づいたこと</h2><ol class="items">
-<li><div><p class="it-title">注文した備品が届いた</p><p class="it-text">Gmailの配達通知で、17日と18日に完了。電源タップ類と別便の1点がそろっている。</p></div></li>
-<li><div><p class="it-title">昨日の外出は予定どおり終了</p><p class="it-text">カレンダーで、18日の日中に入っていた外出が終わり、今日の日中に予定は残っていない。</p></div></li>
-</ol></section>
-<section><h2>Claude Code関連の確認</h2><ol class="items">
-<li><div><p class="it-title">GitHubで認証と鍵の操作</p><p class="it-text">8月18日の朝5時台に、sudo認証コードの発行と、ブリーフ中継用アクセストークンの再生成。同じ時間帯に定期ブリーフが動いており、自分の操作なら確認は不要。</p></div></li>
-<li><div><p class="it-title">Driveの新規・更新に見慣れないものはない</p><p class="it-text">直近24時間の更新は、開発中のスクリプト・設計メモ・日次記録のみ。新規リポジトリやアカウントのアーカイブ通知は届いていない。</p></div></li>
-</ol></section>
-<section><h2>これまでのブリーフ</h2>
-<details><summary><span class="sum-date">火曜日 · 8月18日 2026</span>午前はあなたの時間、shuhei。昼から浅草橋へ出て、夜は家に戻る一日。</summary><div class="arc">
-<p><span class="t">6 – 10:30 AM</span>　出発まではひらけた時間。トレーニングや記録の日課をこなせる。</p>
-<p><span class="t">10:30 AM – 3:30 PM</span>　昼をはさんで浅草橋方面へ外出。午前の空きから午後の予定へと流れる。</p>
-<p><span class="t">3:30 PM onward</span>　夕方には家に戻り、夜は静かに流れていく。</p>
-<p><span class="t">本日は予防接種</span>　カレンダーに、本日、予防接種の予定。持ち物を今日のうちに確認しておくと当日が楽。</p>
-<p><span class="t">昨日の配送が完了</span>　Gmailの通知で、育児用品などの荷物が昨日のうちに届いた。本日もいくつか配送の予定がある。</p>
-</div></details>
-<details><summary><span class="sum-date">月曜日 · 8月17日 2026</span>予定をひとつ挟むだけの軽い一日、shuhei。明日に向けて力を残しておける。</summary><div class="arc">
-<p><span class="t">5 – 11 AM</span>　早朝から荷物が数便届く。昼前までは家のペースで動ける。</p>
-<p><span class="t">11:30 AM – 4 PM</span>　昼前に通院。昼過ぎからは育児対応の時間が続く。</p>
-<p><span class="t">4 PM onward</span>　夕方からは手が空き、夜は静かに流れていく。</p>
-<p><span class="t">書類を出す</span>　家族の予定に今日付けで『書類を出す』。提出先の窓口が開くうちに済ませておきたい。</p>
-<p><span class="t">明日は予防接種</span>　明日、予防接種の予定。持ち物を今夜のうちに確認しておくと当日が楽。</p>
-<p><span class="t">明日は浅草橋へ外出</span>　明日12:30から浅草橋方面へ外出の予定。予防接種と時間が近いので、順番を決めておくと動きやすい。</p>
-<p><span class="t">今日の料理は仕込み済み</span>　予定していた献立（豚ヒレのポワレ、加賀太きゅうりのソテー）はTodoistで完了済み。</p>
-<p><span class="t">昨夜のフットボールの結果</span>　フォロー中のクラブは、マンチェスター・シティが0-3で黒星、バルセロナがプレシーズンで5-2の勝利。</p>
-</div></details>
-<details><summary><span class="sum-date">日曜日 · 8月16日 2026</span>今日は予定のない日曜、秀平さん。ゴーヤ一本を使い切る、料理の一日にできます。</summary><div class="arc">
-<p><span class="t">– 12:00</span>　予定表は今日まっさら。朝はジムとストレッチ、11時に計測がひとつ入る。</p>
-<p><span class="t">12:00 – 18:00</span>　会議はなく、日中はゴーヤ一本を使い切る3品の仕込みに向く時間。</p>
-<p><span class="t">18:00 –</span>　夕はストレッチと記録の評価。明日は昼に通院。</p>
-<p><span class="t">3日ごとの記録評価</span>　Todoistで今日が期限。直近3日分の記録をまとめて見る回。</p>
-<p><span class="t">定点計測</span>　10日ごとの計測日がTodoistに。前回からの推移を確かめる。</p>
-<p><span class="t">ゴーヤ一本を使い切る3品</span>　前菜・パスタ・は作り置きが今日期限。生の前菜は初日に、カポナータは2日目が食べ頃。</p>
-<p><span class="t">コープデリの次回注文が確定</span>　8月2回B週の注文を受付済み。翌週の配達は20日(木)の予定。</p>
-</div></details>
-<details><summary><span class="sum-date">土曜日 · 8月15日 2026</span>土曜日はまるごとあなたの時間です、秀平さん。</summary><div class="arc">
-<p><span class="t">– 12:00</span>　午前はジムとストレッチのいつもの流れ。予定は入らず、静かに始まる。</p>
-<p><span class="t">12:00 – 18:00</span>　昼を過ぎてもまとまった空き時間が続く。手をつけたいことに向けられる。</p>
-<p><span class="t">18:00 –</span>　夜も予定はなし。明日の日曜も、いまのところ空いている。</p>
-<p><span class="t">いつもと違う環境からのログイン通知</span>　仕入れ先のアカウントに、普段と異なる環境からのログインがあったとの通知。身に覚えがなければ、公式サイト側でパスワードの確認を。Gmailの通知メールより。</p>
-<p><span class="t">複数の配達が完了</span>　佐川やヨドバシなどの荷物が、昨日までに配達済みに。配達完了通知より。</p>
-<p><span class="t">Amazonの返金が2件完了</span>　未配達で返送された商品の返金手続きが、2件とも完了した。</p>
-<p><span class="t">集荷とコープ締切が過ぎた</span>　昨日の集荷（16 – 18時）が受付され、コープの注文締切（21時）も締まった。</p>
-</div></details>
-<details><summary><span class="sum-date">水曜日 · 8月12日 2026</span>朝いちばんの受け取りを終えたら、あとはまるごと自分の時間です、秀平さん。</summary><div class="arc">
-<p><span class="t">4:30 – 8:00</span>　朝の早い時間に配送枠がひとつ。7時台までに届く見込み。</p>
-<p><span class="t">8:00 – 18:00</span>　昼を過ぎても予定は入っていない。まとまった時間がそのまま残る。</p>
-<p><span class="t">18:00 –</span>　夜も静か。明日は午前と午後に配達がひとつずつ。</p>
-<p><span class="t">早朝にAmazonの配送枠</span>　4:30 – 8:00に配送がひとつ、7時台までに届く見込み。</p>
-<p><span class="t">猫の飲水管理が今日ぶんに</span>　10日ごとの猫の飲水管理が、今日の予定に入っている。</p>
-<p><span class="t">配達が複数完了</span>　USB機器・洋菓子・調味料など複数が、昨日までに配達済みに。</p>
-<p><span class="t">来客の招待が承諾された</span>　8月20日の設備点検ほか、先方から承諾の連絡が届いた。</p>
-<p><span class="t">新規注文が発送段階へ</span>　プリマハムほか複数点が、注文・発送済みに。</p>
-</div></details>
-</section>
-</div></div>
+  <div class="band top">
+    <div class="inner">
+      <div class="daydate">木曜日 · 8月20日 2026</div>
+      <h1 class="head">午前は家で受け取りが続き、秀平さん。午後は出かける一日になりそうです。</h1>
+      <div class="terrain"><svg viewBox="0 0 840 170" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="今日の地形">
+  <path d="M0,120 C90,116 150,110 210,104 C280,97 340,70 420,66 C500,62 560,92 640,104 C710,114 780,120 840,118"
+        fill="none" stroke="#2E2C27" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="120" cy="112" r="6" fill="#B4B3A8"/>
+  <circle cx="210" cy="104" r="8" fill="#2E2C27"/>
+  <circle cx="420" cy="66" r="9" fill="#2E2C27"/>
+  <circle cx="640" cy="104" r="8" fill="#2E2C27"/>
+  <circle cx="740" cy="117" r="6" fill="#B4B3A8"/>
+  <path d="M64,44 q7,-7 14,0 q7,-7 14,0" fill="none" stroke="#B4B3A8" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M792,40 a13,13 0 1,0 8,20 a10,10 0 1,1 -8,-20 Z" fill="#C6613F" opacity="0.9"/>
+</svg></div>
+      <div class="acts">
+        <div class="act"><div class="t">5 – 9 AM</div><div class="s">配送は5時台から動き出し、朝は受け取りの構え。会議は今日ひとつもない。</div></div>
+        <div class="act"><div class="t">9 AM – 3 PM</div><div class="s">午前は在宅の短い訪問がひとつ、荷物も数便届く。昼は育児対応の時間が続く。</div></div>
+        <div class="act"><div class="t">3 PM onward</div><div class="s">午後は外出がひとつ、戻れば夜は日課だけ。明日は午前に外の予定。</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="band bottom">
+    <div class="inner">
+      <div class="const"><span class="clabel">常設</span>夜間の育児対応（深夜〜朝）、昼の育児対応（12:00 – 16:00）、日課（トレーニング・体調記録・スキンケア）</div>
+      <div class="lists">
+        <section>
+          <h2>気にかけたいこと</h2>
+          <ul class="items">
+      <li class="item">
+        <span class="num">01</span>
+        <div class="body">
+          <div class="ititle">今日午前は在宅で訪問対応</div>
+          <div class="isent">カレンダーで、今日9時から在宅の訪問がひとつ。立ち会いは短いが、その時間帯は家にいる必要がある。</div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="num">02</span>
+        <div class="body">
+          <div class="ititle">今日午後は予防接種で外出</div>
+          <div class="isent">カレンダーで、今日の午後に予防接種の予定。持ち物を出る前に確認しておくと当日が楽。</div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="num">03</span>
+        <div class="body">
+          <div class="ititle">粗大ごみを今日のうちに出す</div>
+          <div class="isent">Todoistと予定表で、回収は明日8時から。前日のうちに出しておく必要がある。</div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="num">04</span>
+        <div class="body">
+          <div class="ititle">サブスクの解約が明日まで</div>
+          <div class="isent">家族のカレンダーに終日予定として明日まで。動かせる日は今日を入れて残り少ない。</div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="num">05</span>
+        <div class="body">
+          <div class="ititle">明日は昼前に外出、夜に注文締切</div>
+          <div class="isent">明日は昼前に通院の外出、夜21時に食材宅配の注文締切。順番を決めておくと動きやすい。</div>
+        </div>
+      </li>
+          </ul>
+        </section>
+        <section>
+          <h2>片づいたこと</h2>
+          <ul class="items">
+      <li class="item">
+        <span class="num">01</span>
+        <div class="body">
+          <div class="ititle">今朝のフットボールは白星</div>
+          <div class="isent">フォロー中のバルセロナが、今朝のプレシーズンで2-1の勝利。</div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="num">02</span>
+        <div class="body">
+          <div class="ititle">注文品の発送が進んでいる</div>
+          <div class="isent">Gmailの発送通知で、キッチン用品など複数件が発送済みに。今日も配送の予定がある。</div>
+        </div>
+      </li>
+          </ul>
+        </section>
+        <section class="archive">
+          <h2>これまでのブリーフ</h2>
+      <details class="arch">
+        <summary><span class="a-day">水曜日 · 8月19日 2026</span><span class="a-head">今日は予定表が空いています、秀平さん。まとまった時間を、待っている一つに使えます。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">5 – 12 PM</span><span class="a-text">日課は5時台から動き出し、午前に会議はひとつも入っていない。</span></div><div class="a-act"><span class="a-time">12 – 4 PM</span><span class="a-text">昼の育児対応が4時間続く。連続した作業時間は午前側に寄せると取りやすい。</span></div><div class="a-act"><span class="a-time">4 PM onward</span><span class="a-text">夕方以降は日課が続くだけで、外に出る予定は入っていない。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>明日は訪問と外出が重なる</b> — カレンダーで、明日は午前に設備点検の訪問、夕方に予防接種。在宅の時間帯と移動の順番を今日のうちに決めておくと動きやすい。</li><li><b>節電の対象時間が今日</b> — 契約中のエネルギー会社からの案内で、対象は今日の13:30 – 20:00。事前のエントリーがないと対象外になる。</li><li><b>サブスクの解約期限が8/21</b> — 家族のカレンダーに終日予定として入っており、残りは3日。今日を含めて動かせる日は限られる。</li><li><b>粗大ごみの収集が8/21</b> — Todoistに明日期限で登録されている。当日ではなく前日までに出す準備が要る。</li><li><b>今夜19時に3日ごとの評価</b> — Todoistで優先度の高い一件。直近3日分の記録をまとめて見る回にあたる。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>注文した備品が届いた</b> — Gmailの配達通知で、17日と18日に完了。電源タップ類と別便の1点がそろっている。</li><li><b>昨日の外出は予定どおり終了</b> — カレンダーで、18日の日中に入っていた外出が終わり、今日の日中に予定は残っていない。</li></ul>
+        </div>
+      </details>
+      <details class="arch">
+        <summary><span class="a-day">火曜日 · 8月18日 2026</span><span class="a-head">午前はあなたの時間、shuhei。昼から浅草橋へ出て、夜は家に戻る一日。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">6 – 10:30 AM</span><span class="a-text">出発まではひらけた時間。トレーニングや記録の日課をこなせる。</span></div><div class="a-act"><span class="a-time">10:30 AM – 3:30 PM</span><span class="a-text">昼をはさんで浅草橋方面へ外出。午前の空きから午後の予定へと流れる。</span></div><div class="a-act"><span class="a-time">3:30 PM onward</span><span class="a-text">夕方には家に戻り、夜は静かに流れていく。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>本日は予防接種</b> — カレンダーに、本日、予防接種の予定。持ち物を今日のうちに確認しておくと当日が楽。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>昨日の配送が完了</b> — Gmailの通知で、育児用品などの荷物が昨日のうちに届いた。本日もいくつか配送の予定がある。</li></ul>
+        </div>
+      </details>
+      <details class="arch">
+        <summary><span class="a-day">月曜日 · 8月17日 2026</span><span class="a-head">予定をひとつ挟むだけの軽い一日、shuhei。明日に向けて力を残しておける。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">5 – 11 AM</span><span class="a-text">早朝から荷物が数便届く。昼前までは家のペースで動ける。</span></div><div class="a-act"><span class="a-time">11:30 AM – 4 PM</span><span class="a-text">昼前に通院。昼過ぎからは育児対応の時間が続く。</span></div><div class="a-act"><span class="a-time">4 PM onward</span><span class="a-text">夕方からは手が空き、夜は静かに流れていく。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>書類を出す</b> — 家族の予定に今日付けで『書類を出す』。提出先の窓口が開くうちに済ませておきたい。</li><li><b>明日は予防接種</b> — 明日、予防接種の予定。持ち物を今夜のうちに確認しておくと当日が楽。</li><li><b>明日は浅草橋へ外出</b> — 明日12:30から浅草橋方面へ外出の予定。予防接種と時間が近いので、順番を決めておくと動きやすい。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>今日の料理は仕込み済み</b> — 予定していた献立（豚ヒレのポワレ、加賀太きゅうりのソテー）はTodoistで完了済み。</li><li><b>昨夜のフットボールの結果</b> — フォロー中のクラブは、マンチェスター・シティが0-3で黒星、バルセロナがプレシーズンで5-2の勝利。</li></ul>
+        </div>
+      </details>
+      <details class="arch">
+        <summary><span class="a-day">日曜日 · 8月16日 2026</span><span class="a-head">今日は予定のない日曜、秀平さん。ゴーヤ一本を使い切る、料理の一日にできます。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">– 12:00</span><span class="a-text">予定表は今日まっさら。朝はジムとストレッチ、11時に計測がひとつ入る。</span></div><div class="a-act"><span class="a-time">12:00 – 18:00</span><span class="a-text">会議はなく、日中はゴーヤ一本を使い切る3品の仕込みに向く時間。</span></div><div class="a-act"><span class="a-time">18:00 –</span><span class="a-text">夕はストレッチと記録の評価。明日は昼に通院。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>3日ごとの記録評価</b> — Todoistで今日が期限。直近3日分の記録をまとめて見る回。</li><li><b>定点計測</b> — 10日ごとの計測日がTodoistに。前回からの推移を確かめる。</li><li><b>ゴーヤ一本を使い切る3品</b> — 前菜・パスタ・は作り置きが今日期限。生の前菜は初日に、カポナータは2日目が食べ頃。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>コープデリの次回注文が確定</b> — 8月2回B週の注文を受付済み。翌週の配達は20日(木)の予定。</li></ul>
+        </div>
+      </details>
+      <details class="arch">
+        <summary><span class="a-day">土曜日 · 8月15日 2026</span><span class="a-head">土曜日はまるごとあなたの時間です、秀平さん。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">– 12:00</span><span class="a-text">午前はジムとストレッチのいつもの流れ。予定は入らず、静かに始まる。</span></div><div class="a-act"><span class="a-time">12:00 – 18:00</span><span class="a-text">昼を過ぎてもまだまだ空き時間が続く。手をつけたいことに向けられる。</span></div><div class="a-act"><span class="a-time">18:00 –</span><span class="a-text">夜も予定はなし。明日の日曜も、いまのところ空いている。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>いつもと違う環境からのログイン通知</b> — 仕入れ先のアカウントに、普段と異なる環境からのログインがあったとの通知。身に覚えがなければ、公式サイト側でパスワードの確認を。Gmailの通知メールより。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>複数の配達が完了</b> — 佐川やヨドバシなどの荷物が、昨日までに配達済みに。配達完了通知より。</li><li><b>Amazonの返金が2件完了</b> — 未配達で返送された商品の返金手続きが、2件とも完了した。</li><li><b>集荷とコープ締切が過ぎた</b> — 昨日の集荷（16 – 18時）が受付され、コープの返品締切（21時）も締まった。</li></ul>
+        </div>
+      </details>
+      <details class="arch">
+        <summary><span class="a-day">水曜日 · 8月12日 2026</span><span class="a-head">朝いちばんの受け取りを終えたら、あとはまるごと自分の時間です、秀平さん。</span></summary>
+        <div class="a-inner">
+          <div class="a-acts"><div class="a-act"><span class="a-time">4:30 – 8:00</span><span class="a-text">朝の早い時間に配送枠がひとつ。7時台までに届く見込み。</span></div><div class="a-act"><span class="a-time">8:00 – 18:00</span><span class="a-text">昼を過ぎても予定は入っていない。まとまった時間がそのまま残る。</span></div><div class="a-act"><span class="a-time">18:00 –</span><span class="a-text">夜も静か。明日は午前と午後に配達がひとつずつ。</span></div></div>
+          <div class="a-h">気にかけたいこと</div><ul><li><b>早朝にAmazonの配送枠</b> — 4:30 – 8:00に配送がひとつ、7時台までに届く見込み。</li><li><b>猫の飲水管理が今日ぶんに</b> — 10日ごとの猫の飲水管理が、今日の予定に入っている。</li></ul>
+          <div class="a-h">片づいたこと</div><ul><li><b>配達が複数完了</b> — USB機器・洋菓子・調味料など複数が、昨日までに配達済みに。</li><li><b>来客の招待が承諾された</b> — 8月20日の設備点検ほか、先方から承諾の連絡が届いた。</li><li><b>新規注文が発送段階へ</b> — プリマハムほか複数点が、注文・発送済みに。</li></ul>
+        </div>
+      </details>
+        </section>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
