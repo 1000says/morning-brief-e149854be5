@@ -4,202 +4,214 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="brief-sources" content="cal=12;ok=12;ev=6">
-<title>モーニングブリーフ · 8月24日</title>
+<meta name="brief-sources" content="cal=12;ok=12;ev=7">
+<title>モーニングブリーフ · 8月25日</title>
 <style>
-:root{--bg:#FCFCFB;--wash:#F9F9F7;--ink:#2E2C27;--soft:#6B6A63;--grey:#B4B3A8;
---hair:#E4E3DC;--line:#E1E1DF;--clay:#C6613F;--card:#FFFFFF;}
-@media (prefers-color-scheme:dark){
-:root{--bg:#141310;--wash:#191816;--ink:#EDEBE5;--soft:#A8A69D;--grey:#6E6C64;
---hair:#2C2A26;--line:#2C2A26;--clay:#D9805F;--card:#1E1D1A;}
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--soft);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif;
-line-height:1.75;-webkit-font-smoothing:antialiased;}
-.band{width:100%;}
-.band.top{background:var(--wash);border-bottom:1px solid var(--line);}
-.inner,.band.bottom .wrap{max-width:860px;margin:0 auto;padding:40px 28px;}
-.band.bottom{background:var(--bg);}
-.daydate{font-size:12.5px;letter-spacing:.06em;color:var(--soft);margin-bottom:12px;}
-.headline{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
-font-weight:600;font-style:normal;color:var(--ink);font-size:40px;line-height:1.4;margin:0 0 26px;letter-spacing:.01em;}
-.drawing{color:var(--ink);margin:0 0 22px;}
-.drawing svg.terrain{width:100%;height:auto;display:block;}
-.acts{display:flex;gap:0;}
-.act{flex:1;padding:0 20px;border-left:1px solid var(--hair);}
-.act:first-child{padding-left:0;border-left:none;}
-.act-time{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.02em;
-font-variant-numeric:tabular-nums;margin-bottom:6px;}
-.act-text{margin:0;font-size:14px;color:var(--soft);}
-.band.bottom .wrap{padding-top:34px;}
-.block{margin:0 0 40px;}
-.block h2{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans",sans-serif;
-font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--ink);margin:0 0 18px;}
-.plan-row{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--hair);}
-.plan-row:first-of-type{border-top:none;}
-.plan-k{flex:none;width:44px;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--soft);padding-top:3px;}
-.plan-v{font-size:14px;color:var(--ink);}
-.items{list-style:none;counter-reset:it;margin:0;padding:0;}
-.items li{position:relative;padding:0 0 16px 34px;counter-increment:it;}
-.items li::before{content:counter(it,decimal-leading-zero);position:absolute;left:0;top:1px;
-font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
-.it-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
-.it-text{margin:0;font-size:14px;color:var(--soft);}
-.calm{font-size:14px;color:var(--soft);margin:0;}
-.archive details{border-top:1px solid var(--hair);padding:0;}
-.archive details:last-child{border-bottom:1px solid var(--hair);}
-.archive summary{list-style:none;cursor:pointer;padding:12px 0;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;}
-.archive summary::-webkit-details-marker{display:none;}
-.archive summary::before{content:"+";color:var(--grey);font-size:13px;width:12px;flex:none;}
-.archive details[open] summary::before{content:"–";}
-.arch-day{font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.03em;flex:none;}
-.arch-head{font-size:13px;color:var(--ink);}
-.arch-body{padding:2px 0 16px 24px;}
-.arch-acts{font-size:13px;color:var(--soft);margin:0 0 10px;}
-.arch-sub{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--soft);margin:8px 0 3px;}
-.arch-body ul{margin:0;padding-left:18px;}
-.arch-body li{font-size:13px;color:var(--soft);margin:2px 0;}
-@media (max-width:640px){
-.headline{font-size:30px;}
-.inner,.band.bottom .wrap{padding:30px 20px;}
-.acts{flex-direction:column;gap:0;}
-.act{padding:14px 0;border-left:none;border-top:1px solid var(--hair);}
-.act:first-child{padding-top:0;border-top:none;}
-}
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
+    --ink-grey:#B4B3A8; --hairline:#E4E3DC; --clay:#C6613F; --clay-hover:#AE5133;
+    --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
+    --sans:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.7}
+  .band{width:100%}
+  .band-top{background:var(--wash);border-bottom:1px solid var(--hairline)}
+  .inner{max-width:860px;margin:0 auto;padding:48px 28px}
+  .daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin:0 0 10px}
+  h1.headline{font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.4;
+    margin:0 0 26px;color:var(--ink);letter-spacing:.01em}
+  .terrain{width:100%;height:auto;display:block;margin:0 0 8px}
+  .acts{display:flex;gap:0;margin-top:26px}
+  .act{flex:1;padding:0 22px;border-left:1px solid var(--hairline)}
+  .act:first-child{padding-left:0;border-left:none}
+  .act .t{font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--ink);
+    font-variant-numeric:tabular-nums;margin:0 0 7px}
+  .act .s{font-size:13.5px;color:var(--ink-soft);margin:0}
+  h2{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.09em;
+    color:var(--ink);margin:0 0 18px;text-transform:none}
+  section.block{margin:0 0 40px}
+  .const-list,.plain-list{margin:0;padding:0;list-style:none}
+  .const-list li{font-size:13.5px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--hairline)}
+  .const-list li:last-child{border-bottom:none}
+  .const-list li b{color:var(--ink);font-weight:600;margin-right:8px;font-variant-numeric:tabular-nums}
+  .sched-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px}
+  .sched-row{font-size:13.5px;color:var(--ink-soft);padding:5px 0}
+  .sched-row .lab{display:inline-block;min-width:64px;color:var(--ink);font-weight:600;font-size:11.5px;
+    letter-spacing:.04em}
+  .sched-row .tm{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;margin-left:6px}
+  .items{margin:0;padding:0;list-style:none}
+  .item{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--hairline)}
+  .item:first-child{border-top:none}
+  .item .num{color:var(--ink-grey);font-size:12px;font-variant-numeric:tabular-nums;
+    padding-top:3px;min-width:18px}
+  .item .body .title{font-weight:600;font-size:15px;color:var(--ink);margin:0 0 4px}
+  .item .body .desc{font-size:13.5px;color:var(--ink-soft);margin:0}
+  .item .body .desc u{text-decoration:none;border-bottom:1px solid var(--ink-grey);
+    color:var(--ink-soft);padding-bottom:1px}
+  .calm{font-size:13.5px;color:var(--ink-soft);margin:0;padding:2px 0}
+  details.arch{border-top:1px solid var(--hairline);padding:0}
+  details.arch summary{cursor:pointer;list-style:none;padding:14px 0;display:flex;gap:14px;
+    align-items:baseline}
+  details.arch summary::-webkit-details-marker{display:none}
+  details.arch summary .d{font-size:12px;color:var(--ink-soft);min-width:132px;letter-spacing:.02em}
+  details.arch summary .h{font-size:13.5px;color:var(--ink);font-weight:500}
+  details.arch .arch-inner{padding:2px 0 18px 146px}
+  details.arch .arch-acts{margin:0 0 12px}
+  details.arch .arch-acts div{font-size:12.5px;color:var(--ink-soft);padding:2px 0}
+  details.arch .arch-acts .at{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;
+    margin-right:8px}
+  details.arch .arch-sub{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--ink-soft);
+    margin:10px 0 4px}
+  details.arch .arch-il{margin:0;padding:0;list-style:none}
+  details.arch .arch-il li{font-size:12.5px;color:var(--ink-soft);padding:3px 0}
+  details.arch .arch-il li b{color:var(--ink);font-weight:600;margin-right:6px}
+  @media (max-width:640px){
+    .inner{padding:34px 20px}
+    h1.headline{font-size:30px}
+    .acts{flex-direction:column;gap:0}
+    .act{border-left:none;border-top:1px solid var(--hairline);padding:16px 0}
+    .act:first-child{border-top:none;padding-top:0}
+    details.arch summary{flex-direction:column;gap:2px}
+    details.arch summary .d{min-width:0}
+    details.arch .arch-inner{padding-left:0}
+  }
 </style>
 </head>
 <body>
-<section class="band top">
+
+<div class="band band-top">
   <div class="inner">
-    <div class="daydate">月曜日 · 8月24日 2026</div>
-    <h1 class="headline">今日はほとんど余白です、秀平さん。動くのは育児の時間帯と、夜明けの一戦くらい。</h1>
-    <div class="drawing"><svg class="terrain" viewBox="0 0 840 170" width="840" height="170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="今日の一日を表した、おだやかな水平線">
-  <path d="M0,122 C120,116 210,126 320,120 C430,114 520,122 640,118 C720,115 795,122 840,118" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  <g class="sun" stroke="#C6613F" stroke-width="2.2" stroke-linecap="round" fill="none">
-    <circle cx="150" cy="60" r="14"/>
-    <line x1="150" y1="30" x2="150" y2="40"/>
-    <line x1="150" y1="80" x2="150" y2="90"/>
-    <line x1="120" y1="60" x2="130" y2="60"/>
-    <line x1="170" y1="60" x2="180" y2="60"/>
-    <line x1="129" y1="39" x2="136" y2="46"/>
-    <line x1="164" y1="74" x2="171" y2="81"/>
-    <line x1="171" y1="39" x2="164" y2="46"/>
-    <line x1="136" y1="74" x2="129" y2="81"/>
-  </g>
-  <circle cx="120" cy="119" r="6" fill="#B4B3A8"/>
-  <g class="birds" stroke="#6B6A63" stroke-width="1.6" stroke-linecap="round" fill="none">
-    <path d="M452,66 q9,-8 18,0"/>
-    <path d="M474,72 q9,-8 18,0"/>
-  </g>
-  <path class="moon" d="M726,50 a17,17 0 1 0 12,29 a13,13 0 1 1 -12,-29 Z" fill="currentColor"/>
-</svg></div>
-    <div class="acts"><div class="act"><div class="act-time">04:30 – 12:00</div><p class="act-text">夜明けにサッカーの一戦。あとの午前はジムを挟みつつ、ほぼ自由に使える。</p></div>
-<div class="act"><div class="act-time">12:00 – 16:00</div><p class="act-text">昼の育児対応の時間帯。今日いちばんの固定枠はここ。</p></div>
-<div class="act"><div class="act-time">16:00 以降</div><p class="act-text">時刻の入った予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p></div>
-</div>
+    <p class="daydate">火曜日 · 8月25日 2026</p>
+    <h1 class="headline">今日は予定表がほぼ空いています、秀平さん。まとまった時間を、待っていることに向けられます。</h1>
+
+    <svg class="terrain" viewBox="0 0 840 170" role="img" aria-label="穏やかな一日を表す、ほぼ水平の地形の線">
+      <circle cx="118" cy="52" r="21" fill="none" stroke="#C6613F" stroke-width="1.6"/>
+      <line x1="118" y1="14" x2="118" y2="24" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="118" y1="80" x2="118" y2="90" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="80" y1="52" x2="90" y2="52" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="146" y1="52" x2="156" y2="52" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="88" y1="24" x2="95" y2="31" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="141" y1="31" x2="148" y2="24" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M600 60 q9 -8 18 0 q9 -8 18 0" fill="none" stroke="#B4B3A8" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M660 74 q7 -6 14 0 q7 -6 14 0" fill="none" stroke="#B4B3A8" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M0 132 C 120 128, 240 130, 360 129 S 600 131, 720 129 840 130 840 130"
+            fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    <div class="acts">
+      <div class="act">
+        <p class="t">05:00 – 12:00</p>
+        <p class="s">時刻の決まった約束はない午前。日課をこなしつつ、手をつけたいことに向けやすい。</p>
+      </div>
+      <div class="act">
+        <p class="t">12:00 – 16:00</p>
+        <p class="s">昼は育児対応の時間帯。今日の固定枠はここだけ。</p>
+      </div>
+      <div class="act">
+        <p class="t">16:00 以降</p>
+        <p class="s">時刻付きの予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p>
+      </div>
+    </div>
   </div>
-</section>
-<section class="band bottom"><div class="wrap">
-<!-- ══════ タイムラインブロック v3.1（自己完結・このコメントから END まで verbatim で挿入） ══════ -->
+</div>
+
+<div class="band">
+  <div class="inner">
+
+    <section class="block">
+      <h2>常設</h2>
+      <ul class="const-list">
+        <li><b>夜間</b>育児対応（常設）</li>
+        <li><b>12:00 – 16:00</b>昼の育児対応</li>
+      </ul>
+    </section>
+
+<!-- ══════ タイムラインブロック v4.0（自己完結・このコメントから END まで verbatim で挿入） ══════ -->
 <style>
-/* tlx: timeline block — ページ側クラスに依存しない（テンプレートは日々変わるため）。
-   見出し・セクション間隔はページの h2 / section に合わせてある（13px/600/.09em・margin 40px）。 */
-.tlx{margin:0 0 40px}
-.tlx-h{font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.09em;color:#2E2C27;margin:0 0 18px;
+.tlx{
+  --tlx-ink:#2E2C27; --tlx-soft:#6B6A63; --tlx-mute:#86847B; --tlx-dim:#57564F;
+  --tlx-warn:#9A3B2E; --tlx-line:#E4E3DC; --tlx-line-fine:#EFEEE8;
+  --tlx-card:#FFFFFF; --tlx-card-past:#F4F4F1; --tlx-chip:#F9F9F7;
+  --tlx-brand:#3E7B4C; --tlx-brand-soft:#EEF5EA; --tlx-on-brand:#FFFFFF;
+  --tlx-num:"SF Mono","Cascadia Mono","Consolas",ui-monospace,monospace;
+  margin:0 0 40px}
+.tlx-h{font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--tlx-ink);margin:0 0 18px;
   display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.tlx-date{font-size:12px;font-weight:600;letter-spacing:.04em;color:#6B6A63}
-.tlx-warn{font-size:12.5px;color:#AE5133;margin:-8px 0 14px}
+.tlx-date{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--tlx-soft)}
+.tlx-warn{font-size:12.5px;color:var(--tlx-warn);margin:-8px 0 14px}
 .tlx-allday{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .tlx-allday:empty{display:none}
-.tlx-chip{font-size:12.5px;line-height:1.5;color:#6B6A63;border:1px solid #E4E3DC;border-radius:4px;
-  padding:3px 10px;background:#F9F9F7}
-.tlx-chip b{font-weight:600;color:#6B6A63;margin-right:7px;font-size:11.5px;letter-spacing:.04em}
+.tlx-chip{font-size:12.5px;line-height:1.5;color:var(--tlx-soft);border:1px solid var(--tlx-line);border-radius:4px;
+  padding:3px 10px;background:var(--tlx-chip)}
+.tlx-chip b{font-weight:600;color:var(--tlx-soft);margin-right:7px;font-size:11.5px;letter-spacing:.04em}
 .tlx-wrap{position:relative}
-.tlx-canvas{position:relative;margin-left:52px;border-left:1px solid #E4E3DC}
-.tlx-hour{position:absolute;left:0;right:0;border-top:1px solid #EFEEE8;pointer-events:none}
-.tlx-hour.tlx-major{border-top-color:#E4E3DC}
+.tlx-canvas{position:relative;margin-left:52px;border-left:1px solid var(--tlx-line)}
+.tlx-hour{position:absolute;left:0;right:0;border-top:1px solid var(--tlx-line-fine);pointer-events:none}
+.tlx-hour.tlx-major{border-top-color:var(--tlx-line)}
 .tlx-hlabel{position:absolute;left:-52px;width:44px;text-align:right;top:-0.65em;
-  font-size:11px;color:#6B6A63;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  font-family:var(--tlx-num);font-size:11px;color:var(--tlx-soft);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tlx-hour.tlx-major .tlx-hlabel::after{content:"";position:absolute;right:-9px;top:.65em;width:7px;
+  border-top:1px solid var(--tlx-line)}
 .tlx-gap{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:flex-start;
   pointer-events:none}
-.tlx-gap span{font-size:11px;color:#6B6A63;letter-spacing:.04em;padding-left:4px}
-.tlx-gap::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed #EFEEE8}
-.tlx-ev{position:absolute;border-radius:6px;background:#F3F2EC;border:1px solid #E1E1DF;
-  border-left:3px solid #2E2C27;padding:5px 9px 5px 10px;overflow:hidden;min-height:26px}
-.tlx-ev .tlx-time{display:block;font-size:11px;font-weight:700;color:#6B6A63;
+.tlx-gap span{font-size:11px;color:var(--tlx-soft);letter-spacing:.04em;padding-left:4px}
+.tlx-gap::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--tlx-line-fine)}
+.tlx-ev{position:absolute;border-radius:6px;background:var(--tlx-card);border:1px solid var(--tlx-line);
+  border-left:3px solid var(--tlx-ink);padding:5px 9px 5px 10px;overflow:hidden;min-height:26px}
+.tlx-ev .tlx-time{display:block;font-family:var(--tlx-num);font-size:11px;font-weight:700;color:var(--tlx-soft);
   font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1.4}
-.tlx-ev .tlx-title{font-size:12.5px;font-weight:600;color:#2E2C27;line-height:1.45;
+.tlx-ev .tlx-title{font-size:12.5px;font-weight:600;color:var(--tlx-ink);line-height:1.45;
   overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .tlx-ev.tlx-compact{display:flex;align-items:center;gap:8px;padding-top:2px;padding-bottom:2px}
 .tlx-ev.tlx-compact .tlx-time{flex:none}
 .tlx-ev.tlx-compact .tlx-title{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block;min-width:0}
-/* 狭いレーンでは時刻を視覚的にだけ隠す（支援技術には残す・位置で時刻が読めるのは晴眼者だけのため） */
 .tlx-ev.tlx-tiny .tlx-time{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .tlx-ev.tlx-narrow{padding:3px 5px 3px 6px}
 .tlx-ev.tlx-narrow .tlx-title{font-size:11.5px;line-height:1.35;-webkit-line-clamp:3;letter-spacing:-.01em}
 .tlx-ev.tlx-narrow .tlx-time{font-size:10px}
-.tlx-ev.tlx-hi{background:#F8EFE9;border-left-color:#C6613F}
-.tlx-pri{color:#AE5133;font-size:10px}
-.tlx-ev.tlx-past .tlx-pri{color:#6B6A63}
-.tlx-ev.tlx-narrow .tlx-pri{display:none}
-.tlx-ev.tlx-narrow.tlx-hi{border-left-width:4px}
-.tlx-ev.tlx-lo{border-left-style:dashed;border-left-color:#86847B}
-.tlx-ev.tlx-lo .tlx-title{color:#57564F;font-weight:500}
+.tlx-ev.tlx-hi{background:var(--tlx-brand-soft);border-left-width:4px;border-left-color:var(--tlx-brand)}
+.tlx-pri{color:var(--tlx-brand);font-size:10px}
+.tlx-ev.tlx-past .tlx-pri{color:var(--tlx-soft)}
+.tlx-ev.tlx-narrow .tlx-pri{font-size:9px}
+.tlx-ev.tlx-lo{border-left-style:dashed;border-left-color:var(--tlx-mute)}
+.tlx-ev.tlx-lo .tlx-title{color:var(--tlx-dim);font-weight:500}
 .tlx-ev.tlx-past .tlx-title{font-weight:600}
-.tlx-chip-hi{border-left:3px solid #C6613F;padding-left:9px}
-.tlx-ev.tlx-past{background:#FAFAF8;border-left-color:#B4B3A8;border-left-style:solid}
-.tlx-ev.tlx-past .tlx-title{color:#57564F}
-.tlx-ev.tlx-past .tlx-time{color:#6B6A63}
-.tlx-ev.tlx-live{border-left-color:#C6613F}
-.tlx-now{position:absolute;left:0;right:0;border-top:2px solid #C6613F;z-index:9;pointer-events:none}
-.tlx-now::before{content:"";position:absolute;left:-5px;top:-5px;width:8px;height:8px;border-radius:50%;background:#C6613F}
+.tlx-ev.tlx-lo.tlx-past .tlx-title{font-weight:500}
+.tlx-chip-hi{border-left:4px solid var(--tlx-brand);padding-left:9px}
+.tlx-ev.tlx-past{background:var(--tlx-card-past);border-left-color:var(--tlx-mute);border-left-style:solid}
+.tlx-ev.tlx-past .tlx-title{color:var(--tlx-dim)}
+.tlx-ev.tlx-past .tlx-time{color:var(--tlx-soft)}
+.tlx-ev.tlx-live{border-left-color:var(--tlx-brand)}
+.tlx-now{position:absolute;left:0;right:0;border-top:2px solid var(--tlx-brand);z-index:9;pointer-events:none}
+.tlx-now::before{content:"";position:absolute;left:-5px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--tlx-brand)}
 .tlx-nowlabel{position:absolute;right:0;top:-9px;transform:translateY(-100%);
-  font-size:11px;font-weight:700;color:#FFFFFF;background:#AE5133;border-radius:4px;
-  padding:1px 7px;font-variant-numeric:tabular-nums;letter-spacing:.03em}
+  font-family:var(--tlx-num);font-size:11px;font-weight:700;color:var(--tlx-on-brand);background:var(--tlx-brand);
+  border-radius:4px;padding:1px 7px;font-variant-numeric:tabular-nums;letter-spacing:.03em}
 .tlx-now.tlx-now-low .tlx-nowlabel{top:4px;transform:none}
-.tlx-empty{font-size:13.5px;color:#6B6A63;padding:2px 0}
+.tlx-empty{font-size:13.5px;color:var(--tlx-soft);padding:2px 0}
 @media (max-width:640px){
   .tlx-canvas{margin-left:46px}
   .tlx-hlabel{left:-46px;width:38px}
   .tlx-ev{padding:4px 7px 4px 8px}
 }
-@media (prefers-color-scheme:dark){
-  .tlx-h{color:#EDEBE5}
-  .tlx-date{color:#A8A69D}
-  .tlx-warn{color:#E29078}
-  .tlx-chip{color:#A8A69D;background:#191816;border-color:#2C2A26}
-  .tlx-chip b{color:#8E8B83}
-  .tlx-canvas{border-left-color:#2C2A26}
-  .tlx-hour{border-top-color:#232220}
-  .tlx-hour.tlx-major{border-top-color:#2C2A26}
-  .tlx-hlabel{color:#A8A69D}
-  .tlx-gap span{color:#8E8B83}
-  .tlx-gap::before{border-top-color:#232220}
-  .tlx-ev{background:#1E1D1A;border-color:#2C2A26;border-left-color:#EDEBE5}
-  .tlx-ev .tlx-time{color:#A8A69D}
-  .tlx-ev .tlx-title{color:#EDEBE5}
-  .tlx-ev.tlx-hi{background:#261E19;border-left-color:#C6613F}
-  .tlx-pri{color:#E29078}
-  .tlx-ev.tlx-past .tlx-pri{color:#8E8B83}
-  .tlx-ev.tlx-lo{border-left-color:#7A776F}
-  .tlx-ev.tlx-lo .tlx-title{color:#C9C6BD}
-  .tlx-chip-hi{border-left-color:#C6613F}
-  .tlx-ev.tlx-past{background:#1A1917;border-left-color:#4A4842}
-  .tlx-ev.tlx-past .tlx-title,.tlx-ev.tlx-past .tlx-time{color:#8E8B83}
-  .tlx-ev.tlx-live{border-left-color:#C6613F}
-  .tlx-empty{color:#A8A69D}
-}
+.tlx[data-tlx-theme="dark"]{
+  --tlx-ink:#EDEBE5; --tlx-soft:#A8A69D; --tlx-mute:#8E8B83; --tlx-dim:#C9C6BD;
+  --tlx-warn:#F0A58C; --tlx-line:#2C2A26; --tlx-line-fine:#232220;
+  --tlx-card:#1E1D1A; --tlx-card-past:#232220; --tlx-chip:#191816;
+  --tlx-brand:#7FBF8C; --tlx-brand-soft:#1C2A1F; --tlx-on-brand:#0F1A12;
+  --tlx-num:"SF Mono","Cascadia Mono","Consolas",ui-monospace,monospace}
 </style>
-<section class="tlx" id="tlx" aria-label="きょうのタイムライン">
+<section class="tlx" id="tlx">
   <h2 class="tlx-h">きょうのタイムライン<span class="tlx-date" id="tlx-date"></span></h2>
   <p class="tlx-warn" id="tlx-warn" hidden>このページは本日分ではありません。</p>
   <div class="tlx-allday" id="tlx-allday"></div>
   <div class="tlx-wrap"><div class="tlx-canvas" id="tlx-canvas"></div></div>
 </section>
 <script type="application/json" id="tlx-data">
-{"date": "2026-08-24", "events": [{"s": "04:30", "e": "06:30", "t": "サッカー観戦（バルセロナ）", "p": "low"}], "allday": [{"t": "住民税の納付（期限が近い）", "p": "high"}, "夜間の育児対応（常設）", "昼の育児対応（12:00 – 16:00）"]}
+{"date":"2026-08-25","events":[],"allday":["夜間の育児対応（常設）","昼の育児対応（12:00 – 16:00）",{"t":"住民税の納付期限が近い","p":"high"}]}
 </script>
 <script>
 (function(){
@@ -210,8 +222,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
   function two(n){return (n<10?"0":"")+n}
   function fmt(m){return two(Math.floor(m/60)%24)+":"+two(m%60)}
   var WD=["日","月","火","水","木","金","土"];
-
-  // ---- データ正規化。深夜跨ぎ（e<=s）は 24:00 でクランプして題名に印を付ける（無言で捨てない）
   var evs=[];
   (data.events||[]).forEach(function(v){
     var a=String(v.s).split(":"),b=String(v.e).split(":");
@@ -222,8 +232,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     evs.push({s:Math.max(0,s),e:Math.min(24*60,e),t:t+(over?"（翌日まで）":""),raw:t,p:pr});
   });
   var allday=data.allday||[];
-
-  // ---- 日付表示（ページの日付とデータの日付が食い違っても読者が気づけるように）
   var now=new Date();
   var today=now.getFullYear()+"-"+two(now.getMonth()+1)+"-"+two(now.getDate());
   var isToday=(data.date===today);
@@ -234,7 +242,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     dEl.textContent=(+dm[2])+"/"+(+dm[3])+"（"+WD[dd.getDay()]+"）";
   }
   if(!isToday&&dm)document.getElementById("tlx-warn").hidden=false;
-
   var alBox=document.getElementById("tlx-allday");
   allday.forEach(function(x){
     var txt=(x&&typeof x==="object")?String(x.t||""):String(x);
@@ -249,7 +256,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
       sr0.textContent="（重要）";c.appendChild(sr0)}
     c.appendChild(document.createTextNode(txt));alBox.appendChild(c);
   });
-
   var canvas=document.getElementById("tlx-canvas");
   if(!evs.length){
     var em=document.createElement("p");em.className="tlx-empty";
@@ -258,8 +264,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     return;
   }
   evs.sort(function(a,b){return a.s-b.s||b.e-a.e});
-
-  // ---- 重なりクラスタごとにレーン割当（レーン数はクラスタ単位）
   var cluster=[],clusterEnd=-1;
   function closeCluster(){
     var lanes=[];
@@ -277,8 +281,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     cluster.push(ev);clusterEnd=Math.max(clusterEnd,ev.e);
   });
   if(cluster.length)closeCluster();
-
-  // ---- 表示窓＝[最初の予定-1h, 最後の予定+1h]（最小 8 時間・現在時刻を必ず含む）
   var minS=Math.min.apply(null,evs.map(function(v){return v.s}));
   var maxE=Math.max.apply(null,evs.map(function(v){return v.e}));
   var nowMin=now.getHours()*60+now.getMinutes();
@@ -287,8 +289,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
   h0=Math.max(0,h0);h1=Math.min(24,h1);
   while(h1-h0<8){if(h1<24)h1++;else if(h0>0)h0--;else break}
   var winS=h0*60,winE=h1*60;
-
-  // ---- 空白帯の畳み込み: 予定が無い 2h 超の区間は固定高にして、密度を上げる
   var PXH=44,PXM=PXH/60,GAPH=30,GAP_MIN=120;
   var busy=[];
   evs.forEach(function(v){
@@ -297,7 +297,7 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     if(busy.length&&s<=busy[busy.length-1][1])busy[busy.length-1][1]=Math.max(busy[busy.length-1][1],e);
     else busy.push([s,e]);
   });
-  if(isToday&&nowMin>=winS&&nowMin<=winE){   // 現在時刻は畳まない（now が隠れないように）
+  if(isToday&&nowMin>=winS&&nowMin<=winE){
     busy.push([Math.max(winS,nowMin-1),Math.min(winE,nowMin+1)]);
     busy.sort(function(a,b){return a[0]-b[0]});
     var merged=[];
@@ -327,8 +327,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     }
     return top;
   }
-
-  // ---- 時間軸・空白帯
   segs.forEach(function(g){
     if(g.gap){
       var gd=document.createElement("div");gd.className="tlx-gap";
@@ -350,8 +348,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
       line.appendChild(lab);canvas.appendChild(line);
     }
   });
-
-  // ---- イベント
   var nodes=[];
   evs.forEach(function(v){
     var el=document.createElement("div");
@@ -371,7 +367,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     el.appendChild(tm);el.appendChild(tt);canvas.appendChild(el);
     nodes.push({el:el,ev:v,top:ytop,h:hpx});
   });
-  // min-height で伸びた短時間の予定が同レーンの次と重なるのを押し下げて解消
   var byLane={};
   nodes.forEach(function(o){(byLane[o.ev.lane]=byLane[o.ev.lane]||[]).push(o)});
   Object.keys(byLane).forEach(function(k){
@@ -381,8 +376,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
       prev=o;
     });
   });
-
-  // ---- 横幅: 3 レーン以上／狭幅では等分をやめ階段オフセット（題名の可読幅を確保）
   function layout(){
     var w=canvas.offsetWidth||600,narrow=w<340;
     nodes.forEach(function(o){
@@ -397,8 +390,6 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
     });
   }
   layout();window.addEventListener("resize",layout);
-
-  // ---- 現在時刻ライン（日付も毎回再判定＝日跨ぎで前日データに線を引かない）
   function drawNow(){
     var old=canvas.querySelector(".tlx-now");if(old)old.parentNode.removeChild(old);
     var n2=new Date(),t2=n2.getFullYear()+"-"+two(n2.getMonth()+1)+"-"+two(n2.getDate());
@@ -415,26 +406,135 @@ font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;}
 </script>
 <!-- ══════ END タイムラインブロック ══════ -->
 
-<section class="block"><h2>予定</h2>
-<div class="plan-row"><span class="plan-k">常設</span><div class="plan-v">夜間の育児対応（常設）<br>昼の育児対応（12:00 – 16:00）</div></div>
-<div class="plan-row"><span class="plan-k">終日</span><div class="plan-v">住民税の納付（期限が近い）</div></div>
-<div class="plan-row"><span class="plan-k">今日</span><div class="plan-v">04:30 – 06:30　サッカー観戦（バルセロナ・LaLiga）</div></div>
-<div class="plan-row"><span class="plan-k">明日</span><div class="plan-v">同じ育児の常設のみ。時刻の入った予定は入っていない。</div></div>
-</section>
-<section class="block"><h2>要対応</h2><ol class="items"><li><div class="it-title">住民税の納付期限が近い</div><p class="it-text">家族カレンダーで住民税の支払いが今日から表示。第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</p></li></ol></section>
-<section class="block"><h2>片付いたこと</h2><p class="calm">今日はっきり片付いた項目はなし。静かな一日。</p></section>
-<section class="block archive"><h2>これまでのブリーフ</h2>
-<details><summary><span class="arch-day">日曜日 · 8月23日 2026</span><span class="arch-head">日曜日はまるごと空いています、秀平さん。試合は夜と明け方に待っています。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 12:00 時刻の決まった約束はない午前。運動と家のことに向けやすい時間。 ／ 12:00 – 16:00 昼は育児の担当。外の予定は入っていない。 ／ 16:00 以降 夜22:00からマンチェスター・シティ戦、明け方にバルセロナ戦。</p><div class="arch-sub">要対応</div><ul><li>仮のチケット予約を確定する</li><li>住民税の支払い（明日から）</li></ul><div class="arch-sub">片付いたこと</div><ul><li>注文していたデバイスが発送</li></ul></div></details>
-<details><summary><span class="arch-day">土曜日 · 8月22日 2026</span><span class="arch-head">午後は友達との時間がある土曜日、秀平さん、前後はゆったり過ごせそう。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 12:00 時刻の決まった予定はなく、静かな午前。手をつけたいことに向けやすい。 ／ 12:00 – 16:00 13:00から友達との時間。昼の育児対応と重なる時間帯。 ／ 16:00 以降 夕方は落ち着き、18:00–20:00に時間指定の配達を受け取る。</p><div class="arch-sub">要対応</div><ul><li>今夜、配達の受け取り</li></ul><div class="arch-sub">片付いたこと</div><ul><li>注文品の発送・配達が進行</li></ul></div></details>
-<details><summary><span class="arch-day">金曜日 · 8月21日 2026</span><span class="arch-head">午前は受け取りと外出が重なる一日、秀平さん。午後は落ち着いた時間が戻ります。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 09:00 早朝5時から配送が動き出し、8時までに粗大ごみを出す構え。 ／ 09:00 – 14:00 午前は在宅で荷受けが続き、昼前に通院で短く外出する。 ／ 14:00 以降 午後は落ち着き、夜21時に食材宅配の注文締切。明日は昼に来客。</p><div class="arch-sub">要対応</div><ul><li>朝8時までに粗大ごみを出す</li><li>午前は在宅で荷受けが続く</li><li>昼前に通院で短く外出</li><li>夜21時に食材宅配の注文締切</li><li>サブスクの解約期限が明日まで</li><li>明日は昼に来客の予定</li></ul><div class="arch-sub">片付いたこと</div><ul><li>複数の発送通知が並ぶ</li><li>注文品の配達が昨日完了</li></ul></div></details>
-<details><summary><span class="arch-day">木曜日 · 8月20日 2026</span><span class="arch-head">午前は家で受け取りが続き、秀平さん。午後は出かける一日になりそうです。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 09:00 配送は5時台から動き出し、朝は受け取りの構え。会議は今日ひとつもない。 ／ 09:00 – 15:00 午前は在宅の短い訪問がひとつ、荷物も数便届く。昼は育児対応の時間が続く。 ／ 15:00 以降 午後は外出がひとつ、戻れば夜は日課だけ。明日は午前に外の予定。</p><div class="arch-sub">要対応</div><ul><li>今日午前は在宅で訪問対応</li><li>今日午後は予防接種で外出</li><li>粗大ごみを今日のうちに出す</li><li>サブスクの解約が明日まで</li><li>明日は昼前に外出、夜に注文締切</li></ul><div class="arch-sub">片付いたこと</div><ul><li>今朝のフットボールは白星</li><li>注文品の発送が進んでいる</li></ul></div></details>
-<details><summary><span class="arch-day">水曜日 · 8月19日 2026</span><span class="arch-head">今日は予定表が空いています、秀平さん。まとまった時間を、待っている一つに使えます。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 12:00 日課は5時台から動き出し、午前に会議はひとつも入っていない。 ／ 12:00 – 16:00 昼の育児対応が4時間続く。連続した作業時間は午前側に寄せると取りやすい。 ／ 16:00 以降 夕方以降は日課が続くだけで、外に出る予定は入っていない。</p><div class="arch-sub">要対応</div><ul><li>明日は訪問と外出が重なる</li><li>節電の対象時間が今日</li><li>サブスクの解約期限が8/21</li><li>粗大ごみの収集が8/21</li><li>今夜19時に3日ごとの評価</li></ul><div class="arch-sub">片付いたこと</div><ul><li>注文した備品が届いた</li><li>昨日の外出は予定どおり終了</li></ul></div></details>
-<details><summary><span class="arch-day">火曜日 · 8月18日 2026</span><span class="arch-head">午前はあなたの時間、shuhei。昼から浅草橋へ出て、夜は家に戻る一日。</span></summary><div class="arch-body"><p class="arch-acts">06:00 – 10:30 出発まではひらけた時間。トレーニングや記録の日課をこなせる。 ／ 10:30 – 15:30 昼をはさんで浅草橋方面へ外出。午前の空きから午後の予定へと流れる。 ／ 15:30 以降 夕方には家に戻り、夜は静かに流れていく。</p><div class="arch-sub">要対応</div><ul><li>本日は予防接種</li></ul><div class="arch-sub">片付いたこと</div><ul><li>昨日の配送が完了</li></ul></div></details>
-<details><summary><span class="arch-day">月曜日 · 8月17日 2026</span><span class="arch-head">予定をひとつ挟むだけの軽い一日、shuhei。明日に向けて力を残しておける。</span></summary><div class="arch-body"><p class="arch-acts">05:00 – 11:00 早朝から荷物が数便届く。昼前までは家のペースで動ける。 ／ 11:30 – 16:00 昼前に通院。昼過ぎからは育児対応の時間が続く。 ／ 16:00 以降 夕方からは手が空き、夜は静かに流れていく。</p><div class="arch-sub">要対応</div><ul><li>書類を出す</li><li>明日は予防接種</li><li>明日は浅草橋へ外出</li></ul><div class="arch-sub">片付いたこと</div><ul><li>今日の料理は仕込み済み</li><li>昨夜のフットボールの結果</li></ul></div></details>
-<details><summary><span class="arch-day">日曜日 · 8月16日 2026</span><span class="arch-head">今日は予定のない日曜、秀平さん。ゴーヤ一本を使い切る、料理の一日にできます。</span></summary><div class="arch-body"><p class="arch-acts">– 12:00 予定表は今日まっさら。朝はジムとストレッチ、11時に計測がひとつ入る。 ／ 12:00 – 18:00 会議はなく、日中はゴーヤ一本を使い切る3品の仕込みに向く時間。 ／ 18:00 – 夕はストレッチと記録の評価。明日は昼に通院。</p><div class="arch-sub">要対応</div><ul><li>3日ごとの記録評価</li><li>定点計測</li><li>ゴーヤ一本を使い切る3品</li></ul><div class="arch-sub">片付いたこと</div><ul><li>コープデリの次回注文が確定</li></ul></div></details>
-<details><summary><span class="arch-day">土曜日 · 8月15日 2026</span><span class="arch-head">土曜日はまるごとあなたの時間です、秀平さん。</span></summary><div class="arch-body"><p class="arch-acts">– 12:00 午前はジムとストレッチのいつもの流れ。予定は入らず、静かに始まる。 ／ 12:00 – 18:00 昼を過ぎてもまだまだ空き時間が続く。手をつけたいことに向けられる。 ／ 18:00 – 夜も予定はなし。明日の日曜も、いまのところ空いている。</p><div class="arch-sub">要対応</div><ul><li>いつもと違う環境からのログイン通知</li></ul><div class="arch-sub">片付いたこと</div><ul><li>複数の配達が完了</li><li>Amazonの返金が2件完了</li><li>集荷とコープ締切が過ぎた</li></ul></div></details>
-<details><summary><span class="arch-day">水曜日 · 8月12日 2026</span><span class="arch-head">朝いちばんの受け取りを終えたら、あとはまること自分の時間です、秀平さん。</span></summary><div class="arch-body"><p class="arch-acts">4:30 – 8:00 朝の早い時間に配送枠がひとつ。7時台までに届く見込み。 ／ 8:00 – 18:00 昼を過ぎても予定は入っていない。まとまった時間がそのまま残る。 ／ 18:00 – 夜も静か。明日は午前と午後に配達がひとつずつ。</p><div class="arch-sub">要対応</div><ul><li>早朝にAmazonの配送枠</li><li>猫の飲水管理が今日ぶんに</li></ul><div class="arch-sub">片付いたこと</div><ul><li>配達が複数完了</li><li>来客の招待が承諾された</li><li>新規注文が発送段階へ</li></ul></div></details>
-</section>
-</div></section>
+    <section class="block">
+      <h2>予定</h2>
+      <p class="sched-note">今日は時刻の決まった予定はありません。育児の時間帯を除けば、まとまった余白の一日です。</p>
+      <div class="sched-row"><span class="lab">終日</span>住民税の支払い（家族カレンダー・納期が近い）</div>
+      <div class="sched-row"><span class="lab">明日</span><span class="tm">12:00 – 15:00</span> ワインセラー、<span class="tm">12:00 – 16:00</span> ベビーシッター（在宅・同じ昼帯）</div>
+    </section>
+
+    <section class="block">
+      <h2>注意が要ること</h2>
+      <ul class="items">
+        <li class="item">
+          <span class="num">1</span>
+          <div class="body">
+            <p class="title">住民税の納付期限が近い</p>
+            <p class="desc"><u>家族カレンダー</u>で住民税の支払いが引き続き終日表示。第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</p>
+          </div>
+        </li>
+        <li class="item">
+          <span class="num">2</span>
+          <div class="body">
+            <p class="title">明日は昼に在宅の予定が重なる</p>
+            <p class="desc"><u>カレンダー</u>で、明日の昼はワインセラーの対応（12:00 – 15:00）とベビーシッター（12:00 – 16:00）が同じ時間帯。受け入れの段取りを今日のうちに決めておくと当日が動きやすい。</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>片付いたこと</h2>
+      <p class="calm">今日はっきり片付いた項目はなし。静かな一日。</p>
+    </section>
+
+    <section class="block">
+      <h2>これまでのブリーフ</h2>
+
+      <details class="arch">
+        <summary><span class="d">月曜日 · 8月24日 2026</span><span class="h">今日はほとんど余白です、秀平さん。動くのは育児の時間帯と、夜明けの一戦くらい。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">04:30 – 12:00</span>夜明けにサッカーの一戦。あとの午前はジムを挟みつつ、ほぼ自由に使える。</div>
+            <div><span class="at">12:00 – 16:00</span>昼の育児対応の時間帯。今日いちばんの固定枠はここ。</div>
+            <div><span class="at">16:00 以降</span>時刻の入った予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>住民税の納付期限が近い</b>家族カレンダーで住民税の支払いが今日から表示。第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li>今日はっきり片付いた項目はなし。静かな一日。</li></ul>
+        </div>
+      </details>
+
+      <details class="arch">
+        <summary><span class="d">日曜日 · 8月23日 2026</span><span class="h">日曜日はまるごと空いています、秀平さん。試合は夜と明け方に待っています。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">05:00 – 12:00</span>時刻の決まった約束はない午前。運動と家のことに向けやすい時間。</div>
+            <div><span class="at">12:00 – 16:00</span>昼は育児の担当。外の予定は入っていない。</div>
+            <div><span class="at">16:00 以降</span>夜22:00からマンチェスター・シティ戦、明け方にバルセロナ戦。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>仮のチケット予約を確定する</b>カレンダーで、今日は「仮」のままのチケット予約。確定するか今日のうちに判断したい。</li><li><b>住民税の支払い（明日から）</b>カレンダーで、明日から住民税の支払い期限が始まる。忘れずに済ませておきたい。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li><b>注文していたデバイスが発送</b>Gmailの通知で、注文していた指輪のウェアラブルが昨日発送。到着待ちで、今の対応は不要。</li></ul>
+        </div>
+      </details>
+
+      <details class="arch">
+        <summary><span class="d">土曜日 · 8月22日 2026</span><span class="h">午後は友達との時間がある土曜日、秀平さん、前後はゆったり過ごせそう。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">05:00 – 12:00</span>時刻の決まった予定はなく、静かな午前。手をつけたいことに向けやすい。</div>
+            <div><span class="at">12:00 – 16:00</span>13:00から友達との時間。昼の育児対応と重なる時間帯。</div>
+            <div><span class="at">16:00 以降</span>夕方は落ち着き、18:00–20:00に時間指定の配達を受け取る。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>今夜、配達の受け取り</b>カレンダーで、今日18:00–20:00に時間指定の配達。その時間帯は在宅にしておきたい。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li><b>注文品の発送・配達が進行</b>Gmailの通知で、ここ数日に注文した複数の品が発送・配達を完了。今の対応は不要。</li></ul>
+        </div>
+      </details>
+
+      <details class="arch">
+        <summary><span class="d">金曜日 · 8月21日 2026</span><span class="h">午前は受け取りと外出が重なる一日、秀平さん。午後は落ち着いた時間が戻ります。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">05:00 – 09:00</span>早朝5時から配送が動き出し、8時までに粗大ごみを出す構え。</div>
+            <div><span class="at">09:00 – 14:00</span>午前は在宅で荷受けが続き、昼前に通院で短く外出する。</div>
+            <div><span class="at">14:00 以降</span>午後は落ち着き、夜21時に食材宅配の注文締切。明日は昼に来客。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>朝8時までに粗大ごみを出す</b>カレンダーで、今日8時から回収の予定。前日の受付は終わり、朝一で玄関先に出しておく必要がある。</li><li><b>午前は在宅で荷受けが続く</b>カレンダーで、朝5時から昼過ぎまで配送が複数便。家を空けられる時間は限られる。</li><li><b>昼前に通院で短く外出</b>カレンダーで、今日11:30から通院の予定。持ち物と保険証を出る前に確認しておくと当日が楽。</li><li><b>夜21時に食材宅配の注文締切</b>カレンダーで、コープの締切が今夜21時。日中に注文内容を決めておくと締切に間に合わせやすい。</li><li><b>サブスクの解約期限が明日まで</b>家族のカレンダーに終日予定として明日まで。動かせる日は今日を入れて残り2日。</li><li><b>明日は昼に来客の予定</b>カレンダーで、明日13時から自宅に来客。人数分の受け入れ準備を今日のうちに整えておくと当日が動きやすい。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li><b>複数の発送通知が並ぶ</b>Gmailの通知で、昨日以降にキッチン用品や日用品など複数件が発送済み。今日の日中に順次到着の予定。</li><li><b>注文品の配達が昨日完了</b>ヤマトとAmazonの配達通知で、昨日中に複数の荷物が到着。今日は次の便を待つ状態。</li></ul>
+        </div>
+      </details>
+
+      <details class="arch">
+        <summary><span class="d">木曜日 · 8月20日 2026</span><span class="h">午前は家で受け取りが続き、秀平さん。午後は出かける一日になりそうです。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">05:00 – 09:00</span>配送は5時台から動き出し、朝は受け取りの構え。会議は今日ひとつもない。</div>
+            <div><span class="at">09:00 – 15:00</span>午前は在宅の短い訪問がひとつ、荷物も数便届く。昼は育児対応の時間が続く。</div>
+            <div><span class="at">15:00 以降</span>午後は外出がひとつ、戻れば夜は日課だけ。明日は午前に外の予定。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>今日午前は在宅で訪問対応</b>カレンダーで、今日9時から在宅の訪問がひとつ。立ち会いは短いが、その時間帯は家にいる必要がある。</li><li><b>今日午後は予防接種で外出</b>カレンダーで、今日の午後に予防接種の予定。持ち物を出る前に確認しておくと当日が楽。</li><li><b>粗大ごみを今日のうちに出す</b>Todoistと予定表で、回収は明日8時から。前日のうちに出しておく必要がある。</li><li><b>サブスクの解約が明日まで</b>家族のカレンダーに終日予定として明日まで。動かせる日は今日を入れて残り少ない。</li><li><b>明日は昼前に外出、夜に注文締切</b>明日は昼前に通院の外出、夜21時に食材宅配の注文締切。順番を決めておくと動きやすい。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li><b>今朝のフットボールは白星</b>フォロー中のバルセロナが、今朝のプレシーズンで2-1の勝利。</li><li><b>注文品の発送が進んでいる</b>Gmailの発送通知で、キッチン用品など複数件が発送済みに。今日も配送の予定がある。</li></ul>
+        </div>
+      </details>
+
+      <details class="arch">
+        <summary><span class="d">水曜日 · 8月19日 2026</span><span class="h">今日は予定表が空いています、秀平さん。まとまった時間を、待っている一つに使えます。</span></summary>
+        <div class="arch-inner">
+          <div class="arch-acts">
+            <div><span class="at">05:00 – 12:00</span>日課は5時台から動き出し、午前に会議はひとつも入っていない。</div>
+            <div><span class="at">12:00 – 16:00</span>昼の育児対応が4時間続く。連続した作業時間は午前側に寄せると取りやすい。</div>
+            <div><span class="at">16:00 以降</span>夕方以降は日課が続くだけで、外に出る予定は入っていない。</div>
+          </div>
+          <p class="arch-sub">注意が要ること</p>
+          <ul class="arch-il"><li><b>明日は訪問と外出が重なる</b>カレンダーで、明日は午前に設備点検の訪問、夕方に予防接種。在宅の時間帯と移動の順番を今日のうちに決めておくと動きやすい。</li><li><b>節電の対象時間が今日</b>契約中のエネルギー会社からの案内で、対象は今日の13:30 – 20:00。事前のエントリーがないと対象外になる。</li><li><b>サブスクの解約期限が8/21</b>家族のカレンダーに終日予定として入っており、残りは3日。今日を含めて動かせる日は限られる。</li><li><b>粗大ごみの収集が8/21</b>Todoistに明日期限で登録されている。当日ではなく前日までに出す準備が要る。</li><li><b>今夜19時に3日ごとの評価</b>Todoistで優先度の高い一件。直近3日分の記録をまとめて見る回にあたる。</li></ul>
+          <p class="arch-sub">片付いたこと</p>
+          <ul class="arch-il"><li><b>注文した備品が届いた</b>Gmailの配達通知で、17日と18日に完了。電源タップ類と別便の1点がそろっている。</li><li><b>昨日の外出は予定どおり終了</b>カレンダーで、18日の日中に入っていた外出が終わり、今日の日中に予定は残っていない。</li></ul>
+        </div>
+      </details>
+
+    </section>
+
+  </div>
+</div>
+
 </body>
 </html>
