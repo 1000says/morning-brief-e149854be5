@@ -4,6 +4,6 @@
   "code": 200,
   "degraded": false,
   "enabled": true,
-  "format": "flex",
-  "reason": ""
+  "format": "text",
+  "reason": "subset-miss"
 }
