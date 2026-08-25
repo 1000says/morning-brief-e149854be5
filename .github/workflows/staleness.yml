@@ -248,106 +248,22 @@ jobs:
             fi
           fi
 
-          # ---------- SLI-5: きょうのタイムライン（MB-029） ----------
-          # 生成側はテンプレートを**毎朝作り直す**ため、貼り込んだブロックは静かに落ちる／壊れる。
-          # 判定は .github/scripts/tlx-check.py（ローカルでも同じコマンドで再現できる）。
-          # データ側（ブロック不在・JSON 破損・日付ずれ）は移行期の方針どおり WARN 止まり＝
-          # **無音にはしない**（未導入と故障を受信側が区別できるように）。
-          # **SLI-6 と同じ形に揃える**（MB-040 G3 MUST-3・2026-08-25）: 判定器の「不在」と
-          #   「動かない」を分ける。SLI-5 も同じ穴を踏んでいた——判定器は SLI-6 と**同じ 1 回の
-          #   push で配備される**ため、片方だけ fail-closed にすると「配備し忘れ」の検知が
-          #   ゲートによってまちまちになる。不在＝赤（ゲートが存在しない）／実行不能＝黄。
-          #   データ側の契約違反は従来どおり warn（移行期の方針は据え置き）。
-          if [ ! -f .github/scripts/tlx-check.py ]; then
-            tlx_out="ABSENT"
+          # ---------- SLI-5 / SLI-6 は .github/scripts/sli-extra.sh が判定する ----------
+          # **判定本体を run: に inline しないこと（D61・2026-08-25 の実障害）。**
+          # GitHub Actions は run: の値全体を 1 つの式として扱い **21,000 バイト**の上限がある
+          # （文字数ではなく UTF-8 バイト数）。SLI-5/6 を inline した a4d4499 は 23,081 バイトで
+          # workflow ごと startup_failure＝cron も dispatch も起動不能になった。YAML は妥当なので
+          # パーサでは検出できない。天井は relay/test/invariants.test.js の INV-C27 が assert する。
+          #
+          # 判定器の**不在**は fail-closed にする。ここを黙って skip にすると
+          # 「SLI-5/6 が緑」ではなく「SLI-5/6 が存在しない」状態が毎日緑で通る（CE-04b ⑫）。
+          if [ ! -f .github/scripts/sli-extra.sh ]; then
+            echo "::error::${TAG}SLI-5/SLI-6 の判定本体が配備されていない（.github/scripts/sli-extra.sh が repo に無い）。タイムライン契約も LINE 縮退も検知できない＝両ゲートが存在しない。site/.github/scripts/ 一式を配信 repo へ push する。"
+            echo "| タイムライン / LINE 縮退 | 判定本体 **未配備** | 🔴 ゲート不在 |" >> "$GITHUB_STEP_SUMMARY"
+            fail=1
           else
-            tlx_out="$(python3 .github/scripts/tlx-check.py index.html 2>/dev/null || echo "BAD runner")"
+            TAG="$TAG" B_YMD="${b_ymd:-}" bash .github/scripts/sli-extra.sh all || fail=1
           fi
-          echo "SLI-5 $tlx_out"
-          case "$tlx_out" in
-            ABSENT)
-              echo "::error::${TAG}SLI-5 判定器が配備されていない（.github/scripts/tlx-check.py が repo に無い）。ラベル allowlist を強制できる決定論ゲートはここだけで、不在の間は生名・calendarId が公開面へ出ても検知できない。site/.github/scripts/ 一式を配信 repo へ push する。"
-              echo "| タイムライン | 判定器 **未配備** | 🔴 ゲート不在 |" >> "$GITHUB_STEP_SUMMARY"
-              fail=1 ;;
-            "BAD runner")
-              echo "::warning::${TAG}SLI-5 判定器は在るが実行できない（python3 不在・クラッシュを疑う）。"
-              echo "| タイムライン | 判定器 実行不能 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
-            MISSING*)
-              echo "::warning::${TAG}SLI-5 タイムラインのブロックが無い（tlx-canvas 不在）。生成側の指示文から落ちた疑い。"
-              echo "| タイムライン | ブロック不在 | 🟡 未導入/欠落 |" >> "$GITHUB_STEP_SUMMARY" ;;
-            NOJSON*)
-              echo "::warning::${TAG}SLI-5 ブロックはあるがデータ JSON が無い（何も描画されない）。"
-              echo "| タイムライン | JSON 不在 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
-            BAD*)
-              # cal-label 系は「非表示になる」ではない（ブロックは c を無検証で描画する）。受信側が症状を取り違えないよう分けて書く（MB-036 G3 MUST-1・2026-08-25）。
-              echo "::warning::${TAG}SLI-5 タイムラインのデータが契約違反（$tlx_out）。json/date/time 系ならブロックは自動的に非表示。cal-label / allday-cal-label は非表示にならず、allowlist 外のラベル（生のカレンダー名・calendarId・実名）が公開面に描画されている疑い＝生成側タスク本文のラベル表12行を確認する（写しは docs/handoff/cowork/COWORK-TASK-NEXT.md）。"
-              echo "| タイムライン | データ不正（${tlx_out#BAD }） | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
-            OK*)
-              t_date="$(echo "$tlx_out" | cut -d' ' -f2)"
-              t_ev="$(echo "$tlx_out" | cut -d' ' -f3)"
-              t_ad="$(echo "$tlx_out" | cut -d' ' -f4)"
-              if [ -n "${b_ymd:-}" ] && [ "$t_date" != "$b_ymd" ]; then
-                echo "::warning::${TAG}SLI-5 タイムラインの日付 $t_date がブリーフ日 $b_ymd と一致しない（前日分が残った疑い）。"
-                echo "| タイムライン | 日付ずれ $t_date≠$b_ymd | 🟡 |" >> "$GITHUB_STEP_SUMMARY"
-              else
-                echo "| タイムライン | $t_date・予定 $t_ev 件／終日 $t_ad 件 | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY"
-              fi ;;
-            *)
-              echo "::warning::${TAG}SLI-5 判定不能（出力: $tlx_out）。"
-              echo "| タイムライン | 判定不能 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
-          esac
-
-          # ---------- SLI-6: LINE 縮退の**判定**（MB-040） ----------
-          # 上の「LINE 形式」行（MB-025）は `::warning::` 止まりで **job は緑のまま**だった。
-          # 2026-08-25 の `subset-miss` はそのため誰にも届かなかった——中継は理由を
-          # notify-state.json へ正直に書いて push しているのに、読む人も鳴らす経路も無い
-          # （記録はあるが検出チャネルが死んでいる＝CE-04 gate liveness）。ここで fail へ昇格する。
-          # 判定は .github/scripts/notify-degradation-check.py（workflow に条件式を置かない＝
-          # ローカルでも同じコマンドで再現でき、relay/test/notify-degradation.test.js が検査できる）。
-          # **判定器の「不在」と「動かない」を先に分ける**（MB-040 G3 MUST-3・2026-08-25）。
-          #   初版は両方を "BAD runner" に潰して warning 止まりにしていたため、
-          #   **配備し忘れると永久に緑**（＝ゲートが存在しないのに毎日 🟡 が出るだけ）になった。
-          #   実測: 配信 repo に .github/scripts/ が無く、SLI-4/5/6 のいずれも remote に存在しない。
-          #   不在＝**このゲートは存在しない**＝赤／在るのに落ちる＝環境要因なので黄（fail-open）。
-          if [ ! -f .github/scripts/notify-degradation-check.py ]; then
-            nd_out="ABSENT"
-          else
-            nd_out="$(python3 .github/scripts/notify-degradation-check.py notify-state.json 2>/dev/null || echo 'BAD runner')"
-          fi
-          echo "SLI-6 $nd_out"
-          case "$nd_out" in
-            ABSENT)
-              echo "::error::${TAG}SLI-6 判定器が配備されていない（.github/scripts/notify-degradation-check.py が repo に無い）。SLI-6 は存在しないのと同じ＝縮退が起きても誰も気づけない。site/.github/scripts/ 一式を配信 repo へ push する。"
-              echo "| LINE 縮退 | 判定器 **未配備** | 🔴 ゲート不在 |" >> "$GITHUB_STEP_SUMMARY"
-              fail=1 ;;
-            MISSING)
-              # **無音にしない**（未導入と故障を受信側が区別できるように）
-              echo "| LINE 縮退 | notify-state.json 未導入 | ⚪ |" >> "$GITHUB_STEP_SUMMARY" ;;
-            "SKIP "*)
-              echo "| LINE 縮退 | 判定対象外（${nd_out#SKIP }） | ⚪ skip |" >> "$GITHUB_STEP_SUMMARY" ;;
-            "OK "*)
-              echo "| LINE 縮退 | ${nd_out#OK } で配信 | 🟢 ok |" >> "$GITHUB_STEP_SUMMARY" ;;
-            "NG "*)
-              echo "::error::${TAG}SLI-6 LINE 通知が縮退している（${nd_out#NG }）。history.json の文字列が当日の公開本文へ verbatim で含まれているかを確認する（生成側の contract＝decisions D59・手順は COWORK-TASK-NEXT.md の『verbatim 自己検査』）。ローカル再現: python -X utf8 scripts/check_notify_degradation.py"
-              echo "| LINE 縮退 | ${nd_out#NG } | 🔴 縮退 |" >> "$GITHUB_STEP_SUMMARY"
-              fail=1 ;;
-            "BAD runner")
-              # 判定器は**在るのに動かない**＝python3 不在・クラッシュ等の環境要因。
-              # ここは fail-open（毎日赤くしない）。**不在（ABSENT）とは別事象**として扱う。
-              echo "::warning::${TAG}SLI-6 判定器は在るが実行できない（python3 不在・クラッシュを疑う）。"
-              echo "| LINE 縮退 | 判定器 実行不能 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
-            "BAD "*)
-              # state が読めない＝**判定できない**。ここは fail-closed にする（state を書く主体が壊れた日と
-              # 正常な日を区別できなくなるため。判定器の不在〔上〕とは別事象）。
-              echo "::error::${TAG}SLI-6 notify-state.json が読めない（${nd_out#BAD }）。中継の state 書き込みが壊れた疑い。"
-              echo "| LINE 縮退 | state 破損（${nd_out#BAD }） | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
-              fail=1 ;;
-            *)
-              # 契約外の出力＝判定器と workflow の版がずれている。緑にしない。
-              echo "::error::${TAG}SLI-6 判定不能（出力: $nd_out）。判定器と workflow の契約がずれている。"
-              echo "| LINE 縮退 | 判定不能（$nd_out） | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
-              fail=1 ;;
-          esac
 
           if [ "$fail" = "1" ]; then
             {
