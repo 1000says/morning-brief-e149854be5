@@ -1,136 +1,188 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" style="color-scheme: light dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="brief-sources" content="cal=12;ok=12;ev=7">
-<title>モーニングブリーフ · 8月25日</title>
+<meta name="brief-sources" content="cal=12;ok=12;ev=8">
+<title>モーニングブリーフ · 8月26日</title>
 <style>
   :root{
     --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
-    --ink-grey:#B4B3A8; --hairline:#E4E3DC; --clay:#C6613F; --clay-hover:#AE5133;
+    --ink-grey:#B4B3A8; --hairline:#E4E3DC; --line:#E1E1DF;
+    --clay:#C6613F; --clay-hover:#AE5133; --brand:#3E7B4C;
     --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
     --sans:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#171613; --wash:#1E1D1A; --ink:#EDEBE5; --ink-soft:#A8A69D;
+      --ink-grey:#6E6C64; --hairline:#2C2A26; --line:#2C2A26;
+      --clay:#E0805E; --clay-hover:#EE9877; --brand:#7FBF8C;
+    }
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;line-height:1.7}
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
   .band{width:100%}
-  .band-top{background:var(--wash);border-bottom:1px solid var(--hairline)}
-  .inner{max-width:860px;margin:0 auto;padding:48px 28px}
-  .daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin:0 0 10px}
-  h1.headline{font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.4;
-    margin:0 0 26px;color:var(--ink);letter-spacing:.01em}
-  .terrain{width:100%;height:auto;display:block;margin:0 0 8px}
-  .acts{display:flex;gap:0;margin-top:26px}
-  .act{flex:1;padding:0 22px;border-left:1px solid var(--hairline)}
-  .act:first-child{padding-left:0;border-left:none}
-  .act .t{font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--ink);
-    font-variant-numeric:tabular-nums;margin:0 0 7px}
-  .act .s{font-size:13.5px;color:var(--ink-soft);margin:0}
-  h2{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.09em;
-    color:var(--ink);margin:0 0 18px;text-transform:none}
-  section.block{margin:0 0 40px}
-  .const-list,.plain-list{margin:0;padding:0;list-style:none}
-  .const-list li{font-size:13.5px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--hairline)}
-  .const-list li:last-child{border-bottom:none}
-  .const-list li b{color:var(--ink);font-weight:600;margin-right:8px;font-variant-numeric:tabular-nums}
-  .sched-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px}
-  .sched-row{font-size:13.5px;color:var(--ink-soft);padding:5px 0}
-  .sched-row .lab{display:inline-block;min-width:64px;color:var(--ink);font-weight:600;font-size:11.5px;
-    letter-spacing:.04em}
-  .sched-row .tm{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;margin-left:6px}
-  .items{margin:0;padding:0;list-style:none}
-  .item{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--hairline)}
-  .item:first-child{border-top:none}
-  .item .num{color:var(--ink-grey);font-size:12px;font-variant-numeric:tabular-nums;
-    padding-top:3px;min-width:18px}
-  .item .body .title{font-weight:600;font-size:15px;color:var(--ink);margin:0 0 4px}
-  .item .body .desc{font-size:13.5px;color:var(--ink-soft);margin:0}
-  .item .body .desc u{text-decoration:none;border-bottom:1px solid var(--ink-grey);
-    color:var(--ink-soft);padding-bottom:1px}
-  .calm{font-size:13.5px;color:var(--ink-soft);margin:0;padding:2px 0}
-  details.arch{border-top:1px solid var(--hairline);padding:0}
-  details.arch summary{cursor:pointer;list-style:none;padding:14px 0;display:flex;gap:14px;
-    align-items:baseline}
-  details.arch summary::-webkit-details-marker{display:none}
-  details.arch summary .d{font-size:12px;color:var(--ink-soft);min-width:132px;letter-spacing:.02em}
-  details.arch summary .h{font-size:13.5px;color:var(--ink);font-weight:500}
-  details.arch .arch-inner{padding:2px 0 18px 146px}
-  details.arch .arch-acts{margin:0 0 12px}
-  details.arch .arch-acts div{font-size:12.5px;color:var(--ink-soft);padding:2px 0}
-  details.arch .arch-acts .at{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;
-    margin-right:8px}
-  details.arch .arch-sub{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--ink-soft);
-    margin:10px 0 4px}
-  details.arch .arch-il{margin:0;padding:0;list-style:none}
-  details.arch .arch-il li{font-size:12.5px;color:var(--ink-soft);padding:3px 0}
-  details.arch .arch-il li b{color:var(--ink);font-weight:600;margin-right:6px}
+  .band-top{background:var(--wash);border-bottom:1px solid var(--line)}
+  .band-bottom{background:var(--bg)}
+  .inner{max-width:860px;margin:0 auto;padding:40px 28px}
+  .band-top .inner{padding-top:44px;padding-bottom:40px}
+  .day-date{font-size:13px;letter-spacing:.02em;color:var(--ink-soft);margin:0 0 12px}
+  .headline{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.32;
+    margin:0 0 30px;color:var(--ink);letter-spacing:.01em}
+  .terrain{display:block;width:100%;height:auto;margin:0 0 26px}
+  .acts{display:flex;gap:0}
+  .act{flex:1;padding:0 22px;position:relative}
+  .act:first-child{padding-left:0}
+  .act:last-child{padding-right:0}
+  .act + .act{border-left:1px solid var(--hairline)}
+  .act-time{display:block;font-weight:700;font-size:13.5px;letter-spacing:.02em;
+    color:var(--ink);margin:0 0 6px;font-variant-numeric:tabular-nums}
+  .act-text{font-size:14px;color:var(--ink-soft);margin:0}
+  h2.sect{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink);margin:0 0 18px}
+  .block{margin:0 0 40px}
+  .item{display:flex;gap:14px;padding:0 0 18px}
+  .item .num{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:13px;
+    font-weight:600;min-width:18px;padding-top:1px}
+  .item .body{flex:1}
+  .item .title{font-weight:600;font-size:15.5px;color:var(--ink);margin:0 0 2px}
+  .item .desc{font-size:14px;color:var(--ink-soft);margin:0}
+  .src{color:var(--ink-soft);border-bottom:1px solid var(--ink-grey);
+    text-decoration:none;padding-bottom:1px}
+  .calm{font-size:15px;color:var(--ink-soft);margin:0 0 8px}
+  .plan-group{margin:0 0 16px}
+  .plan-when{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.06em;
+    color:var(--ink-soft);background:var(--wash);border:1px solid var(--hairline);
+    border-radius:4px;padding:2px 9px;margin:0 0 8px}
+  .plan-line{font-size:14.5px;color:var(--ink);margin:0 0 6px;padding-left:2px}
+  .plan-line .t{font-variant-numeric:tabular-nums;color:var(--ink-soft);
+    font-size:13px;margin-left:8px}
+  .plan-line .cal{color:var(--ink-soft);font-size:12px;margin-left:8px}
+  .arc{margin-top:8px}
+  details{border-top:1px solid var(--hairline);padding:14px 0}
+  details summary{cursor:pointer;list-style:none;font-size:14.5px;color:var(--ink)}
+  details summary::-webkit-details-marker{display:none}
+  details summary .d-date{color:var(--ink-soft);font-size:12.5px;display:block;margin-bottom:3px}
+  details summary .d-head{font-weight:600}
+  details[open] summary .d-head{color:var(--ink)}
+  .arc-body{padding:12px 0 4px}
+  .arc-body .ar{font-size:13.5px;color:var(--ink-soft);margin:0 0 5px}
+  .arc-body .ar b{color:var(--ink);font-weight:600}
+  .arc-body .arh{font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--ink-grey);
+    text-transform:uppercase;margin:12px 0 6px}
   @media (max-width:640px){
-    .inner{padding:34px 20px}
-    h1.headline{font-size:30px}
+    .headline{font-size:30px}
+    .inner{padding:32px 20px}
     .acts{flex-direction:column;gap:0}
-    .act{border-left:none;border-top:1px solid var(--hairline);padding:16px 0}
-    .act:first-child{border-top:none;padding-top:0}
-    details.arch summary{flex-direction:column;gap:2px}
-    details.arch summary .d{min-width:0}
-    details.arch .arch-inner{padding-left:0}
+    .act{padding:16px 0}
+    .act + .act{border-left:none;border-top:1px solid var(--hairline)}
+    .act:first-child{padding-top:0}
   }
 </style>
 </head>
 <body>
-
-<div class="band band-top">
-  <div class="inner">
-    <p class="daydate">火曜日 · 8月25日 2026</p>
-    <h1 class="headline">今日は予定表がほぼ空いています、秀平さん。まとまった時間を、待っていることに向けられます。</h1>
-
-    <svg class="terrain" viewBox="0 0 840 170" role="img" aria-label="穏やかな一日を表す、ほぼ水平の地形の線">
-      <circle cx="118" cy="52" r="21" fill="none" stroke="#C6613F" stroke-width="1.6"/>
-      <line x1="118" y1="14" x2="118" y2="24" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="118" y1="80" x2="118" y2="90" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="80" y1="52" x2="90" y2="52" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="146" y1="52" x2="156" y2="52" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="88" y1="24" x2="95" y2="31" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="141" y1="31" x2="148" y2="24" stroke="#C6613F" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M600 60 q9 -8 18 0 q9 -8 18 0" fill="none" stroke="#B4B3A8" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M660 74 q7 -6 14 0 q7 -6 14 0" fill="none" stroke="#B4B3A8" stroke-width="1.3" stroke-linecap="round"/>
-      <path d="M0 132 C 120 128, 240 130, 360 129 S 600 131, 720 129 840 130 840 130"
-            fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-
-    <div class="acts">
-      <div class="act">
-        <p class="t">05:00 – 12:00</p>
-        <p class="s">時刻の決まった約束はない午前。日課をこなしつつ、手をつけたいことに向けやすい。</p>
-      </div>
-      <div class="act">
-        <p class="t">12:00 – 16:00</p>
-        <p class="s">昼は育児対応の時間帯。今日の固定枠はここだけ。</p>
-      </div>
-      <div class="act">
-        <p class="t">16:00 以降</p>
-        <p class="s">時刻付きの予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p>
+  <div class="band band-top">
+    <div class="inner">
+      <div class="day-date">水曜日 · 8月26日 2026</div>
+      <h1 class="headline">予定表は昼をのぞいて空いています、秀平さん。午前と夜は、自分のために使えます。</h1>
+      <svg class="terrain" viewBox="0 0 840 170" role="img" aria-label="今日の地形図：昼だけ動きのある、静かな一日">
+        <!-- sun (clay accent, open morning) -->
+        <g stroke="var(--clay)" stroke-width="2" fill="none" stroke-linecap="round">
+          <circle cx="120" cy="46" r="13" fill="none"/>
+          <line x1="120" y1="20" x2="120" y2="10"/>
+          <line x1="120" y1="82" x2="120" y2="72"/>
+          <line x1="94" y1="46" x2="84" y2="46"/>
+          <line x1="146" y1="46" x2="156" y2="46"/>
+          <line x1="101" y1="27" x2="94" y2="20"/>
+          <line x1="139" y1="27" x2="146" y2="20"/>
+          <line x1="101" y1="65" x2="94" y2="72"/>
+          <line x1="139" y1="65" x2="146" y2="72"/>
+        </g>
+        <!-- birds (evening, room to breathe) -->
+        <g stroke="var(--ink-soft)" stroke-width="1.6" fill="none" stroke-linecap="round">
+          <path d="M690,52 q9,-8 18,0"/>
+          <path d="M712,58 q8,-7 16,0"/>
+        </g>
+        <!-- terrain: calm, gentle midday rise -->
+        <path d="M0,132 C 150,131 290,130 420,120 C 550,130 690,133 840,132"
+              fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>
+        <!-- midday: two genuinely-overlapping events (hollow intersecting) -->
+        <circle cx="410" cy="122" r="10" fill="var(--wash)" stroke="var(--ink)" stroke-width="2"/>
+        <circle cx="430" cy="122" r="10" fill="var(--wash)" stroke="var(--ink)" stroke-width="2"/>
+      </svg>
+      <div class="acts">
+        <div class="act">
+          <span class="act-time">05:00 – 12:00</span>
+          <p class="act-text">時刻の決まった約束はない午前。日課をこなしつつ、手をつけたいことに向けやすい。</p>
+        </div>
+        <div class="act">
+          <span class="act-time">12:00 – 16:00</span>
+          <p class="act-text">昼は在宅で動きが集まる時間帯。今日の予定の中心はここ。</p>
+        </div>
+        <div class="act">
+          <span class="act-time">16:00 以降</span>
+          <p class="act-text">時刻付きの予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="band">
-  <div class="inner">
+  <div class="band band-bottom">
+    <div class="inner">
 
-    <section class="block">
-      <h2>常設</h2>
-      <ul class="const-list">
-        <li><b>夜間</b>育児対応（常設）</li>
-        <li><b>12:00 – 16:00</b>昼の育児対応</li>
-      </ul>
-    </section>
+      <section class="block">
+        <h2 class="sect">注意が要ること</h2>
+        <div class="item">
+          <div class="num">1</div>
+          <div class="body">
+            <p class="title">昼は在宅で対応が重なる</p>
+            <p class="desc"><span class="src">カレンダー</span>で、今日の昼はベビーシッター（12:00 – 16:00）とワインセラーの対応（12:00 – 15:00）が同じ時間帯。受け入れの段取りを午前のうちに整えておくと当日が動きやすい。</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="num">2</div>
+          <div class="body">
+            <p class="title">明日は夕方に配達の受け取り</p>
+            <p class="desc"><span class="src">カレンダー</span>で、明日の15:00 – 16:00にコープの配達。その時間帯は在宅にしておきたい。</p>
+          </div>
+        </div>
+      </section>
 
-<!-- ══════ タイムラインブロック v4.0（自己完結・このコメントから END まで verbatim で挿入） ══════ -->
+      <section class="block">
+        <h2 class="sect">片付いたこと</h2>
+        <div class="item">
+          <div class="num">1</div>
+          <div class="body">
+            <p class="title">注文していた品が届いた</p>
+            <p class="desc"><span class="src">Gmailの通知</span>で、ここ数日に注文した複数の品が昨日までに配達済み。今の対応は不要。</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ══════ タイムラインブロック v4.1（自己完結・このコメントから END まで verbatim で挿入） ══════ -->
 <style>
+/* tlx: timeline block v4.1 — ページ側クラスに依存しない（テンプレートは日々変わるため）。
+   見出し・セクション間隔はページの h2 / section に合わせてある（13px/600/.09em・margin 40px）。
+   色は **すべて .tlx スコープの CSS 変数** を経由する（規則の中に色を直書きしない）。
+   ダークは末尾の 1 ブロックで **変数だけを差し替える**＝セレクタを再記述しないので、
+   片方のテーマだけ直して他方が置き去りになる事故が起きない（旧 v3.1 の失敗様式）。
+   ただし発火は **ホストの opt-in 属性**（`data-tlx-theme="dark"`）だけ＝`prefers-color-scheme` は使わない。
+   実ホスト（Cowork のブリーフ）は dark 未対応（メディアクエリ 0 件・実測）のため、
+   OS がダークだとブロックだけが反転して cream 地に黒箱が乗る（見出し 1.16:1・実測）。
+   既定は常にライト＝ホストと必ず一致する。
+   ブランド色は LINE カードと同じ morning green（製品として 1 色に揃える・decisions D55）。
+   v4.1（MB-036）: 予定の **帰属カレンダー** を任意キー `c` で受け取り、題名の後ろへ二次トーンで
+   添える（`.tlx-cal`）。読者が朝いちばんに知りたいのは「何が・いつ」で、「誰の予定か」は二次情報＝
+   タイトルと同じ強さで並べない（色は増やさず既存トークンの範囲）。`c` が無ければ描画は v4.0 と
+   完全に同じ（後方互換）＝**`c` の省略は「my予定（自分の予定）」を意味する**（毎行 `my予定` と
+   繰り返しても情報量が増えないため、既定は無ラベル側に置く）。
+   uiux 是正（2026-08-25・未配備のため版は据え置き）: ①チップの区切り罫を --tlx-mute へ（非テキスト 3:1）
+   ②レーン幅フック .tlx-nocal を追加（狭レーンでの字切れ） ③.tlx-cal の効かない縮み宣言を削除
+   ④sr-only の読み上げ順を「題名 →（重要）→（帰属）」へ。 */
 .tlx{
   --tlx-ink:#2E2C27; --tlx-soft:#6B6A63; --tlx-mute:#86847B; --tlx-dim:#57564F;
   --tlx-warn:#9A3B2E; --tlx-line:#E4E3DC; --tlx-line-fine:#EFEEE8;
@@ -151,6 +203,9 @@
 .tlx-canvas{position:relative;margin-left:52px;border-left:1px solid var(--tlx-line)}
 .tlx-hour{position:absolute;left:0;right:0;border-top:1px solid var(--tlx-line-fine);pointer-events:none}
 .tlx-hour.tlx-major{border-top-color:var(--tlx-line)}
+/* 時刻ルーラー（v4.0 のシグネチャ）: 左の時刻列を「目盛のある定規」にする。
+   数字は等幅 tabular で桁を揃え、major（3 時間ごと）だけ軸へ届く短い tick を出す。
+   DOM は v3.1 のまま（.tlx-hour / .tlx-hlabel）＝JS を変えずに見た目だけを起こす。 */
 .tlx-hlabel{position:absolute;left:-52px;width:44px;text-align:right;top:-0.65em;
   font-family:var(--tlx-num);font-size:11px;color:var(--tlx-soft);font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .tlx-hour.tlx-major .tlx-hlabel::after{content:"";position:absolute;right:-9px;top:.65em;width:7px;
@@ -168,19 +223,45 @@
 .tlx-ev.tlx-compact{display:flex;align-items:center;gap:8px;padding-top:2px;padding-bottom:2px}
 .tlx-ev.tlx-compact .tlx-time{flex:none}
 .tlx-ev.tlx-compact .tlx-title{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block;min-width:0}
+/* 狭いレーンでは時刻を視覚的にだけ隠す（支援技術には残す・位置で時刻が読めるのは晴眼者だけのため） */
 .tlx-ev.tlx-tiny .tlx-time{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .tlx-ev.tlx-narrow{padding:3px 5px 3px 6px}
 .tlx-ev.tlx-narrow .tlx-title{font-size:11.5px;line-height:1.35;-webkit-line-clamp:3;letter-spacing:-.01em}
 .tlx-ev.tlx-narrow .tlx-time{font-size:10px}
+/* 帰属カレンダー（v4.1・MB-036 / uiux 是正 2026-08-25）: 二次情報なので **時刻と同じ二次トーン**
+   （--tlx-soft）・11px（.tlx-time / .tlx-hlabel と同値＝級数の刻みを増やさない）でタイトルの後ろに置く。
+   **狭いときはラベルは「縮む」のではなく「消える」**: inline の span では min-width / overflow /
+   text-overflow は効かない（computed display:inline・scrollWidth=0 を実測）＝書いても偽の安心にしかならず、
+   宣言ごと外した。切れるくらいなら消す（消えても sr-only と title 属性に残る）。
+   消す条件は 3 つ: .tlx-narrow（canvas 幅 < 340px＝モバイル条件）／.tlx-tiny（compact かつレーン幅 < 130px）
+   ／**.tlx-nocal（レーン幅 < 200px・uiux 是正で追加）**。narrow は canvas 幅・tiny は compact バー限定なので、
+   canvas 340–480px × 3 レーンの帯（バー 144–166px）はどちらにも掛からず、60 分バーで題名が 2 行になって
+   ラベルがバー下端を +1.5px 超えて半分に切れていた（canvas 422px／バー 152px・実測）。
+   チップ側は本文自体が --tlx-soft で同色同トーン＝従属関係が出ないため、色ではなく **細い区切り罫**
+   で分節する。1px の罫は **非テキスト＝WCAG 1.4.11 の 3:1** が基準（4.5 ではない）ので --tlx-mute を使う
+   （chip 地に対し light 3.56 / dark 5.21・実測）。--tlx-line は 1.22 / 1.24 で 3:1 に届かず、罫が見えない。 */
+.tlx-cal{font-size:11px;color:var(--tlx-soft);margin-left:6px;white-space:nowrap;font-weight:500}
+.tlx-ev.tlx-compact .tlx-cal{margin-left:5px}
+.tlx-ev.tlx-narrow .tlx-cal,.tlx-ev.tlx-tiny .tlx-cal{display:none}
+.tlx-ev.tlx-nocal .tlx-cal{display:none}
+.tlx-ev.tlx-past .tlx-cal{color:var(--tlx-dim)}
+.tlx-chip .tlx-cal{margin-left:6px;padding-left:6px;border-left:1px solid var(--tlx-mute)}
+/* 「重要」と「進行中」は色を増やさず **形** で分ける（どちらもブランド色）:
+   重要（hi）＝太い左罫 4px ＋ ◆ ／ 進行中（live）＝基底の左罫 3px ＋ 現在時刻ラインの丸。
+   live は幅を宣言しない＝重要かつ進行中のとき 4px（重要さ）が残る。 */
 .tlx-ev.tlx-hi{background:var(--tlx-brand-soft);border-left-width:4px;border-left-color:var(--tlx-brand)}
 .tlx-pri{color:var(--tlx-brand);font-size:10px}
 .tlx-ev.tlx-past .tlx-pri{color:var(--tlx-soft)}
+/* narrow でも ◆ は消さない（重要さは色を増やさず形で伝える＝◆ が消えると hi は
+   「太い左罫」だけになり、past で罫が mute へ落ちる回で手掛かりが 0 になる）。 */
 .tlx-ev.tlx-narrow .tlx-pri{font-size:9px}
 .tlx-ev.tlx-lo{border-left-style:dashed;border-left-color:var(--tlx-mute)}
 .tlx-ev.tlx-lo .tlx-title{color:var(--tlx-dim);font-weight:500}
 .tlx-ev.tlx-past .tlx-title{font-weight:600}
 .tlx-ev.tlx-lo.tlx-past .tlx-title{font-weight:500}
 .tlx-chip-hi{border-left:4px solid var(--tlx-brand);padding-left:9px}
+/* past は **色だけ**を減衰させる（border-left-width を書かない）＝重要かつ過去のとき
+   .tlx-hi の 4px が残り、「重要だった」ことが読める。 */
 .tlx-ev.tlx-past{background:var(--tlx-card-past);border-left-color:var(--tlx-mute);border-left-style:solid}
 .tlx-ev.tlx-past .tlx-title{color:var(--tlx-dim)}
 .tlx-ev.tlx-past .tlx-time{color:var(--tlx-soft)}
@@ -197,6 +278,10 @@
   .tlx-hlabel{left:-46px;width:38px}
   .tlx-ev{padding:4px 7px 4px 8px}
 }
+/* ダーク: **変数の差し替えだけ**（規則を 1 つも再記述しない）。--tlx-num はライトと同値を
+   明示して 14 本を揃える（テーマ間で本数が食い違うと、片側だけ足した token に気づけない）。
+   発火は **ホストが宣言したときだけ**＝<section class="tlx" data-tlx-theme="dark">。
+   （OS 設定では発火しない。ホストがライト固定なら、ブロックもライトのまま。） */
 .tlx[data-tlx-theme="dark"]{
   --tlx-ink:#EDEBE5; --tlx-soft:#A8A69D; --tlx-mute:#8E8B83; --tlx-dim:#C9C6BD;
   --tlx-warn:#F0A58C; --tlx-line:#2C2A26; --tlx-line-fine:#232220;
@@ -206,12 +291,18 @@
 </style>
 <section class="tlx" id="tlx">
   <h2 class="tlx-h">きょうのタイムライン<span class="tlx-date" id="tlx-date"></span></h2>
-  <p class="tlx-warn" id="tlx-warn" hidden>このページは本日分ではありません。</p>
+  <p class="tlx-warn" id="tlx-warn" hidden></p>
   <div class="tlx-allday" id="tlx-allday"></div>
   <div class="tlx-wrap"><div class="tlx-canvas" id="tlx-canvas"></div></div>
 </section>
 <script type="application/json" id="tlx-data">
-{"date":"2026-08-25","events":[],"allday":["夜間の育児対応（常設）","昼の育児対応（12:00 – 16:00）",{"t":"住民税の納付期限が近い","p":"high"}]}
+{"date":"2026-08-26","events":[
+  {"s":"12:00","e":"15:00","t":"ワインセラーの対応","p":"high"},
+  {"s":"12:00","e":"16:00","t":"ベビーシッター","p":"high"}
+],"allday":[
+  {"t":"夜間の育児対応（常設）","c":"家族(2)"},
+  {"t":"昼の育児対応（12:00 – 16:00）","c":"家族(2)"}
+]}
 </script>
 <script>
 (function(){
@@ -222,6 +313,17 @@
   function two(n){return (n<10?"0":"")+n}
   function fmt(m){return two(Math.floor(m/60)%24)+":"+two(m%60)}
   var WD=["日","月","火","水","木","金","土"];
+  // 帰属カレンダー（v4.1）: 表示は二次トーンの小さなラベル（aria-hidden）＋ **常設の sr-only**。
+  // .tlx-pri（◆＋「（重要）」）と同型＝表示幅で読み上げが消える／二重に読まれる の両方を構造的に排除する。
+  function addCal(parent,label){
+    if(!label)return;
+    var cl=document.createElement("span");cl.className="tlx-cal";
+    cl.setAttribute("aria-hidden","true");cl.textContent=label;parent.appendChild(cl);
+    var sc=document.createElement("span");
+    sc.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
+    sc.textContent="（"+label+"）";parent.appendChild(sc);
+  }
+  // ---- データ正規化。深夜跨ぎ（e<=s）は 24:00 でクランプして題名に印を付ける（無言で捨てない）
   var evs=[];
   (data.events||[]).forEach(function(v){
     var a=String(v.s).split(":"),b=String(v.e).split(":");
@@ -229,9 +331,10 @@
     if(!isFinite(s)||!isFinite(e))return;
     if(e<=s){e=24*60;over=true}
     var pr=String(v.p||"").toLowerCase();pr=(pr==="high"?"hi":pr==="low"?"lo":"");
-    evs.push({s:Math.max(0,s),e:Math.min(24*60,e),t:t+(over?"（翌日まで）":""),raw:t,p:pr});
+    evs.push({s:Math.max(0,s),e:Math.min(24*60,e),t:t+(over?"（翌日まで）":""),raw:t,p:pr,c:String(v.c||"")});
   });
   var allday=data.allday||[];
+  // ---- 日付表示（ページの日付とデータの日付が食い違っても読者が気づけるように）
   var now=new Date();
   var today=now.getFullYear()+"-"+two(now.getMonth()+1)+"-"+two(now.getDate());
   var isToday=(data.date===today);
@@ -241,11 +344,16 @@
     var dd=new Date(+dm[1],+dm[2]-1,+dm[3]);
     dEl.textContent=(+dm[2])+"/"+(+dm[3])+"（"+WD[dd.getDay()]+"）";
   }
-  if(!isToday&&dm)document.getElementById("tlx-warn").hidden=false;
+  // 警告文は **HTML に静的に持たない**（v4.1・MB-038）。中継の本文抽出はタグを剥がすだけで
+  // `hidden` 属性を見ないため、静的に置くと「画面に出していない文」が毎朝の LINE 通知本文へ
+  // 混入する（2026-08-25 実測・4 日連続）。必要なときだけ JS が textContent で入れる。
+  if(!isToday&&dm){var wEl=document.getElementById("tlx-warn");
+    wEl.textContent="このページは本日分ではありません。";wEl.hidden=false}
   var alBox=document.getElementById("tlx-allday");
   allday.forEach(function(x){
     var txt=(x&&typeof x==="object")?String(x.t||""):String(x);
     var hp=(x&&typeof x==="object")&&String(x.p||"").toLowerCase()==="high";
+    var cv=(x&&typeof x==="object")?String(x.c||""):"";
     if(!txt)return;
     var c=document.createElement("span");c.className="tlx-chip"+(hp?" tlx-chip-hi":"");
     var b=document.createElement("b");b.textContent="終日";c.appendChild(b);
@@ -254,7 +362,7 @@
       var sr0=document.createElement("span");
       sr0.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
       sr0.textContent="（重要）";c.appendChild(sr0)}
-    c.appendChild(document.createTextNode(txt));alBox.appendChild(c);
+    c.appendChild(document.createTextNode(txt));addCal(c,cv);alBox.appendChild(c);
   });
   var canvas=document.getElementById("tlx-canvas");
   if(!evs.length){
@@ -264,6 +372,7 @@
     return;
   }
   evs.sort(function(a,b){return a.s-b.s||b.e-a.e});
+  // ---- 重なりクラスタごとにレーン割当（レーン数はクラスタ単位）
   var cluster=[],clusterEnd=-1;
   function closeCluster(){
     var lanes=[];
@@ -281,6 +390,7 @@
     cluster.push(ev);clusterEnd=Math.max(clusterEnd,ev.e);
   });
   if(cluster.length)closeCluster();
+  // ---- 表示窓＝[最初の予定-1h, 最後の予定+1h]（最小 8 時間・現在時刻を必ず含む）
   var minS=Math.min.apply(null,evs.map(function(v){return v.s}));
   var maxE=Math.max.apply(null,evs.map(function(v){return v.e}));
   var nowMin=now.getHours()*60+now.getMinutes();
@@ -289,6 +399,7 @@
   h0=Math.max(0,h0);h1=Math.min(24,h1);
   while(h1-h0<8){if(h1<24)h1++;else if(h0>0)h0--;else break}
   var winS=h0*60,winE=h1*60;
+  // ---- 空白帯の畳み込み: 予定が無い 2h 超の区間は固定高にして、密度を上げる
   var PXH=44,PXM=PXH/60,GAPH=30,GAP_MIN=120;
   var busy=[];
   evs.forEach(function(v){
@@ -297,7 +408,7 @@
     if(busy.length&&s<=busy[busy.length-1][1])busy[busy.length-1][1]=Math.max(busy[busy.length-1][1],e);
     else busy.push([s,e]);
   });
-  if(isToday&&nowMin>=winS&&nowMin<=winE){
+  if(isToday&&nowMin>=winS&&nowMin<=winE){   // 現在時刻は畳まない（now が隠れないように）
     busy.push([Math.max(winS,nowMin-1),Math.min(winE,nowMin+1)]);
     busy.sort(function(a,b){return a[0]-b[0]});
     var merged=[];
@@ -327,6 +438,7 @@
     }
     return top;
   }
+  // ---- 時間軸・空白帯
   segs.forEach(function(g){
     if(g.gap){
       var gd=document.createElement("div");gd.className="tlx-gap";
@@ -348,6 +460,7 @@
       line.appendChild(lab);canvas.appendChild(line);
     }
   });
+  // ---- イベント
   var nodes=[];
   evs.forEach(function(v){
     var el=document.createElement("div");
@@ -355,7 +468,7 @@
     var live=isToday&&v.s<=nowMin&&nowMin<v.e;
     el.className="tlx-ev"+(v.p?" tlx-"+v.p:"")+(hpx<44?" tlx-compact":"")+((isToday&&v.e<=nowMin)?" tlx-past":"")+(live?" tlx-live":"");
     el.style.top=ytop+"px";el.style.height=hpx+"px";
-    el.title=fmt(v.s)+" – "+fmt(v.e)+"　"+v.raw;
+    el.title=fmt(v.s)+" – "+fmt(v.e)+"　"+v.raw+(v.c?"　["+v.c+"]":"");
     var tm=document.createElement("span");tm.className="tlx-time";tm.textContent=fmt(v.s)+" – "+fmt(v.e);
     var tt=document.createElement("span");tt.className="tlx-title";
     if(v.p==="hi"){var pd=document.createElement("span");pd.className="tlx-pri";
@@ -364,9 +477,17 @@
     if(v.p==="hi"){var sr=document.createElement("span");
       sr.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
       sr.textContent="（重要）";tt.appendChild(sr)}
+    // 帰属カレンダーは **.tlx-title の内側**（題名テキストの後ろ）へ差す。兄弟に置くと別行になり、
+    // hpx<44 の compact バー（60 分予定＝最頻）では overflow:hidden に切られて見えない。
+    // **「（重要）」より後ろ**に置く＝読み上げ順は v4.0 と同じ「題名 →（重要）」で、帰属はその後に続く
+    //（重要さは帰属より先に伝える）。**終日チップとは本文の位置が違う**＝チップは ◆ が題名の前に
+    // 立つ体裁なので「終日 →（重要）→ 本文 →（帰属）」、バーは「題名 →（重要）→（帰属）」。
+    // 揃えているのは「（重要）が（帰属）より先」の一点だけ（D-49e/f/g が実行して読み上げ列を固定する）。
+    addCal(tt,v.c);
     el.appendChild(tm);el.appendChild(tt);canvas.appendChild(el);
     nodes.push({el:el,ev:v,top:ytop,h:hpx});
   });
+  // min-height で伸びた短時間の予定が同レーンの次と重なるのを押し下げて解消
   var byLane={};
   nodes.forEach(function(o){(byLane[o.ev.lane]=byLane[o.ev.lane]||[]).push(o)});
   Object.keys(byLane).forEach(function(k){
@@ -376,6 +497,7 @@
       prev=o;
     });
   });
+  // ---- 横幅: 3 レーン以上／狭幅では等分をやめ階段オフセット（題名の可読幅を確保）
   function layout(){
     var w=canvas.offsetWidth||600,narrow=w<340;
     nodes.forEach(function(o){
@@ -383,6 +505,9 @@
       el.style.left="calc("+(lane*100/n)+"% + "+(lane===0?4:3)+"px)";
       el.style.width="calc("+(100/n)+"% - "+(n>1?7:8)+"px)";el.style.zIndex="2";
       el.className=el.className.replace(" tlx-narrow","")+((narrow&&n>=3)?" tlx-narrow":"");
+      // 帰属ラベルは **レーン幅（バーの実幅）** で落とす。narrow は canvas 幅・tiny は compact バー限定の
+      // ため、canvas 340–480px × 3 レーンの帯はどちらにも掛からず、ラベルが切れて残っていた（uiux 是正）。
+      el.className=el.className.replace(" tlx-nocal","")+((el.offsetWidth<200)?" tlx-nocal":"");
       if(el.className.indexOf("tlx-compact")>=0){
         var tiny=el.offsetWidth<130;
         el.className=el.className.replace(" tlx-tiny","")+(tiny?" tlx-tiny":"");
@@ -390,6 +515,7 @@
     });
   }
   layout();window.addEventListener("resize",layout);
+  // ---- 現在時刻ライン（日付も毎回再判定＝日跨ぎで前日データに線を引かない）
   function drawNow(){
     var old=canvas.querySelector(".tlx-now");if(old)old.parentNode.removeChild(old);
     var n2=new Date(),t2=n2.getFullYear()+"-"+two(n2.getMonth()+1)+"-"+two(n2.getDate());
@@ -406,135 +532,119 @@
 </script>
 <!-- ══════ END タイムラインブロック ══════ -->
 
-    <section class="block">
-      <h2>予定</h2>
-      <p class="sched-note">今日は時刻の決まった予定はありません。育児の時間帯を除けば、まとまった余白の一日です。</p>
-      <div class="sched-row"><span class="lab">終日</span>住民税の支払い（家族カレンダー・納期が近い）</div>
-      <div class="sched-row"><span class="lab">明日</span><span class="tm">12:00 – 15:00</span> ワインセラー、<span class="tm">12:00 – 16:00</span> ベビーシッター（在宅・同じ昼帯）</div>
-    </section>
-
-    <section class="block">
-      <h2>注意が要ること</h2>
-      <ul class="items">
-        <li class="item">
-          <span class="num">1</span>
-          <div class="body">
-            <p class="title">住民税の納付期限が近い</p>
-            <p class="desc"><u>家族カレンダー</u>で住民税の支払いが引き続き終日表示。第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</p>
-          </div>
-        </li>
-        <li class="item">
-          <span class="num">2</span>
-          <div class="body">
-            <p class="title">明日は昼に在宅の予定が重なる</p>
-            <p class="desc"><u>カレンダー</u>で、明日の昼はワインセラーの対応（12:00 – 15:00）とベビーシッター（12:00 – 16:00）が同じ時間帯。受け入れの段取りを今日のうちに決めておくと当日が動きやすい。</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="block">
-      <h2>片付いたこと</h2>
-      <p class="calm">今日はっきり片付いた項目はなし。静かな一日。</p>
-    </section>
-
-    <section class="block">
-      <h2>これまでのブリーフ</h2>
-
-      <details class="arch">
-        <summary><span class="d">月曜日 · 8月24日 2026</span><span class="h">今日はほとんど余白です、秀平さん。動くのは育児の時間帯と、夜明けの一戦くらい。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">04:30 – 12:00</span>夜明けにサッカーの一戦。あとの午前はジムを挟みつつ、ほぼ自由に使える。</div>
-            <div><span class="at">12:00 – 16:00</span>昼の育児対応の時間帯。今日いちばんの固定枠はここ。</div>
-            <div><span class="at">16:00 以降</span>時刻の入った予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</div>
-          </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>住民税の納付期限が近い</b>家族カレンダーで住民税の支払いが今日から表示。第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li>今日はっきり片付いた項目はなし。静かな一日。</li></ul>
+      <section class="block">
+        <h2 class="sect">予定</h2>
+        <div class="plan-group">
+          <span class="plan-when">常設</span>
+          <p class="plan-line">夜間の育児対応（常設）<span class="cal">家族(2)</span></p>
+          <p class="plan-line">昼の育児対応（12:00 – 16:00）<span class="cal">家族(2)</span></p>
         </div>
-      </details>
-
-      <details class="arch">
-        <summary><span class="d">日曜日 · 8月23日 2026</span><span class="h">日曜日はまるごと空いています、秀平さん。試合は夜と明け方に待っています。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">05:00 – 12:00</span>時刻の決まった約束はない午前。運動と家のことに向けやすい時間。</div>
-            <div><span class="at">12:00 – 16:00</span>昼は育児の担当。外の予定は入っていない。</div>
-            <div><span class="at">16:00 以降</span>夜22:00からマンチェスター・シティ戦、明け方にバルセロナ戦。</div>
-          </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>仮のチケット予約を確定する</b>カレンダーで、今日は「仮」のままのチケット予約。確定するか今日のうちに判断したい。</li><li><b>住民税の支払い（明日から）</b>カレンダーで、明日から住民税の支払い期限が始まる。忘れずに済ませておきたい。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li><b>注文していたデバイスが発送</b>Gmailの通知で、注文していた指輪のウェアラブルが昨日発送。到着待ちで、今の対応は不要。</li></ul>
+        <div class="plan-group">
+          <span class="plan-when">今日</span>
+          <p class="plan-line">ワインセラーの対応<span class="t">12:00 – 15:00</span></p>
+          <p class="plan-line">ベビーシッター<span class="t">12:00 – 16:00</span></p>
         </div>
-      </details>
-
-      <details class="arch">
-        <summary><span class="d">土曜日 · 8月22日 2026</span><span class="h">午後は友達との時間がある土曜日、秀平さん、前後はゆったり過ごせそう。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">05:00 – 12:00</span>時刻の決まった予定はなく、静かな午前。手をつけたいことに向けやすい。</div>
-            <div><span class="at">12:00 – 16:00</span>13:00から友達との時間。昼の育児対応と重なる時間帯。</div>
-            <div><span class="at">16:00 以降</span>夕方は落ち着き、18:00–20:00に時間指定の配達を受け取る。</div>
-          </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>今夜、配達の受け取り</b>カレンダーで、今日18:00–20:00に時間指定の配達。その時間帯は在宅にしておきたい。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li><b>注文品の発送・配達が進行</b>Gmailの通知で、ここ数日に注文した複数の品が発送・配達を完了。今の対応は不要。</li></ul>
+        <div class="plan-group">
+          <span class="plan-when">明日</span>
+          <p class="plan-line">コープ配達<span class="t">15:00 – 16:00</span></p>
+          <p class="plan-line">終日のケアの予定<span class="cal">家族(1)</span></p>
         </div>
-      </details>
+      </section>
 
-      <details class="arch">
-        <summary><span class="d">金曜日 · 8月21日 2026</span><span class="h">午前は受け取りと外出が重なる一日、秀平さん。午後は落ち着いた時間が戻ります。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">05:00 – 09:00</span>早朝5時から配送が動き出し、8時までに粗大ごみを出す構え。</div>
-            <div><span class="at">09:00 – 14:00</span>午前は在宅で荷受けが続き、昼前に通院で短く外出する。</div>
-            <div><span class="at">14:00 以降</span>午後は落ち着き、夜21時に食材宅配の注文締切。明日は昼に来客。</div>
+      <section class="block arc">
+        <h2 class="sect">これまでのブリーフ</h2>
+
+        <details>
+          <summary><span class="d-date">火曜日 · 8月25日 2026</span><span class="d-head">今日は予定表がほぼ空いています、秀平さん。まとまった時間を、待っていることに向けられます。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>05:00 – 12:00</b>　時刻の決まった約束はない午前。日課をこなしつつ、手をつけたいことに向けやすい。</p>
+            <p class="ar"><b>12:00 – 16:00</b>　昼は育児対応の時間帯。今日の固定枠はここだけ。</p>
+            <p class="ar"><b>16:00 以降</b>　時刻付きの予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>住民税の納付期限が近い</b>　第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</p>
+            <p class="ar"><b>明日は昼に在宅の予定が重なる</b>　ワインセラーの対応とベビーシッターが同じ時間帯。受け入れの段取りを今日のうちに。</p>
           </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>朝8時までに粗大ごみを出す</b>カレンダーで、今日8時から回収の予定。前日の受付は終わり、朝一で玄関先に出しておく必要がある。</li><li><b>午前は在宅で荷受けが続く</b>カレンダーで、朝5時から昼過ぎまで配送が複数便。家を空けられる時間は限られる。</li><li><b>昼前に通院で短く外出</b>カレンダーで、今日11:30から通院の予定。持ち物と保険証を出る前に確認しておくと当日が楽。</li><li><b>夜21時に食材宅配の注文締切</b>カレンダーで、コープの締切が今夜21時。日中に注文内容を決めておくと締切に間に合わせやすい。</li><li><b>サブスクの解約期限が明日まで</b>家族のカレンダーに終日予定として明日まで。動かせる日は今日を入れて残り2日。</li><li><b>明日は昼に来客の予定</b>カレンダーで、明日13時から自宅に来客。人数分の受け入れ準備を今日のうちに整えておくと当日が動きやすい。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li><b>複数の発送通知が並ぶ</b>Gmailの通知で、昨日以降にキッチン用品や日用品など複数件が発送済み。今日の日中に順次到着の予定。</li><li><b>注文品の配達が昨日完了</b>ヤマトとAmazonの配達通知で、昨日中に複数の荷物が到着。今日は次の便を待つ状態。</li></ul>
-        </div>
-      </details>
+        </details>
 
-      <details class="arch">
-        <summary><span class="d">木曜日 · 8月20日 2026</span><span class="h">午前は家で受け取りが続き、秀平さん。午後は出かける一日になりそうです。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">05:00 – 09:00</span>配送は5時台から動き出し、朝は受け取りの構え。会議は今日ひとつもない。</div>
-            <div><span class="at">09:00 – 15:00</span>午前は在宅の短い訪問がひとつ、荷物も数便届く。昼は育児対応の時間が続く。</div>
-            <div><span class="at">15:00 以降</span>午後は外出がひとつ、戻れば夜は日課だけ。明日は午前に外の予定。</div>
+        <details>
+          <summary><span class="d-date">月曜日 · 8月24日 2026</span><span class="d-head">今日はほとんど余白です、秀平さん。動くのは育児の時間帯と、夜明けの一戦くらい。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>04:30 – 12:00</b>　夜明けにサッカーの一戦。あとの午前はジムを挟みつつ、ほぼ自由に使える。</p>
+            <p class="ar"><b>12:00 – 16:00</b>　昼の育児対応の時間帯。今日いちばんの固定枠はここ。</p>
+            <p class="ar"><b>16:00 以降</b>　時刻の入った予定はなく、夕方から夜は静か。夜は育児の当番に戻る。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>住民税の納付期限が近い</b>　第2期の納期が近い頃合いで、今日のうちに段取りだけでも進めておきたい。</p>
           </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>今日午前は在宅で訪問対応</b>カレンダーで、今日9時から在宅の訪問がひとつ。立ち会いは短いが、その時間帯は家にいる必要がある。</li><li><b>今日午後は予防接種で外出</b>カレンダーで、今日の午後に予防接種の予定。持ち物を出る前に確認しておくと当日が楽。</li><li><b>粗大ごみを今日のうちに出す</b>Todoistと予定表で、回収は明日8時から。前日のうちに出しておく必要がある。</li><li><b>サブスクの解約が明日まで</b>家族のカレンダーに終日予定として明日まで。動かせる日は今日を入れて残り少ない。</li><li><b>明日は昼前に外出、夜に注文締切</b>明日は昼前に通院の外出、夜21時に食材宅配の注文締切。順番を決めておくと動きやすい。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li><b>今朝のフットボールは白星</b>フォロー中のバルセロナが、今朝のプレシーズンで2-1の勝利。</li><li><b>注文品の発送が進んでいる</b>Gmailの発送通知で、キッチン用品など複数件が発送済みに。今日も配送の予定がある。</li></ul>
-        </div>
-      </details>
+        </details>
 
-      <details class="arch">
-        <summary><span class="d">水曜日 · 8月19日 2026</span><span class="h">今日は予定表が空いています、秀平さん。まとまった時間を、待っている一つに使えます。</span></summary>
-        <div class="arch-inner">
-          <div class="arch-acts">
-            <div><span class="at">05:00 – 12:00</span>日課は5時台から動き出し、午前に会議はひとつも入っていない。</div>
-            <div><span class="at">12:00 – 16:00</span>昼の育児対応が4時間続く。連続した作業時間は午前側に寄せると取りやすい。</div>
-            <div><span class="at">16:00 以降</span>夕方以降は日課が続くだけで、外に出る予定は入っていない。</div>
+        <details>
+          <summary><span class="d-date">日曜日 · 8月23日 2026</span><span class="d-head">日曜日はまるごと空いています、秀平さん。試合は夜と明け方に待っています。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>05:00 – 12:00</b>　時刻の決まった約束はない午前。運動と家のことに向けやすい時間。</p>
+            <p class="ar"><b>12:00 – 16:00</b>　昼は育児の担当。外の予定は入っていない。</p>
+            <p class="ar"><b>16:00 以降</b>　夜22:00からマンチェスター・シティ戦、明け方にバルセロナ戦。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>仮のチケット予約を確定する</b>　「仮」のままのチケット予約。確定するか今日のうちに判断したい。</p>
+            <p class="ar"><b>住民税の支払い（明日から）</b>　明日から住民税の支払い期限が始まる。忘れずに済ませておきたい。</p>
+            <p class="arh">片付いたこと</p>
+            <p class="ar"><b>注文していたデバイスが発送</b>　注文していたウェアラブルが昨日発送。到着待ちで、今の対応は不要。</p>
           </div>
-          <p class="arch-sub">注意が要ること</p>
-          <ul class="arch-il"><li><b>明日は訪問と外出が重なる</b>カレンダーで、明日は午前に設備点検の訪問、夕方に予防接種。在宅の時間帯と移動の順番を今日のうちに決めておくと動きやすい。</li><li><b>節電の対象時間が今日</b>契約中のエネルギー会社からの案内で、対象は今日の13:30 – 20:00。事前のエントリーがないと対象外になる。</li><li><b>サブスクの解約期限が8/21</b>家族のカレンダーに終日予定として入っており、残りは3日。今日を含めて動かせる日は限られる。</li><li><b>粗大ごみの収集が8/21</b>Todoistに明日期限で登録されている。当日ではなく前日までに出す準備が要る。</li><li><b>今夜19時に3日ごとの評価</b>Todoistで優先度の高い一件。直近3日分の記録をまとめて見る回にあたる。</li></ul>
-          <p class="arch-sub">片付いたこと</p>
-          <ul class="arch-il"><li><b>注文した備品が届いた</b>Gmailの配達通知で、17日と18日に完了。電源タップ類と別便の1点がそろっている。</li><li><b>昨日の外出は予定どおり終了</b>カレンダーで、18日の日中に入っていた外出が終わり、今日の日中に予定は残っていない。</li></ul>
-        </div>
-      </details>
+        </details>
 
-    </section>
+        <details>
+          <summary><span class="d-date">土曜日 · 8月22日 2026</span><span class="d-head">午後は友達との時間がある土曜日、秀平さん、前後はゆったり過ごせそう。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>05:00 – 12:00</b>　時刻の決まった予定はなく、静かな午前。手をつけたいことに向けやすい。</p>
+            <p class="ar"><b>12:00 – 16:00</b>　13:00から友達との時間。昼の育児対応と重なる時間帯。</p>
+            <p class="ar"><b>16:00 以降</b>　夕方は落ち着き、18:00–20:00に時間指定の配達を受け取る。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>今夜、配達の受け取り</b>　今日18:00–20:00に時間指定の配達。その時間帯は在宅にしておきたい。</p>
+            <p class="arh">片付いたこと</p>
+            <p class="ar"><b>注文品の発送・配達が進行</b>　ここ数日に注文した複数の品が発送・配達を完了。今の対応は不要。</p>
+          </div>
+        </details>
 
+        <details>
+          <summary><span class="d-date">金曜日 · 8月21日 2026</span><span class="d-head">午前は受け取りと外出が重なる一日、秀平さん。午後は落ち着いた時間が戻ります。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>05:00 – 09:00</b>　早朝5時から配送が動き出し、8時までに粗大ごみを出す構え。</p>
+            <p class="ar"><b>09:00 – 14:00</b>　午前は在宅で荷受けが続き、昼前に通院で短く外出する。</p>
+            <p class="ar"><b>14:00 以降</b>　午後は落ち着き、夜21時に食材宅配の注文締切。明日は昼に来客。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>朝8時までに粗大ごみを出す</b>　今日8時から回収の予定。朝一で玄関先に出しておく必要がある。</p>
+            <p class="ar"><b>昼前に通院で短く外出</b>　今日11:30から通院。持ち物を出る前に確認しておくと当日が楽。</p>
+            <p class="ar"><b>夜21時に食材宅配の注文締切</b>　コープの締切が今夜21時。日中に注文内容を決めておきたい。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="d-date">木曜日 · 8月20日 2026</span><span class="d-head">午前は家で受け取りが続き、秀平さん。午後は出かける一日になりそうです。</span></summary>
+          <div class="arc-body">
+            <p class="ar"><b>05:00 – 09:00</b>　配送は5時台から動き出し、朝は受け取りの構え。会議は今日ひとつもない。</p>
+            <p class="ar"><b>09:00 – 15:00</b>　午前は在宅の短い訪問がひとつ、荷物も数便届く。昼は育児対応の時間が続く。</p>
+            <p class="ar"><b>15:00 以降</b>　午後は外出がひとつ、戻れば夜は日課だけ。明日は午前に外の予定。</p>
+            <p class="arh">注意が要ること</p>
+            <p class="ar"><b>今日午前は在宅で訪問対応</b>　今日9時から在宅の訪問がひとつ。その時間帯は家にいる必要がある。</p>
+            <p class="ar"><b>今日午後は予防接種で外出</b>　午後に外出の予定。持ち物を出る前に確認しておくと当日が楽。</p>
+          </div>
+        </details>
+
+      </section>
+
+    </div>
   </div>
-</div>
 
+  <script>
+  // ページ全体のダーク対応に合わせて、タイムラインブロックの opt-in 属性を同期する
+  // （ブロック本体は prefers-color-scheme を見ない設計のため、ページ側から属性を付け外しする）。
+  (function(){
+    var tlx=document.getElementById("tlx");
+    if(!tlx||!window.matchMedia)return;
+    var mq=window.matchMedia("(prefers-color-scheme: dark)");
+    function sync(){ if(mq.matches){tlx.setAttribute("data-tlx-theme","dark");} else {tlx.removeAttribute("data-tlx-theme");} }
+    sync();
+    if(mq.addEventListener){mq.addEventListener("change",sync);} else if(mq.addListener){mq.addListener(sync);}
+  })();
+  </script>
 </body>
 </html>
