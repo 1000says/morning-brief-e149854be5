@@ -12,6 +12,7 @@ name: Staleness watchdog
 #   SLI-3 通知一致  : notify-state.json の ymd が最新ブリーフの日付と一致し、ok=true / degraded=false
 #   SLI-5 タイムライン: tlx ブロックが index.html に在り、埋め込み JSON が契約どおり（MB-029）
 #   SLI-6 LINE 縮退  : notify-state.json の reason が空でない／format が flex でない（MB-040）
+#   SLI-7 縮退モード : 公開ブリーフがローカル縮退版で出た日を数える（MB-043・SLI-1 が緑に戻って生成停止を隠すため）
 #                     → Flex カードが text へ落ちた日を **fail** で知らせる（MB-025 の warning 行は
 #                        job を緑のままにしていたので、8/25 の subset-miss は誰にも届かなかった）
 #   SLI-5 タイムライン: tlx ブロックが index.html に在り、埋め込み JSON が妥当（MB-029）
@@ -248,7 +249,7 @@ jobs:
             fi
           fi
 
-          # ---------- SLI-5 / SLI-6 は .github/scripts/sli-extra.sh が判定する ----------
+          # ---------- SLI-5 / SLI-6 / SLI-7 は .github/scripts/sli-extra.sh が判定する ----------
           # **判定本体を run: に inline しないこと（D61・2026-08-25 の実障害）。**
           # GitHub Actions は run: の値全体を 1 つの式として扱い **21,000 バイト**の上限がある
           # （文字数ではなく UTF-8 バイト数）。SLI-5/6 を inline した a4d4499 は 23,081 バイトで

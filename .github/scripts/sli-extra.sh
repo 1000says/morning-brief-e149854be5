@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SLI-5（タイムライン契約・MB-029）と SLI-6（LINE 縮退・MB-040）の判定本体。
+# SLI-5（タイムライン契約・MB-029）・SLI-6（LINE 縮退・MB-040）・SLI-7（縮退モード・MB-043）の判定本体。
 #
 # **なぜ workflow から出したか（D61・2026-08-25 の実障害）**
 #   GitHub Actions は `run:` の値**全体を 1 つの式**として扱い、**21,000 バイト**の上限がある
@@ -13,7 +13,7 @@
 # 判定ロジックを workflow に置かない方針（tlx-check.py / notify-degradation-check.py と同じ）に
 # 揃えた結果でもある＝ローカルでも同じコマンドで再現でき、テストが子プロセスで検査できる。
 #
-# 使い方: [TAG=...] [B_YMD=YYYY-MM-DD] bash .github/scripts/sli-extra.sh [sli5|sli6|all]
+# 使い方: [TAG=...] [B_YMD=YYYY-MM-DD] bash .github/scripts/sli-extra.sh [sli5|sli6|sli7|all]
 #   TAG    … 「【テスト実行・実障害ではない】」等のラベル（staleness.yml が付ける）
 #   B_YMD  … SLI-3 が突合した最新ブリーフの日付。空なら SLI-5 の日付ずれ判定はスキップ。
 # 終了コード: 0 = fail 無し / 1 = fail あり（呼び出し側が自分の fail へ畳む）。2 以上は本体の異常。
@@ -133,13 +133,56 @@ sli6() {
   esac
 }
 
+sli7() {
+  # ---------- SLI-7: ローカル縮退版で出た日（MB-043 / M-3） ----------
+  # **フォールバックが成功すると SLI-1 は緑に戻る**＝「生成が止まっている」という本来の異常が
+  # 隠れる。戻す対象を作らないために、縮退そのものを数える。判定は
+  # .github/scripts/fallback-mode-check.py（git 履歴の index.html から片側マーカーを読む）。
+  # しきい値: 1 日だけは notice（生成が 1 日落ちるのは起こりうる）。2 日連続 or 直近 7 日で 3 日以上は warning。
+  # 判定器の**不在は赤**（SLI-5/6 と同じ形。配備し忘れを緑で通さない）。
+  if [ ! -f .github/scripts/fallback-mode-check.py ]; then
+    echo "::error::${TAG}SLI-7 判定器が配備されていない（.github/scripts/fallback-mode-check.py が repo に無い）。フォールバックが常態化しても SLI-1 は緑のままで、生成停止が検知できない。site/.github/scripts/ 一式を配信 repo へ push する。"
+    echo "| 縮退モード | 判定器 **未配備** | 🔴 ゲート不在 |" >> "$GITHUB_STEP_SUMMARY"
+    fail=1
+    return
+  fi
+  fb_out="$(python3 .github/scripts/fallback-mode-check.py 2>/dev/null || echo "BAD runner")"
+  echo "SLI-7 $fb_out"
+  case "$fb_out" in
+    "OK consecutive=0"*)
+      echo "| 縮退モード | 直近の publish はすべて通常生成 | 🟢 |" >> "$GITHUB_STEP_SUMMARY" ;;
+    OK*)
+      # 1 日だけの縮退。鳴らさずに残す（アラート疲れを避ける）が、無音にはしない。
+      echo "::notice::${TAG}SLI-7 直近の publish が ローカル縮退版（${fb_out#OK }）。1 日だけなら想定内。"
+      echo "| 縮退モード | ${fb_out#OK } | 🟡 1 日 |" >> "$GITHUB_STEP_SUMMARY" ;;
+    WARN*)
+      echo "::warning::${TAG}SLI-7 縮退が続いている（${fb_out#WARN }）。claude.ai の生成が繰り返し落ちている＝週次上限の常態化を疑う。SLI-1 は緑に見えるが、届いているのは機械生成の縮退版。"
+      echo "| 縮退モード | ${fb_out#WARN } | 🟡 常態化 |" >> "$GITHUB_STEP_SUMMARY" ;;
+    "BAD no-publish-commits")
+      # publish が 1 件も無いのは SLI-1 の担当。ここで二重に鳴らさない。
+      echo "::notice::${TAG}SLI-7 publish commit が無く判定できない（SLI-1 側で扱う）。"
+      echo "| 縮退モード | publish 無し（SLI-1 参照） | ⚪ |" >> "$GITHUB_STEP_SUMMARY" ;;
+    "BAD runner")
+      echo "::warning::${TAG}SLI-7 判定器は在るが実行できない（python3 不在・クラッシュを疑う）。"
+      echo "| 縮退モード | 判定器 実行不能 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
+    BAD*)
+      echo "::warning::${TAG}SLI-7 判定できない（${fb_out#BAD }）。git 履歴が浅い（fetch-depth）等を疑う。"
+      echo "| 縮退モード | 判定不能（${fb_out#BAD }） | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
+    *)
+      echo "::error::${TAG}SLI-7 判定不能（出力: $fb_out）。判定器と workflow の契約がずれている。"
+      echo "| 縮退モード | 判定不能（$fb_out） | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+      fail=1 ;;
+  esac
+}
+
 case "${1:-all}" in
   sli5) sli5 ;;
   sli6) sli6 ;;
-  all)  sli5; sli6 ;;
+  sli7) sli7 ;;
+  all)  sli5; sli6; sli7 ;;
   *)
     # 契約外の引数＝呼び出し側と本体の版がずれている。黙って何もしないと**ゲートが消える**。
-    echo "::error::sli-extra.sh: 不明な引数 '${1}'（sli5|sli6|all）。workflow と判定本体の契約がずれている。"
+    echo "::error::sli-extra.sh: 不明な引数 '${1}'（sli5|sli6|sli7|all）。workflow と判定本体の契約がずれている。"
     exit 2 ;;
 esac
 exit "$fail"
