@@ -1,9 +1,9 @@
 {
-  "ymd": "2026-09-19",
+  "ymd": "2026-09-20",
   "ok": true,
   "code": 200,
   "degraded": false,
   "enabled": true,
-  "format": "text",
-  "reason": "no-history"
+  "format": "flex",
+  "reason": ""
 }
