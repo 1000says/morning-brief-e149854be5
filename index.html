@@ -1,95 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="brief-sources" content="cal=12;ok=12;ev=11">
-<title>モーニングブリーフ · 9月25日</title>
+<meta name="brief-sources" content="cal=12;ok=12;ev=7">
+<title>モーニングブリーフ · 9月26日</title>
 <style>
-
-:root{--bg:#FCFCFB;--wash:#F9F9F7;--ink:#2E2C27;--ink-soft:#6B6A63;--ink-grey:#B4B3A8;--hairline:#E4E3DC;--line:#E1E1DF;--clay:#C6613F;--clay-h:#AE5133;}
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
-body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-.band-top{background:var(--wash);border-bottom:1px solid var(--line);}
-.band-bottom{background:var(--bg);}
-.wrap{max-width:860px;margin:0 auto;padding:46px 24px;}
-.daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.03em;margin:0 0 10px;}
-.headline{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;font-weight:600;font-size:40px;line-height:1.28;letter-spacing:.005em;margin:0 0 26px;color:var(--ink);}
-.drawing{display:block;width:100%;height:auto;margin:6px 0 20px;}
-.acts{display:flex;gap:0;}
-.act{flex:1;padding:0 20px;border-left:1px solid var(--hairline);}
-.act:first-child{padding-left:0;border-left:none;}
-.act:last-child{padding-right:0;}
-.act-time{font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--ink);margin:0 0 6px;font-variant-numeric:tabular-nums;}
-.act-text{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
-.sec-h{font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--ink);margin:0 0 16px;}
-.lead{font-size:13px;color:var(--ink-soft);margin:0 0 16px;}
-.item{display:flex;gap:14px;margin:0 0 16px;}
-.item .num{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:13px;font-weight:600;padding-top:1px;min-width:20px;}
-.item-main{flex:1;}
-.item-title{font-weight:600;font-size:15px;color:var(--ink);margin:0 0 3px;line-height:1.45;}
-.item-body{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
-.src{text-decoration:underline;text-decoration-color:var(--ink-grey);text-underline-offset:2px;color:var(--ink-soft);}
-.yotei .item{display:block;margin-bottom:13px;}
-.sec{margin:0 0 40px;}
-.arch{border-top:1px solid var(--hairline);padding:12px 0;}
-.arch:last-child{border-bottom:1px solid var(--hairline);}
-.arch summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:4px;}
-.arch summary::-webkit-details-marker{display:none;}
-.a-day{font-size:12px;color:var(--ink-grey);letter-spacing:.03em;}
-.a-head{font-size:14px;color:var(--ink);line-height:1.5;}
-.a-body{padding:12px 0 4px;}
-.a-act{display:flex;gap:12px;margin:0 0 6px;font-size:13px;}
-.a-time{color:var(--ink-soft);font-weight:600;font-variant-numeric:tabular-nums;min-width:104px;flex:none;}
-.a-text{color:var(--ink-soft);}
-.a-const{font-size:12.5px;color:var(--ink-grey);margin:8px 0 4px;}
-.a-sub{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--ink);margin:12px 0 6px;}
-.a-list{margin:0;padding-left:18px;}
-.a-list li{font-size:13px;color:var(--ink-soft);margin:0 0 5px;line-height:1.55;}
+:root{
+  --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63;
+  --ink-grey:#B4B3A8; --hairline:#E4E3DC; --clay:#C6613F;
+  --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
+  --sans:-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.band{width:100%}
+.band-top{background:var(--wash);border-bottom:1px solid var(--hairline)}
+.band-bottom{background:var(--bg)}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px}
+.band-top .wrap{padding-bottom:28px}
+.daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin:0 0 10px}
+.headline{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.35;
+  margin:0 0 26px;color:var(--ink);letter-spacing:.01em}
+.terrain{display:block;margin:0 0 6px}
+.acts{display:flex;gap:0;margin-top:14px}
+.act{flex:1;padding:0 20px;border-left:1px solid var(--hairline)}
+.act:first-child{padding-left:0;border-left:none}
+.act-time{font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--ink);margin-bottom:6px;
+  font-variant-numeric:tabular-nums}
+.act-text{font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+section{margin:0 0 40px}
+h2,.list-head{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.09em;
+  color:var(--ink);margin:0 0 18px}
+.sched .item{padding:10px 0;border-bottom:1px solid var(--hairline)}
+.sched .item:last-child{border-bottom:none}
+.item-title{font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+.item-text{font-size:13.5px;color:var(--ink-soft)}
+.src{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--ink-grey);
+  text-underline-offset:2px}
+.constants{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;padding:8px 0;
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.tomorrow{margin-top:16px;font-size:13.5px;color:var(--ink-soft);padding-top:14px;
+  border-top:1px dashed var(--hairline)}
+.needs .item,.cc .item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--hairline)}
+.needs .item:last-child,.cc .item:last-child{border-bottom:none}
+.num{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:13px;font-weight:600;
+  min-width:22px;padding-top:2px}
+.item-body{flex:1}
+.calm{font-size:13.5px;color:var(--ink-soft)}
+.routine-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--hairline)}
+.arch{border-bottom:1px solid var(--hairline)}
+.arch summary{cursor:pointer;padding:12px 0;list-style:none;display:flex;flex-direction:column;gap:3px}
+.arch summary::-webkit-details-marker{display:none}
+.arch summary::before{content:"▸";color:var(--ink-grey);margin-right:8px;font-size:11px}
+.arch[open] summary::before{content:"▾"}
+.arch-date{font-size:12px;color:var(--ink-soft);letter-spacing:.03em}
+.arch-head{font-size:14px;color:var(--ink);font-weight:600}
+.arch-body{padding:4px 0 16px 18px}
+.a-act{font-size:13px;color:var(--ink-soft);margin:3px 0;display:flex;gap:10px}
+.a-time{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;min-width:110px;flex:none}
+.a-cons{font-size:12.5px;color:var(--ink-soft);margin:8px 0 4px}
+.a-sub{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-soft);margin:12px 0 4px}
+.a-need{font-size:13px;color:var(--ink-soft);margin:4px 0}
+.a-need b{color:var(--ink);font-weight:600}
+.foot-note{font-size:11.5px;color:var(--ink-grey);margin-top:28px}
 @media (max-width:640px){
-  .wrap{padding:34px 16px;}
-  .headline{font-size:30px;}
-  .acts{flex-direction:column;gap:18px;}
-  .act{padding:0;border-left:none;border-top:1px solid var(--hairline);padding-top:14px;}
-  .act:first-child{border-top:none;padding-top:0;}
-  .a-time{min-width:0;}
-  .a-act{flex-direction:column;gap:1px;}
+  .wrap{padding:28px 16px}
+  .headline{font-size:26px;margin-bottom:20px}
+  .acts{flex-direction:column;gap:0}
+  .act{padding:14px 0;border-left:none;border-top:1px solid var(--hairline)}
+  .act:first-child{border-top:none;padding-top:0}
+  .a-act{flex-direction:column;gap:0}
+  .a-time{min-width:0}
 }
 </style>
 </head>
 <body>
-<div class="band-top"><div class="wrap">
-  <div class="daydate">金曜日 · 9月25日 2026</div>
-  <h1 class="headline">午前は会議が続きますが、夕方には家族が集まる一日です、秀平さん。</h1>
-  <svg class="drawing" viewBox="0 0 840 170" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="今日の一日の起伏">
-  <path d="M0,122 L58,114 Q90,112 118,116 Q170,120 210,102 Q262,80 300,72 Q345,66 388,68 Q430,72 470,96 Q505,110 542,104 Q590,96 632,80 Q672,66 704,70 Q742,76 770,88 Q800,98 840,104"
-    fill="none" stroke="#2E2C27" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- 朝の会議クラスタ -->
-  <circle cx="300" cy="72" r="9" fill="#2E2C27"/>
-  <circle cx="344" cy="67" r="8" fill="#2E2C27"/>
-  <circle cx="386" cy="68" r="7" fill="#2E2C27"/>
-  <!-- 14時の短い会議 -->
-  <circle cx="470" cy="96" r="6" fill="#2E2C27"/>
-  <!-- 夕方 家族の集まり -->
-  <circle cx="632" cy="80" r="8" fill="#2E2C27"/>
-  <circle cx="704" cy="70" r="7" fill="#2E2C27"/>
-  <!-- コープ締切 -->
-  <circle cx="770" cy="88" r="6" fill="#2E2C27"/>
-  <!-- 夜明けの陽（clay accent・早朝5時の始まり） -->
-  <g stroke="#C6613F" stroke-width="1.6" stroke-linecap="round" fill="none">
-    <path d="M42,114 a16,16 0 0 1 32,0" fill="#C6613F" fill-opacity="0.13"/>
-    <line x1="58" y1="90" x2="58" y2="98"/>
-    <line x1="38" y1="100" x2="43" y2="104"/>
-    <line x1="78" y1="100" x2="73" y2="104"/>
+<div class="band band-top">
+  <div class="wrap">
+    <div class="daydate">土曜日 · 9月26日 2026</div>
+    <h1 class="headline">お宮参りとお食い初め、家族で囲む昼の一日です、秀平さん。</h1>
+    <svg class="terrain" viewBox="0 0 840 170" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="今日の一日の起伏。昼に家族の行事がひとつ集まり、朝と夕方はひらいている。">
+  <!-- clay sun: open afternoon -->
+  <g stroke="#C6613F" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.9">
+    <circle cx="712" cy="52" r="13"/>
+    <line x1="712" y1="26" x2="712" y2="33"/>
+    <line x1="712" y1="71" x2="712" y2="78"/>
+    <line x1="686" y1="52" x2="693" y2="52"/>
+    <line x1="731" y1="52" x2="738" y2="52"/>
+    <line x1="694" y1="34" x2="699" y2="39"/>
+    <line x1="725" y1="65" x2="730" y2="70"/>
+    <line x1="730" y1="34" x2="725" y2="39"/>
+    <line x1="699" y1="65" x2="694" y2="70"/>
   </g>
-  <!-- 遅い終い（夜21時）の三日月・ink motif -->
-  <path d="M792,40 a13,13 0 1 0 10,22 a10,10 0 1 1 -10,-22 z" fill="none" stroke="#B4B3A8" stroke-width="1.6"/>
+  <!-- terrain stroke -->
+  <path d="M0,128 C 90,124 170,122 260,116 C 340,110 380,92 420,90 C 462,88 505,104 590,116 C 690,128 760,130 840,129"
+        fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- meeting dots on the line (midday cluster) -->
+  <circle cx="405" cy="90.5" r="8" fill="#2E2C27"/>
+  <circle cx="437" cy="91.5" r="9" fill="#2E2C27"/>
 </svg>
-  <div class="acts"><div class="act"><div class="act-time">05:00 – 12:00</div><div class="act-text">早朝は学習と運動の習慣から。9時半以降は会議が三つ続き、正午まで区切りにくい。</div></div><div class="act"><div class="act-time">12:00 – 16:00</div><div class="act-text">短い会議がひとつあるだけで、昼過ぎは開いている。家族の到着を待つ時間。</div></div><div class="act"><div class="act-time">16:00 以降</div><div class="act-text">夕方から人が集まり、日が暮れても動きが続く。明日の集まりに向けた前夜。</div></div></div>
-</div></div>
-<div class="band-bottom"><div class="wrap">
+    <div class="acts">
+    <div class="act">
+      <div class="act-time">05:00 – 12:00</div>
+      <div class="act-text">早朝から昼前までは時刻付きの予定がありません。行事に向けて身支度を整える時間。</div>
+    </div>
+    <div class="act">
+      <div class="act-time">12:00 – 15:00</div>
+      <div class="act-text">12:15にお宮参り、続いて13:00からお食い初め。昼の数時間に家族の行事が集まります。</div>
+    </div>
+    <div class="act">
+      <div class="act-time">15:00 以降</div>
+      <div class="act-text">行事を終えたあとの夕方はひらいています。ゆっくり過ごせる時間。</div>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="band band-bottom">
+  <div class="wrap">
+
 <!-- ══════ タイムラインブロック v4.1(自己完結・このコメントから END まで verbatim で挿入) ══════ -->
 <style>
 /* tlx: timeline block v4.1 — ページ側クラスに依存しない(テンプレートは日々変わるため)。
@@ -225,16 +258,9 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
   <div class="tlx-wrap"><div class="tlx-canvas" id="tlx-canvas"></div></div>
 </section>
 <script type="application/json" id="tlx-data">
-{"date":"2026-09-25","events":[
-  {"s":"09:30","e":"10:30","t":"会議","c":"my予定"},
-  {"s":"10:30","e":"11:00","t":"会議","c":"my予定"},
-  {"s":"11:00","e":"12:00","t":"会議","c":"my予定"},
-  {"s":"11:00","e":"14:30","t":"移動","c":"家族(1)"},
-  {"s":"14:00","e":"14:30","t":"会議","c":"my予定"},
-  {"s":"16:00","e":"17:00","t":"来客（仮）","c":"家族(1)"},
-  {"s":"17:00","e":"17:30","t":"移動","c":"家族(1)"},
-  {"s":"17:30","e":"18:30","t":"通院（仮）","c":"家族(1)"},
-  {"s":"21:00","e":"22:00","t":"コープ注文締切","p":"high","c":"my予定"}
+{"date":"2026-09-26","events":[
+  {"s":"12:15","e":"12:30","t":"お宮参り","p":"high","c":"my予定"},
+  {"s":"13:00","e":"15:00","t":"お食い初め","p":"high","c":"my予定"}
 ],"allday":[]}
 </script>
 <script>
@@ -465,20 +491,155 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
 </script>
 <!-- ══════ END タイムラインブロック ══════ -->
 
-  <section class="sec yotei">
-    <h2 class="sec-h">予定</h2>
-    <div class="lead">常設: なし</div>
-    <div class="item"><div class="item-title">会議</div><div class="item-body">09:30 – 12:00（3件連続） · <span class="src">カレンダー(my予定)</span></div></div><div class="item"><div class="item-title">会議</div><div class="item-body">14:00 – 14:30 · <span class="src">カレンダー(my予定)</span></div></div><div class="item"><div class="item-title">コープ注文締切</div><div class="item-body">21:00 · <span class="src">カレンダー(my予定)</span></div></div><div class="item"><div class="item-title">移動</div><div class="item-body">11:00 – 14:30 · <span class="src">カレンダー(家族(1))</span></div></div><div class="item"><div class="item-title">来客（仮）</div><div class="item-body">16:00 – 17:00 · <span class="src">カレンダー(家族(1))</span></div></div><div class="item"><div class="item-title">移動</div><div class="item-body">17:00 – 17:30 · <span class="src">カレンダー(家族(1))</span></div></div><div class="item"><div class="item-title">通院（仮）</div><div class="item-body">17:30 – 18:30 · <span class="src">カレンダー(家族(1))</span></div></div>
-    <div class="item"><div class="item-title">明日・お宮参り</div><div class="item-body">12:15 · <span class="src">カレンダー(家族(1))</span></div></div><div class="item"><div class="item-title">明日・お食い初め</div><div class="item-body">13:00 – 15:00 · <span class="src">カレンダー(my予定)</span></div></div>
-  </section>
-  <section class="sec">
-    <h2 class="sec-h">注意が要ること</h2>
-    <div class="item"><div class="num">01</div><div class="item-main"><div class="item-title">明日のお宮参りとお食い初めの段取り</div><div class="item-body">明日9月26日はお宮参り（12:15）とお食い初め（13:00 – 15:00）。主催はこちらなので、今日のうちに持ち物と時間の段取りを確認しておく。</div></div></div><div class="item"><div class="num">02</div><div class="item-main"><div class="item-title">コープの注文を今夜21時まで</div><div class="item-body">コープの注文締切が今日21:00。夜の対応に入る前に済ませておく。</div></div></div>
-  </section>
-  <section class="sec">
-    <h2 class="sec-h">これまでのブリーフ</h2>
-    <details class="arch"><summary><span class="a-day">木曜日 · 9月24日 2026</span><span class="a-head">今日はほぼ一日あいています、秀平さん。詰まってくるのは明日からです。</span></summary><div class="a-body"><div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">午前は時刻の決まった予定がなく、静かに立ち上げられる。手をつけたい作業からどうぞ。</span></div><div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">13:30から30分の会議がひとつ、15:00前後に配達の受け取り。あいだはまとまった時間が残る。</span></div><div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">夜は19:05からサッカー日本代表戦。明日は会議が4件あるので、今日のうちに軽く整えておける。</span></div><div class="a-const">常設: なし</div><div class="a-sub">注意が要ること</div><ul class="a-list"><li><b>明日は会議4件と来客が重なる</b> — 明日は午前から会議が4件（9:30〜12:00ごろと14:00）並び、午後には来客も入る。午後の予定はまだ「仮」のままなので、今日のうちに段取りを見ておくと動きが重ならない。</li><li><b>夜に育児記録のモニタリング評価（今日締切）</b> — Todoistの今日締切に、育児記録のモニタリング評価が1件（19:00・優先度高め）。夜の対応に入る前に済ませておける。</li></ul></div></details><details class="arch"><summary><span class="a-day">水曜日 · 9月23日 2026</span><span class="a-head">秋分の日、秀平さん。時刻の決まった予定はなく、一日がまるごとひらいています。</span></summary><div class="a-body"><div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">秋分の日で、朝は時刻付きの予定がない。手をつけたい作業からゆっくり始められる。</span></div><div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">日中もカレンダーは空白。まとまった時間がそのまま残っている。</span></div><div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">夜も静か。明日の会議とコープ配達に向けて軽く準備しておける。</span></div><div class="a-const">常設: なし</div><div class="a-sub">注意が要ること</div><ul class="a-list"><li><b>recipe-cards の Pages デプロイが連続失敗</b> — GitHubの通知で、recipe-cards の main への pages / deploy が5回連続で失敗している。公開サイトが更新されていない可能性があり、ビルドログの確認が要る。</li><li><b>Cooking-RAG の引き継ぎに残作業があるか確認</b> — Todoist の今日締切に、Cooking-RAG の最新の引き継ぎ(2026-09-19)へ残タスクがあるかの確認が1件。着手前に backlog の現況と突き合わせる前提。</li></ul></div></details><details class="arch"><summary><span class="a-day">火曜日 · 9月22日 2026</span><span class="a-head">国民の休日、秀平さん。会議は夕方にひとつだけ、日中はひらいています。</span></summary><div class="a-body"><div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">祝日の朝はカレンダーが空白。ゆっくり立ち上げられる静かな時間。</span></div><div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">日中も予定は入っていない。まとまった時間を自分の作業に使える。</span></div><div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">17:00に短い会議がひとつ。30分で終わり、夜はまた静かに戻る。</span></div><div class="a-const">常設: なし</div><div class="a-sub">注意が要ること</div><ul class="a-list"><li><b>Agent Board の引き継ぎ判定を修正</b> — Todoist の今日締切に、盤面の「最新の引き継ぎ」選びが名前順で古いファイルを拾う不具合の修正が1件（MB-077）。</li></ul></div></details><details class="arch"><summary><span class="a-day">月曜日 · 9月21日 2026</span><span class="a-head">敬老の日で会議はなく、今日締切の確認が1件だけです。</span></summary><div class="a-body"><div class="a-act"><span class="a-time">05:00 – 12:00</span><span class="a-text">敬老の日で予定は入っていない。まず確認を1件片付けたい。</span></div><div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">カレンダーは空き。まとまった時間を自分の作業に使える。</span></div><div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">今日は静か。明日外方の会議に向けて軽く整えておける。</span></div><div class="a-const">常設: なし</div><div class="a-sub">注意が要ること</div><ul class="a-list"><li><b>育児ダッシュボードの実測切替を確認</b> — Todoist の今日締切に、おむつ交換回数の表示が実測へ切り替わったかの確認が1件（T-441 の事後確認）。</li></ul></div></details><details class="arch"><summary><span class="a-day">日曜日 · 9月20日 2026</span><span class="a-head">予定 2 件・終日 0 件・常設 1 件・今日締切 21 件</span></summary><div class="a-body"><div class="a-act"><span class="a-time">04:00 – 06:00</span><span class="a-text">サッカーの試合</span></div><div class="a-act"><span class="a-time">22:00 – 00:00</span><span class="a-text">サッカーの試合</span></div><div class="a-const">常設: なし</div></div></details>
-  </section>
-</div></div>
+    <section class="sched">
+      <h2>予定</h2>
+      <div class="constants">常設: なし</div>
+      <div class="item">
+        <div class="item-title">お宮参り</div>
+        <div class="item-text">12:15に、<span class="src">カレンダー(my予定)</span>。</div>
+      </div>
+      <div class="item">
+        <div class="item-title">お食い初め</div>
+        <div class="item-text">13:00 – 15:00に、<span class="src">カレンダー(my予定)</span>。</div>
+      </div>
+      <div class="tomorrow">明日(9/27)は早朝にEngland対Spainの試合(03:45 – 05:45)。日中の時刻付き予定は今のところ入っていません。 <span class="src">England / Spain</span></div>
+    </section>
+
+    <section class="needs">
+      <div class="list-head">注意が要ること</div>
+      <div class="item">
+        <div class="num">01</div>
+        <div class="item-body">
+          <div class="item-title">お宮参りとお食い初めが今日の昼</div>
+          <div class="item-text">今日12:15にお宮参り、13:00からお食い初め。家族が集まる昼の行事で、午後の作業時間は限られる。 <span class="src">カレンダー(my予定)</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">02</div>
+        <div class="item-body">
+          <div class="item-title">Windows環境の後始末が今日締切</div>
+          <div class="item-text">GitHub・Drive・ローカルの整合をとる後始末(PLAN-DRIVEGIT 段階1の残り)。Mac側は9/23完了済みで、残るはWindows側。優先度2。 <span class="src">Todoist</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">03</div>
+        <div class="item-body">
+          <div class="item-title">体組成チェックが今日締切</div>
+          <div class="item-text">10日ごとのTANITA計測。脂肪と除脂肪の減少比率、体重の週減少ペースを前回と突き合わせる回。優先度2。 <span class="src">Todoist</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">04</div>
+        <div class="item-body">
+          <div class="item-title">筋トレ自動紐付けの経過確認が今日締切</div>
+          <div class="item-text">1週間前に切り替えた自動紐付けの経過を読み取りだけで確認する。差分に問題があれば元のモードへ戻せる。 <span class="src">Todoist</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">05</div>
+        <div class="item-body">
+          <div class="item-title">Todoist-Vaultの計測と件数照合が今日締切</div>
+          <div class="item-text">TV-001aの残り2点。取り込み完了フラグと、24時間後の件数照合を集合差の両方向で取る。 <span class="src">Todoist</span></div>
+        </div>
+      </div>
+      <div class="routine-note">このほか血糖値・筋トレ・duolingo・保湿・猫まわりなど、毎日の日課タスクも同じく今日締切として並んでいる。</div>
+    </section>
+
+    <section>
+      <div class="list-head">片付いたこと</div>
+      <div class="calm">今朝の時点で、新しく片付いた項目はありません。</div>
+    </section>
+
+    <section class="cc">
+      <div class="list-head">Claude Code関連の確認</div>
+      <div class="item">
+        <div class="num">01</div>
+        <div class="item-body">
+          <div class="item-title">Windows・Claudeの新規デバイス通知(9/25)</div>
+          <div class="item-text">9/25にWindowsからのGoogleアカウント新規ログイン(01:37)、Claudeアカウントへの新規パスキー追加(09:26)と信頼済みデバイス追加が2件(09:25)。いずれも進行中のWindows移行(PLAN-DRIVEGIT)と符合するため、心当たりがあれば確認は不要。</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">02</div>
+        <div class="item-body">
+          <div class="item-title">Driveの直近更新は既知のものだけ</div>
+          <div class="item-text">直近24時間に更新されたDriveファイルは、HAE・Todoist-Vault・ジーナ育児ログ・board-mac.html・skills同期など既知のプロジェクトのみ。見慣れない新規ファイル・新規リポジトリ・アカウントのアーカイブ通知は無し。</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="list-head">これまでのブリーフ</div>
+    <details class="arch">
+      <summary><span class="arch-date">金曜日 · 9月25日 2026</span><span class="arch-head">午前は会議が続きますが、夕方には家族が集まる一日です、秀平さん。</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">05:00 – 12:00</span><span class="a-text">早朝は学習と運動の習慣から。9時半以降は会議が三つ続き、正午まで区切りにくい。</span></div>
+          <div class="a-act"><span class="a-time">12:00 – 16:00</span><span class="a-text">短い会議がひとつあるだけで、昼過ぎは開いている。家族の到着を待つ時間。</span></div>
+          <div class="a-act"><span class="a-time">16:00 以降</span><span class="a-text">夕方から人が集まり、日が暮れても動きが続く。明日の集まりに向けた前夜。</span></div>
+          <div class="a-cons">常設: なし</div>
+          <div class="a-sub">注意が要ること</div>
+          <div class="a-need"><b>明日のお宮参りとお食い初めの段取り</b>　明日9月26日はお宮参り（12:15）とお食い初め（13:00 – 15:00）。主催はこちらなので、今日のうちに持ち物と時間の段取りを確認しておく。</div>
+          <div class="a-need"><b>コープの注文を今夜21時まで</b>　コープの注文締切が今日21:00。夜の対応に入る前に済ませておく。</div>
+      </div>
+    </details>
+    <details class="arch">
+      <summary><span class="arch-date">木曜日 · 9月24日 2026</span><span class="arch-head">今日はほぼ一日あいています、秀平さん。詰まってくるのは明日からです。</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">午前は時刻の決まった予定がなく、静かに立ち上げられる。手をつけたい作業からどうぞ。</span></div>
+          <div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">13:30から30分の会議がひとつ、15:00前後に配達の受け取り。あいだはまとまった時間が残る。</span></div>
+          <div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">夜は19:05からサッカー日本代表戦。明日は会議が4件あるので、今日のうちに軽く整えておける。</span></div>
+          <div class="a-cons">常設: なし</div>
+          <div class="a-sub">注意が要ること</div>
+          <div class="a-need"><b>明日は会議4件と来客が重なる</b>　明日は午前から会議が4件（9:30〜12:00ごろと14:00）並び、午後には来客も入る。午後の予定はまだ「仮」のままなので、今日のうちに段取りを見ておくと動きが重ならない。</div>
+          <div class="a-need"><b>夜に育児記録のモニタリング評価（今日締切）</b>　Todoistの今日締切に、育児記録のモニタリング評価が1件（19:00・優先度高め）。夜の対応に入る前に済ませておける。</div>
+      </div>
+    </details>
+    <details class="arch">
+      <summary><span class="arch-date">水曜日 · 9月23日 2026</span><span class="arch-head">秋分の日、秀平さん。時刻の汸まった予定はなく、一日がまるごとひらいています。</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">秋分の日で、朝は時刻付きの予定がない。手をつけたい作業からゆっくり始められる。</span></div>
+          <div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">日中もカレンダーは空白。まとまった時間がそのまま残っている。</span></div>
+          <div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">夜も静か。明日の会議とコープ配達に向けて軽く準備しておける。</span></div>
+          <div class="a-cons">常設: なし</div>
+          <div class="a-sub">注意が要ること</div>
+          <div class="a-need"><b>recipe-cards の Pages デプロイが連続失敗</b>　GitHubの通知で、recipe-cards の main への pages / deploy が5回連続で失敗している。公開サイトが更新されていない可能性があり、ビルドログの確認が要る。</div>
+          <div class="a-need"><b>Cooking-RAG の引き継ぎに残作業があるか確認</b>　Todoist の今日締切に、Cooking-RAG の最新の引き継ぎ(2026-09-19)へ残タスクがあるかの確認が1件。着手前に backlog の現況と突き合わせる前提。</div>
+      </div>
+    </details>
+    <details class="arch">
+      <summary><span class="arch-date">火曜日 · 9月22日 2026</span><span class="arch-head">国民の休日、秀平さん。会議は夕方にひとつだけ、日中はひらいています。</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">5:00 – 12:00</span><span class="a-text">祝日の朝はカレンダーが空白。ゆっくり立ち上げられる静かな時間。</span></div>
+          <div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">日中も予定は入っていない。まとまった時間を自分の作業に使える。</span></div>
+          <div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">17:00に短い会議がひとつ。30分で終わり、夜はまた静かに戻る。</span></div>
+          <div class="a-cons">常設: なし</div>
+          <div class="a-sub">注意が要ること</div>
+          <div class="a-need"><b>Agent Board の引き継ぎ判定を修正</b>　Todoist の今日締切に、盤面の「最新の引き継ぎ」選びが名前順で古いファイルを拾う不具合の修正が1件（MB-077）。</div>
+      </div>
+    </details>
+    <details class="arch">
+      <summary><span class="arch-date">月曜日 · 9月21日 2026</span><span class="arch-head">敬老の日で会議はなく、今日締切の確認が1件だけです。</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">05:00 – 12:00</span><span class="a-text">敬老の日で予定は入っていない。まず確認を1件片付けたい。</span></div>
+          <div class="a-act"><span class="a-time">12:00 – 17:00</span><span class="a-text">カレンダーは空き。まとまった時間を自分の作業に使える。</span></div>
+          <div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">今日は静か。明日外方の会議に向けて軽く整えておける。</span></div>
+          <div class="a-cons">常設: なし</div>
+          <div class="a-sub">注意が要ること</div>
+          <div class="a-need"><b>育児ダッシュボードの実測切替を確認</b>　Todoist の今日締切に、おむつ交換回数の表示が実測へ切り替わったかの確認が1件（T-441 の事後確認）。</div>
+      </div>
+    </details>
+    <details class="arch">
+      <summary><span class="arch-date">日曜日 · 9月20日 2026</span><span class="arch-head">予定 2 件・終日 0 件・常設 1 件・今日締切 21 件</span></summary>
+      <div class="arch-body">
+          <div class="a-act"><span class="a-time">04:00 – 06:00</span><span class="a-text">サッカーの試合</span></div>
+          <div class="a-act"><span class="a-time">22:00 – 00:00</span><span class="a-text">サッカーの試合</span></div>
+          <div class="a-cons">常設: なし</div>
+      </div>
+    </details>
+    </section>
+
+    <div class="foot-note">このページは毎朝上書きで生成されています。公開範囲は noindex。</div>
+  </div>
+</div>
 </body>
 </html>
