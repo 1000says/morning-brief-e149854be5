@@ -19,9 +19,14 @@ permissions:
   pages: write
   id-token: write
 
+# cancel-in-progress: true（D109・2026-10-03）: 2026-09-30 に deploy が environment `github-pages` の
+# `waiting` で 46 時間張り付き、false だと後続が全部詰まって 2 日公開が止まった。environment 待ちには
+# timeout-minutes が効かない（待ちの上限は GitHub 固定の 30 日）ため、上限は「次の push が取り消す」で置く。
+# 毎朝 brief/notify の push があるので張り付きは最長約 24h で自己回復する。配備するのは常に main の最新なので、
+# 途中の配備を取り消しても最終状態は変わらない。
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   privacy-guard:
