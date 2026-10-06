@@ -1,97 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="brief-sources" content="cal=12;ok=12;ev=14">
-<title>モーニングブリーフ · 10月6日</title>
+<meta name="brief-sources" content="cal=12;ok=12;ev=11">
+<title>モーニングブリーフ · 10月7日</title>
 <style>
-:root{color-scheme:light;--bg:#FCFCFB;--wash:#F9F9F7;--ink:#2E2C27;--ink-soft:#6B6A63;--ink-grey:#B4B3A8;--hair:#E4E3DC;--clay:#C6613F;--clay-h:#AE5133;}
+:root{
+  --bg:#FCFCFB; --wash:#F9F9F7;
+  --ink:#2E2C27; --ink-soft:#6B6A63; --ink-grey:#B4B3A8;
+  --hairline:#E4E3DC; --line:#E1E1DF;
+  --clay:#C6613F; --clay-hover:#AE5133;
+  --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+}
 *{box-sizing:border-box}
-html{color-scheme:light}
-body{margin:0;background:var(--bg);color:var(--ink);
- font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
- line-height:1.7;-webkit-font-smoothing:antialiased;}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
 .band{width:100%;}
-.band-top{background:var(--wash);border-bottom:1px solid var(--hair);}
-.wrap{max-width:860px;margin:0 auto;padding:40px 24px;}
-.daydate{font-size:13px;color:var(--ink-soft);letter-spacing:.04em;margin:0 0 10px;}
-h1.head{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
- font-weight:600;font-size:38px;line-height:1.34;
- letter-spacing:.01em;margin:0 0 26px;color:var(--ink);}
-.terrain{display:block;margin:4px 0 10px;overflow:visible;}
-.acts{display:flex;gap:0;margin-top:14px;}
-.act{flex:1;padding:0 22px;}
-.act:first-child{padding-left:0;}
-.act-div{border-left:1px solid var(--hair);}
-.act-time{font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--ink);margin-bottom:6px;
- font-variant-numeric:tabular-nums;}
-.act-text{font-size:13.5px;color:var(--ink-soft);}
-.sect{margin:0 0 34px;}
-.sect:last-child{margin-bottom:8px;}
-h2.sh{font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--ink);margin:0 0 16px;
- text-transform:uppercase;}
-.const{font-size:13.5px;color:var(--ink-soft);padding:3px 0;}
-.const:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
- background:var(--ink-grey);margin:0 10px 2px 0;vertical-align:middle;}
-ul.list{list-style:none;margin:0;padding:0;}
-li.item{display:flex;gap:14px;padding:11px 0;border-top:1px solid var(--hair);}
-li.item:first-child{border-top:none;}
-.num{color:var(--ink-grey);font-size:12px;font-variant-numeric:tabular-nums;padding-top:3px;min-width:16px;}
-.item-body{flex:1;}
-.it-title{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:3px;}
-.it-sent{font-size:13.5px;color:var(--ink-soft);}
-.src{text-decoration:underline;text-decoration-color:var(--ink-grey);text-underline-offset:2px;color:var(--ink-soft);}
-.calm{font-size:13.5px;color:var(--ink-soft);}
-.sched-tom{font-size:13px;color:var(--ink-soft);margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);}
-details.arch{border-top:1px solid var(--hair);}
-details.arch summary{list-style:none;cursor:pointer;padding:12px 0;display:flex;flex-direction:column;gap:3px;}
-details.arch summary::-webkit-details-marker{display:none;}
-.a-date{font-size:11.5px;color:var(--ink-grey);letter-spacing:.03em;}
-.a-head{font-size:13.5px;color:var(--ink-soft);}
-.a-body{padding:2px 0 16px;}
-.a-act{font-size:12.5px;color:var(--ink-soft);padding:2px 0;}
-.a-act b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;margin-right:6px;}
-.a-sub{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin:10px 0 4px;}
-.a-it{font-size:12.5px;color:var(--ink-soft);padding:1px 0;}
+.band-top{background:var(--wash);border-bottom:1px solid var(--line)}
+.inner{max-width:860px;margin:0 auto;padding:40px 24px}
+.band-top .inner{padding-top:48px;padding-bottom:40px}
+
+.daydate{font-size:12.5px;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 14px}
+.headline{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.32;
+  margin:0 0 30px;color:var(--ink);letter-spacing:.01em}
+
+.terrain{width:100%;height:auto;display:block;margin:4px 0 30px;overflow:visible}
+
+.acts{display:flex;gap:0;margin:0}
+.act{flex:1;padding:0 20px;border-left:1px solid var(--hairline)}
+.act:first-child{padding-left:0;border-left:none}
+.act:last-child{padding-right:0}
+.act-time{font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--ink);margin:0 0 7px}
+.act-text{font-size:13.5px;color:var(--ink-soft);margin:0}
+
+h2.sec{font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--ink);margin:40px 0 18px}
+.constants{margin:0 0 6px}
+.constants .ctitle{font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--ink);margin:0 0 12px}
+.constants ul{list-style:none;margin:0;padding:0}
+.constants li{font-size:13.5px;color:var(--ink-soft);padding:3px 0 3px 16px;position:relative}
+.constants li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:1px;background:var(--ink-grey)}
+
+.list-head{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--ink-soft);
+  margin:16px 0 8px;text-transform:none}
+.list-head:first-of-type{margin-top:0}
+.sched{margin:0}
+.sched ul{list-style:none;margin:0 0 4px;padding:0}
+.sched li{font-size:14px;color:var(--ink);padding:3px 0;display:flex;gap:14px}
+.sched li .t{font-variant-numeric:tabular-nums;color:var(--ink-soft);min-width:96px;flex:none}
+.sched .tomo{font-size:13.5px;color:var(--ink-soft);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--hairline)}
+.sched .tomo b{color:var(--ink);font-weight:600}
+
+.items{margin:0}
+.item{padding:14px 0;border-top:1px solid var(--hairline);display:flex;gap:16px}
+.item:first-child{border-top:none}
+.inum{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:13px;flex:none;width:22px;padding-top:2px}
+.ibody{flex:1}
+.ititle{font-size:15px;font-weight:600;color:var(--ink);margin:0 0 4px}
+.itext{font-size:13.5px;color:var(--ink-soft);margin:0}
+.src{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--hairline);text-underline-offset:2px}
+.calm{font-size:14.5px;color:var(--ink-soft);margin:6px 0 0}
+
+.archive{margin-top:40px}
+details{border-top:1px solid var(--hairline);padding:0}
+details>summary{list-style:none;cursor:pointer;padding:14px 0;display:block}
+details>summary::-webkit-details-marker{display:none}
+.sumline{font-size:13px;color:var(--ink-soft)}
+.sumline .d{font-weight:600;color:var(--ink);letter-spacing:.03em;margin-right:10px}
+.adetail{padding:2px 0 16px}
+.adetail .ar{font-size:13px;color:var(--ink-soft);padding:2px 0;display:flex;gap:12px}
+.adetail .ar .t{font-variant-numeric:tabular-nums;min-width:92px;flex:none;color:var(--ink-grey)}
+.adetail .aneed{font-size:13px;color:var(--ink-soft);margin:8px 0 0;padding-left:0}
+.adetail .aneed b{color:var(--ink);font-weight:600}
+
 @media (max-width:640px){
- .wrap{padding:30px 16px;}
- h1.head{font-size:30px;}
- .acts{flex-direction:column;gap:0;}
- .act{padding:14px 0;border-left:none;}
- .act-div{border-top:1px solid var(--hair);}
- .act:first-child{padding-top:0;}
+  .headline{font-size:30px}
+  .acts{flex-direction:column;gap:0}
+  .act{padding:16px 0;border-left:none;border-top:1px solid var(--hairline)}
+  .act:first-child{padding-top:0;border-top:none}
+  .sched li{flex-direction:column;gap:2px}
+  .sched li .t{min-width:0}
 }
 </style>
 </head>
 <body>
-<div class="band band-top"><div class="wrap">
-<div class="daydate">火曜日 · 10月6日 2026</div>
-<h1 class="head">午前から昼過ぎまで予定が続き、夕方からは手が空きます、shuheiさん。</h1>
-<svg class="terrain" viewBox="0 0 840 170" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="きょうの予定の起伏">
-  <path d="M0,116 C40,112 60,104 96,96 C140,86 176,74 206,70 C236,66 262,62 292,60 C322,58 348,60 372,58 C404,55 420,52 436,50 C446,49 452,47 460,47 C492,47 500,66 520,82 C556,108 600,114 648,117 C710,120 770,119 840,118"
-        fill="none" stroke="#2E2C27" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- 待機(弱・grey) -->
-  <circle cx="206" cy="70" r="6" fill="#B4B3A8"/>
-  <!-- 10:00 子育て学級(重要) -->
-  <circle cx="231" cy="67" r="9" fill="#2E2C27"/>
-  <!-- 11:00 会議 -->
-  <circle cx="292" cy="60" r="9" fill="#2E2C27"/>
-  <!-- 13:30 会議 -->
-  <circle cx="436" cy="50" r="9" fill="#2E2C27"/>
-  <!-- 13:30-15:00 会議 と 14:00-15:00 子育て学級 の重なり: 中空の2円 -->
-  <circle cx="455" cy="48" r="8" fill="#FCFCFB" stroke="#2E2C27" stroke-width="1.8"/>
-  <circle cx="470" cy="49" r="8" fill="#FCFCFB" stroke="#2E2C27" stroke-width="1.8"/>
-  <!-- clay アクセント: 重なりの下に緊張の波線(1点のみ) -->
-  <path d="M443,64 q6,-6 12,0 q6,6 12,0 q6,-6 12,0" fill="none" stroke="#C6613F" stroke-width="2" stroke-linecap="round"/>
-  <!-- 夕方の余白モチーフ: 鳥(ゆとり) -->
-  <path d="M676,74 q7,-7 14,0 M692,74 q7,-7 14,0" fill="none" stroke="#2E2C27" stroke-width="1.6" stroke-linecap="round"/>
-</svg>
-<div class="acts"><div class="act"><div class="act-time">07:00 – 11:00</div><div class="act-text">ジムのあと、子育て学級が午前いっぱい続きます。</div></div><div class="act act-div"><div class="act-time">11:00 – 15:00</div><div class="act-text">会議が2枠。14時の子育て学級と後半が重なります。</div></div><div class="act act-div"><div class="act-time">15:00 以降</div><div class="act-text">予定は入っていません。明日の申込開始に向けて使える時間です。</div></div></div>
-</div></div>
-<div class="band"><div class="wrap">
-<section class="sect"><h2 class="sh">常設</h2><div class="const">ジム（07:00 – 09:00）</div><div class="const">日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div></section>
+
+<section class="band band-top">
+  <div class="inner">
+    <p class="daydate">水曜日 · 10月7日 2026</p>
+    <h1 class="headline">朝はジム、昼前と昼過ぎに会議がひとつずつ。合間の時間は自分のために使えます、shuheiさん。</h1>
+
+    <svg class="terrain" viewBox="0 0 840 170" role="img" aria-label="きょうの一日の起伏">
+      <path d="M0,122 C60,120 92,113 132,109 S212,96 262,101 C322,106 362,114 412,109 S502,82 562,92 C622,100 662,117 722,119 S800,121 840,121"
+            fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 早朝のサッカー（任意・二試合が重なる）: 淡いグレーの点 -->
+      <circle cx="52" cy="121" r="5" fill="none" stroke="#B4B3A8" stroke-width="1.5"/>
+      <circle cx="62" cy="120" r="5" fill="none" stroke="#B4B3A8" stroke-width="1.5"/>
+      <!-- ジム（日課）: 淡いグレーの点 -->
+      <circle cx="150" cy="106" r="5" fill="#B4B3A8"/>
+      <!-- 会議10:00 / 会議13:00: 実線の点 -->
+      <circle cx="243" cy="100" r="8.5" fill="#2E2C27"/>
+      <circle cx="430" cy="107" r="8.5" fill="#2E2C27"/>
+      <!-- 移動14:00–16:00 -->
+      <circle cx="520" cy="88" r="6.5" fill="#2E2C27"/>
+      <!-- clay アクセント: ひらいた夕方の陽 -->
+      <g stroke="#C6613F" stroke-width="1.6" fill="none">
+        <circle cx="766" cy="52" r="9" fill="#C6613F" fill-opacity="0.12"/>
+        <line x1="766" y1="34" x2="766" y2="40"/>
+        <line x1="766" y1="64" x2="766" y2="70"/>
+        <line x1="748" y1="52" x2="754" y2="52"/>
+        <line x1="778" y1="52" x2="784" y2="52"/>
+        <line x1="753" y1="39" x2="757" y2="43"/>
+        <line x1="775" y1="61" x2="779" y2="65"/>
+      </g>
+    </svg>
+
+    <div class="acts">
+      <div class="act">
+        <p class="act-time">07:00 – 11:00</p>
+        <p class="act-text">ジムで一日を始めたあと、10時から会議がひとつ入ります。</p>
+      </div>
+      <div class="act">
+        <p class="act-time">13:00 – 16:00</p>
+        <p class="act-text">昼過ぎに会議がひとつ、続けて移動の時間になります。</p>
+      </div>
+      <div class="act">
+        <p class="act-time">16:00 以降</p>
+        <p class="act-text">夕方からは予定が空きます。手をつけたいことに向けられる時間です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner">
+
+    <div class="constants">
+      <p class="ctitle">常設</p>
+      <ul>
+        <li>ジム（07:00 – 09:00）</li>
+        <li>日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</li>
+      </ul>
+    </div>
+
 <!-- ══════ タイムラインブロック v4.1(自己完結・このコメントから END まで verbatim で挿入) ══════ -->
 <style>
 /* tlx: timeline block v4.1 — ページ側クラスに依存しない(テンプレートは日々変わるため)。
@@ -227,7 +281,17 @@ details.arch summary::-webkit-details-marker{display:none;}
   <div class="tlx-wrap"><div class="tlx-canvas" id="tlx-canvas"></div></div>
 </section>
 <script type="application/json" id="tlx-data">
-{"date": "2026-10-06", "events": [{"s": "09:30", "e": "10:00", "t": "子育て学級（支払い待機）", "c": "家族(1)"}, {"s": "10:00", "e": "11:00", "t": "子育て学級（オンライン）", "p": "high", "c": "家族(1)"}, {"s": "11:00", "e": "12:00", "t": "会議", "c": "my予定"}, {"s": "13:30", "e": "15:00", "t": "会議", "c": "my予定"}, {"s": "14:00", "e": "15:00", "t": "子育て学級（オンライン）", "p": "high", "c": "家族(1)"}], "allday": [{"t": "ジム（07:00 – 09:00）", "c": "my予定"}]}
+{"date":"2026-10-07","events":[
+  {"s":"03:45","e":"05:45","t":"サッカーの試合","p":"low","c":"England"},
+  {"s":"03:45","e":"05:45","t":"サッカーの試合","p":"low","c":"Spain"},
+  {"s":"10:00","e":"11:00","t":"会議","p":"high","c":"my予定"},
+  {"s":"13:00","e":"14:00","t":"会議","p":"high","c":"my予定"},
+  {"s":"14:00","e":"16:00","t":"移動","c":"my予定"}
+],"allday":[
+  {"t":"ジム（07:00 – 09:00）","c":"my予定"},
+  {"t":"IPA試験の申込期間（10/24まで）","c":"家族(2)"},
+  {"t":"日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）","c":"my予定"}
+]}
 </script>
 <script>
 (function(){
@@ -456,11 +520,83 @@ details.arch summary::-webkit-details-marker{display:none;}
 })();
 </script>
 <!-- ══════ END タイムラインブロック ══════ -->
-<section class="sect"><h2 class="sh">予定</h2><ul class="list"><li class="item"><span class="num">01</span><div class="item-body"><div class="it-title">子育て学級（支払い待機）</div><div class="it-sent"><span class="src">カレンダー(家族(1))</span>・09:30 – 10:00</div></div></li><li class="item"><span class="num">02</span><div class="item-body"><div class="it-title">子育て学級（オンライン）</div><div class="it-sent"><span class="src">カレンダー(家族(1))</span>・10:00 – 11:00</div></div></li><li class="item"><span class="num">03</span><div class="item-body"><div class="it-title">会議</div><div class="it-sent"><span class="src">カレンダー(my予定)</span>・11:00 – 12:00</div></div></li><li class="item"><span class="num">04</span><div class="item-body"><div class="it-title">会議</div><div class="it-sent"><span class="src">カレンダー(my予定)</span>・13:30 – 15:00</div></div></li><li class="item"><span class="num">05</span><div class="item-body"><div class="it-title">子育て学級（オンライン）</div><div class="it-sent"><span class="src">カレンダー(家族(1))</span>・14:00 – 15:00</div></div></li></ul><div class="sched-tom">明日（10/7）: ジムと会議2枠・10:00 – 11:00／13:00 – 14:00（<span class="src">カレンダー(my予定)</span>）、早朝03:45にサッカー2試合（<span class="src">England</span>・<span class="src">Spain</span>）、IPA試験の申込期間が開始（<span class="src">カレンダー(家族(2))</span>）。</div></section>
-<section class="sect"><h2 class="sh">注意が要ること</h2><ul class="list"><li class="item"><span class="num">01</span><div class="item-body"><div class="it-title">育児記録スコアリングの評価ロジック見直し</div><div class="it-sent"><span class="src">Todoist</span> で今日が期限。ラストミルクの時刻ではなく、授乳量・睡眠量・体重増加から動的に判定するスコアリングへ作り替える検討と実装を、過去スコアの再計算まで進める。</div></div></li><li class="item"><span class="num">02</span><div class="item-body"><div class="it-title">IPA試験の申込が明日から</div><div class="it-sent"><span class="src">カレンダー(家族(2))</span> で、IPA試験の申込期間が明日10/7に始まる（10/24まで）。応用情報・支援士の過去問を毎日解いている流れで、申込の手続きを。</div></div></li><li class="item"><span class="num">03</span><div class="item-body"><div class="it-title">仕事部屋のボタン電池を交換</div><div class="it-sent"><span class="src">Todoist</span> で今日が期限。デバイスの電池残量の通知を受けて登録した、一度きりのタスク。</div></div></li></ul></section>
-<section class="sect"><h2 class="sh">片付いたこと</h2><div class="calm">今朝、片付いたばかりの知らせはありません。</div></section>
-<section class="sect"><h2 class="sh">Claude Code 関連の確認</h2><ul class="list"><li class="item"><span class="num">01</span><div class="item-body"><div class="it-sent"><span class="src">Gmail</span> に、iPhone からの新しいログインを知らせる Google のセキュリティ通知（10/5 夜）。自分の端末なら対応は不要。</div></div></li></ul></section>
-<section class="sect"><h2 class="sh">これまでのブリーフ</h2><details class="arch"><summary><span class="a-date">月曜日 · 10月5日 2026</span><span class="a-head">会議は午後の一時間半だけ。月曜の大半は、あなたの時間です、しゅうへいさん。</span></summary><div class="a-body"><div class="a-act"><b>07:00 – 09:00</b> 朝いちばんはジム。身体を起こすところから一日が始まります。</div><div class="a-act"><b>14:00 – 15:30</b> 午後に会議が二件。14:30から少し重なって、ひと続きの時間になります。</div><div class="a-act"><b>19:30 – 21:30</b> 夜は日本代表戦（対ニュージーランド）。手を離してゆっくり観られます。</div><div class="a-sub">注意が要ること</div><div class="a-it">daznを今日中に解約</div><div class="a-it">Cloud Run ジョブ失敗のログ確認</div><div class="a-it">token_monitor の7日連続判定</div></div></details><details class="arch"><summary><span class="a-date">日曜日 · 10月4日 2026</span><span class="a-head">日曜はほとんど予定が空いています、shuheiさん。気になっていたことに手をつける一日に。</span></summary><div class="a-body"><div class="a-act"><b>01:00 – 09:00</b> 未明から早朝は動きのある時間帯。それを過ぎると、一日はゆるやかに開ける。</div><div class="a-act"><b>09:00 – 17:00</b> 日中に決まった予定はない。溜まっていた確認ごとや片付けに充てられる時間。</div><div class="a-act"><b>17:00 以降</b> 夜は記録と学習で静かに締める。急ぐ用事はない。</div><div class="a-sub">注意が要ること</div><div class="a-it">送付されたファイルを今日中にダウンロード</div><div class="a-it">probePiyologFeed で体重recordとOI-092を確認</div><div class="a-it">GCP請求が予算100%到達の見込み</div><div class="a-it">morning-brief の Staleness watchdog 失敗を確認</div><div class="a-it">dazn を今日中に解約</div><div class="a-sub">片付いたこと</div><div class="a-it">イングランドがアウェイで3-0勝利</div></div></details><details class="arch"><summary><span class="a-date">土曜日 · 10月3日 2026</span><span class="a-head">午後に予定がひとつ、あとはひらいた土曜日です、shuheiさん。</span></summary><div class="a-body"><div class="a-act"><b>07:00 – 09:00</b> 朝はジムで体を動かすところから始まる。</div><div class="a-act"><b>09:00 – 14:00</b> 昼は予定がなく、手をつけたい作業にあてられる時間。</div><div class="a-act"><b>14:00 – 18:00</b> 午後はヒモ家族のオンライン通話が4時間つづく。</div><div class="a-sub">注意が要ること</div><div class="a-it">rag-recipe の gmail-todo ジョブが失敗</div></div></details><details class="arch"><summary><span class="a-date">金曜日 · 10月2日 2026</span><span class="a-head">予定 2 件・終日 1 件・常設 1 件・今日締切 13 件</span></summary><div class="a-body"><div class="a-act"><b>07:00 – 09:00</b> ジム</div><div class="a-act"><b>21:00 – 22:00</b> コープ注文締切</div></div></details><details class="arch"><summary><span class="a-date">木曜日 · 10月1日 2026</span><span class="a-head">会議はひとつだけの静かな一日、秀平さん。午後に用が重なるほかは、時間を自分の作業に向けられる。</span></summary><div class="a-body"><div class="a-act"><b>7:00 – 9:00</b> 朝いちばんはジムから。体を整えてから一日に入る。</div><div class="a-act"><b>13:00 – 16:00</b> 昼過ぎに短い会議がひとつ。15時台は配達の受け取りと通院（仮）が同じ帯に重なる。</div><div class="a-act"><b>19:00 以降</b> 夜はサッカー日本代表の試合。明日は会議が続くので、早めに休むと楽。</div><div class="a-sub">注意が要ること</div><div class="a-it">配達と通院（仮）が15時に重なる</div><div class="a-it">明日は会議が続く一日</div></div></details><details class="arch"><summary><span class="a-date">水曜日 · 9月30日 2026</span><span class="a-head">きょうは昼過ぎに写真撮影で外へ出る一日ですね、秀平さん。</span></summary><div class="a-body"><div class="a-act"><b>07:00 – 09:00</b> 朝いちばんはジムから。戻れば午前は在宅できる時間がとれる。</div><div class="a-act"><b>13:00 – 15:00</b> 昼過ぎから午後にかけて予定が続く。人と会う、きょう唯一の外向きの時間。</div><div class="a-act"><b>16:00 以降</b> 夕方に作業の枠がひとつ。そのあとの夜は、ゆっくりほどけていく。</div><div class="a-sub">注意が要ること</div><div class="a-it">E2Eの定時結果を確認して不具合を今日閉じるか判断</div><div class="a-it">rag-recipeクラスタのCPUスロットリング通知</div><div class="a-it">ジップアップトレーナーを買う</div></div></details><details class="arch"><summary><span class="a-date">火曜日 · 9月27日 2026</span><span class="a-head">今日はほとんど自分の時間です、秀平さん。固定は昼前の短い会議がひとつだけ。</span></summary><div class="a-body"><div class="a-act"><b>05:00 – 11:00</b> 午前で予定表に載る固定は、昼前の短い会議がひとつだけ。あとは自分のリズムで動ける時間。</div><div class="a-act"><b>11:00 – 15:00</b> 昼はまるごと空き。会議も外出もなく、手をつけたいものに向けられる。</div><div class="a-act"><b>15:00 以降</b> 夜まで予定はなし。明日は午後から外出が入るぶん、今日はいったん力を抜ける一日に。</div><div class="a-sub">注意が要ること</div><div class="a-it">E2E の回帯を確認してゲートを閉じるか判断</div><div class="a-it">token_monitor の定時1日目を確認</div></div></details><details class="arch"><summary><span class="a-date">月曜日 · 9月28日 2026</span><span class="a-head">お食い初めの日、秀平さん。仕事の会議は午後の2つだけです。</span></summary><div class="a-body"><div class="a-act"><b>05:00 – 14:30</b> 午後2時半まで会議はなし。出示して、午前は手を付けたい作業に充てられる時間。</div><div class="a-act"><b>14:30 – 17:00</b> 会議が2つ続いて入る。午後は打ち合わせでまとまる。</div><div class="a-act"><b>17:00 以降</b> 夜は19:25から日本代表の試合。お食い初めのお祝い。今日。</div><div class="a-sub">注意が要ること</div><div class="a-it">ジーナ式レビューの確認と保留4件</div><div class="a-it">定時バンドルの結果を3点チェック</div><div class="a-sub">片付いたこと</div><div class="a-it">LINE配信ボタンの実機確認</div></div></details><details class="arch"><summary><span class="a-date">日曜日 · 9月27日 2026</span><span class="a-head">会議のない日曜です、秀平さん。午後に集荷がひとつあるだけで、あとはひらいています。</span></summary><div class="a-body"><div class="a-act"><b>05:00 – 12:00</b> 明け方のサッカーが終われば、昼前まで時刻付きの予定はない。手をつけたい作業からゆっくり始められる。</div><div class="a-act"><b>12:00 – 16:00</b> 14:00 – 16:00に着物の集荷がひとつ。それ以外の昼はまとまった時間が残る。</div><div class="a-act"><b>16:00 以降</b> 夕方から夜に時刻付きの予定はなく、ひらいている。明日は午後に会議が2件と、夜に日本代表戦。</div><div class="a-sub">注意が要ること</div><div class="a-it">育児記録のモニタリング評価が今日締切</div><div class="a-it">週次バックアップの初回自動実行の確認が今日締切</div><div class="a-it">Claude Code関連の確認が複数今日締切</div></div></details><details class="arch"><summary><span class="a-date">土曜日 · 9月26日 2026</span><span class="a-head">お宮参りとお食い初め、家族で囲む昼の一日です、秀平さん。</span></summary><div class="a-body"><div class="a-act"><b>05:00 – 12:00</b> 早朝から昼前までは時刻付きの予定がありません。行事に向けて身支度を整える時間。</div><div class="a-act"><b>12:00 – 15:00</b> 12:15にお宮参り、続いて13:00からお食い初め。昼の数時間に家族の行事が集まります。</div><div class="a-act"><b>15:00 以降</b> 行事を終えたあとの外方はひらいています。ゆっくり過ごせる時間。</div><div class="a-sub">注意が要ること</div><div class="a-it">お宮参りとお食い初めが今日の昼</div><div class="a-it">コープの注文を今夜21時まで</div></div></details></section>
-</div></div>
+
+    <h2 class="sec">予定</h2>
+    <div class="sched">
+      <div class="list-head">my予定</div>
+      <ul>
+        <li><span class="t">10:00 – 11:00</span>会議</li>
+        <li><span class="t">13:00 – 14:00</span>会議</li>
+        <li><span class="t">14:00 – 16:00</span>移動</li>
+      </ul>
+      <div class="list-head">家族(2)</div>
+      <ul>
+        <li><span class="t">終日</span>IPA試験の申込期間（10/24まで）</li>
+      </ul>
+      <div class="list-head">England</div>
+      <ul>
+        <li><span class="t">03:45 – 05:45</span>サッカーの試合</li>
+      </ul>
+      <div class="list-head">Spain</div>
+      <ul>
+        <li><span class="t">03:45 – 05:45</span>サッカーの試合</li>
+      </ul>
+      <p class="tomo"><b>明日</b> — 朝のジムのあと、13:30から会議が続き、15時台は配達の受け取りと重なります。</p>
+    </div>
+
+    <h2 class="sec">注意が要ること</h2>
+    <div class="items">
+      <div class="item">
+        <div class="inum">1</div>
+        <div class="ibody">
+          <p class="ititle">ビズリーチのログインパスワードを設定</p>
+          <p class="itext"><span class="src">Todoistで明日が期限</span>。ビズリーチがGitHubなどでのログイン提供を10/13に終了するため、それまでにパスワードでのログインへ切り替えておく。</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="inum">2</div>
+        <div class="ibody">
+          <p class="ititle">明日の配達受け取りが会議と重なる</p>
+          <p class="itext"><span class="src">明日の予定</span>で、コープ配達が15:00 – 16:00、14:00 – 16:00の会議と重なる。在宅や受け取りの段取りを先に決めておくと当日が楽。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec">片付いたこと</h2>
+    <div class="items">
+      <div class="item">
+        <div class="inum">1</div>
+        <div class="ibody">
+          <p class="ititle">GitHubの権限承認と認証を完了</p>
+          <p class="itext">昨日、GitHub Appの更新された権限の確認・承認と、認証コードの入力をTodoistで完了。</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="inum">2</div>
+        <div class="ibody">
+          <p class="ititle">スニダンの2段階認証を設定</p>
+          <p class="itext">昨日、2段階認証の設定をTodoistで完了。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="archive">
+      <h2 class="sec">これまでのブリーフ</h2>
+      <details><summary><span class="sumline"><span class="d">火曜日 · 10月6日 2026</span>午前から昼過ぎまで予定が続き、夕方からは手が空きます、shuheiさん。</span></summary><div class="adetail"><div class="ar"><span class="t">07:00 – 11:00</span>ジムのあと、子育て学級が午前いっぱい続きます。</div><div class="ar"><span class="t">11:00 – 15:00</span>会議が2枠。14時の子育て学級と後半が重なります。</div><div class="ar"><span class="t">15:00 以降</span>予定は入っていません。明日の申込開始に向けて使える時間です。</div><p class="aneed"><b>育児記録スコアリングの評価ロジック見直し</b> — Todoist で今日が期限。ラストミルクの時刻ではなく、授乳量・睡眠量・体重増加から動的に判定するスコアリングへ作り替える検討と実装を、過去スコアの再計算まで進める。</p><p class="aneed"><b>IPA試験の申込が明日から</b> — IPA試験の申込期間が明日10/7に始まる（10/24まで）。応用情報・支援士の過去問を毎日解いている流れで、申込の手続きを。</p><p class="aneed"><b>仕事部屋のボタン電池を交換</b> — Todoist で今日が期限。デバイスの電池残量の通知を受けて登録した、一度きりのタスク。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">月曜日 · 10月5日 2026</span>会議は午後の一時間半だけ。月曜の大半は、あなたの時間です、しゅうへいさん。</span></summary><div class="adetail"><div class="ar"><span class="t">07:00 – 09:00</span>朝いちばんはジム。身体を起こすところから一日が始まります。</div><div class="ar"><span class="t">14:00 – 15:30</span>午後に会議が二件。14:30から少し重なって、ひと続きの時間になります。</div><div class="ar"><span class="t">19:30 – 21:30</span>夜は日本代表戦（対ニュージーランド）。手を離してゆっくり観られます。</div><p class="aneed"><b>daznを今日中に解約</b> — Todoistで今日が期限。放っておくと自動で更新されるので、今日のうちに解約まで済ませておく。</p><p class="aneed"><b>Cloud Run ジョブ失敗のログ確認</b> — Todoistで今日の期限。失敗アラート自体は解決済みだが、ログの確認と後片付けが残っている。</p><p class="aneed"><b>token_monitor の7日連続判定</b> — Todoistで&lt;3:00に予約。自動実行の結果を見て、7日連続で正常なら積み残しの項目を閉じるか判断する。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">日曜日 · 10月4日 2026</span>日曜はほとんど予定が空いています、shuheiさん。気になっていたことに手をつける一日に。</span></summary><div class="adetail"><div class="ar"><span class="t">01:00 – 09:00</span>未明から早朝は動きのある時間帯。それを過ぎると、一日はゆるやかに開ける。</div><div class="ar"><span class="t">09:00 – 17:00</span>日中に決まった予定はない。溜まっていた確認ごとや片付けに充てられる時間。</div><div class="ar"><span class="t">17:00 以降</span>夜は記録と学習で静かに締める。急ぐ用事はない。</div><p class="aneed"><b>送付されたファイルを今日中にダウンロード</b> — Todoistの今日の締切に、勤務先から送られたファイルの確認がある。有効期間が今日までで、過ぎると取得できなくなる。</p><p class="aneed"><b>probePiyologFeed で体重recordとOI-092を確認</b> — Todoistの今日の締切。土曜に記録した体重がフィードの24時間窓から外れる前に、日曜のうちに実行して結果を記録する。</p><p class="aneed"><b>GCP請求が予算100%到達の見込み</b> — Todoistの今日の締切。Googleの請求アラートが予算の100%到達見込みを知らせている。コストの状況を確認しておく内容。</p><p class="aneed"><b>morning-brief の Staleness watchdog 失敗を確認</b> — Todoistの今日の締切。GitHub Actions の Staleness watchdog が失敗した通知が届いており、原因の確認が要りそう。</p><p class="aneed"><b>dazn を今日中に解約</b> — Todoistの今日が期限。継続課金の解約手続きを今日のうちに済ませておく。</p><p class="aneed"><b>イングランドがアウェイで3-0勝利</b> — 未明のサッカーは、イングランドがアウェイで3-0の快勝。結果は確定している。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">土曜日 · 10月3日 2026</span>午後に予定がひとつ、あとはひらいた土曜日です、shuheiさん。</span></summary><div class="adetail"><div class="ar"><span class="t">07:00 – 09:00</span>朝はジムで体を動かすところから始まる。</div><div class="ar"><span class="t">09:00 – 14:00</span>昼は予定がなく、手をつけたい作業にあてられる時間。</div><div class="ar"><span class="t">14:00 – 18:00</span>午後はヒモ家族のオンライン通話が4時間つづく。</div><p class="aneed"><b>rag-recipe の gmail-todo ジョブが失敗</b> — 今朝2時55分ごろ、rag-recipe プロジェクトの Cloud Run ジョブ「gmail-todo」が失敗したという通知がGmailに届いている。深刻度は付いていないが、Gmail→カレンダー連携にかかわるジョブなので、再実行するか原因を確認しておきたい。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">金曜日 · 10月2日 2026</span>予定 2 件・終日 1 件・常設 1 件・今日締切 13 件</span></summary><div class="adetail"><div class="ar"><span class="t">07:00 – 09:00</span>ジム</div><div class="ar"><span class="t">21:00 – 22:00</span>コープ注文締切</div></div></details>
+      <details><summary><span class="sumline"><span class="d">木曜日 · 10月1日 2026</span>会議はひとつだけの静かな一日、秀平さん。午後に用が重なるほかは、時間を自分の作業に向けられる。</span></summary><div class="adetail"><div class="ar"><span class="t">7:00 – 9:00</span>朝いちばんはジムから。体を整えてから一日に入る。</div><div class="ar"><span class="t">13:00 – 16:00</span>昼過ぎに短い会議がひとつ。15時台は配達の受け取りと通院（仮）が同じ帯に重なる。</div><div class="ar"><span class="t">19:00 以降</span>夜はサッカー日本代表の試合。明日は会議が続くので、早めに休むと楽。</div><p class="aneed"><b>配達と通院（仮）が15時に重なる</b> — 配達の受け取りと通院（仮）が、ともに15:00 – 16:00。在宅が要る用と外出が同じ帯にあるので、時間をずらすか段取りを先に決めておく。</p><p class="aneed"><b>明日は会議が続く一日</b> — 明日は9:30から16:00にかけて会議が5件。今日のうちに資料や返信を片づけておくと当日が軽くなる。夜21:00には宅配の注文締切もある。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">水曜日 · 9月30日 2026</span>きょうは昼過ぎに写真撮影で外へ出る一日ですね、秀平さん。</span></summary><div class="adetail"><div class="ar"><span class="t">07:00 – 09:00</span>朝いちばんはジムから。戻れば午前は在宅できる時間がとれる。</div><div class="ar"><span class="t">13:00 – 15:00</span>昼過ぎから午後にかけて予定が続く。人と会う、きょう唯一の外向きの時間。</div><div class="ar"><span class="t">16:00 以降</span>夕方に作業の枠がひとつ。そのあとの夜は、ゆっくりほどけていく。</div><p class="aneed"><b>E2Eの定時結果を確認して不具合を今日閉じるか判断</b> — Todoistの今日締切で、昼の定時実行の結果しだい。E2Eが通っていれば対応中の不具合票を今日クローズするか決める。</p><p class="aneed"><b>rag-recipeクラスタのCPUスロットリング通知</b> — Gmailで、Qdrantからrag-recipeクラスタがCPUスロットリング中とのアラート。9/29着で、負荷が続くようなら確認を。</p><p class="aneed"><b>ジップアップトレーナーを買う</b> — Todoistの今日締切。買い物の単発タスクが今日期限で1件。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">火曜日 · 9月27日 2026</span>今日はほとんど自分の時間です、秀平さん。固定は昼前の短い会議がひとつだけ。</span></summary><div class="adetail"><div class="ar"><span class="t">05:00 – 11:00</span>午前で予定表に載る固定は、昼前の短い会議がひとつだけ。あとは自分のリズムで動ける時間。</div><div class="ar"><span class="t">11:00 – 15:00</span>昼はまるごと空き。会議も外出もなく、手をつけたいものに向けられる。</div><div class="ar"><span class="t">15:00 以降</span>夜まで予定はなし。明日は午後から外出が入るぶん、今日はいったん力を抜ける一日に。</div><p class="aneed"><b>E2E の回帯を確認してゲートを閉じるか判断</b> — Todoist の今日締切。昼の定時で E2E の対象ケースが、絰わりの見よくよくまでのゲートを閈す。</p><p class="aneed"><b>token_monitor の定時1日目を確認</b> — Todoist の今日締切。入れ替えたばかりの利用量モニターが、昼の定時で正常に終了（rc 0）したかを確かめる。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">月曜日 · 9月28日 2026</span>お食い初めの日、秀平さん。仕事の会議は午後の2つだけです。</span></summary><div class="adetail"><div class="ar"><span class="t">05:00 – 14:30</span>午後2時半まで会議はなし。出示して、午前は手を付けたい作業に充てられる時間。</div><div class="ar"><span class="t">14:30 – 17:00</span>会議が2つ続いて入る。午後は打ち合わせでまとまる。</div><div class="ar"><span class="t">17:00 以降</span>夜は19:25から日本代表の試合。お食い初めのお祝い。今日。</div><p class="aneed"><b>ジーナ式レビューの確認と保留4件</b> — Todoist で今日締切。T-442 の後の確認と、保留の4件を Claude と進める。</p><p class="aneed"><b>定時バンドルの結果を3点チェック</b> — Todoist で今日13時締切。12時の定時実行の記録で、E2E の所要と失敗、git bundle の鮮度、cc_usage の扱いを確かめる。</p><p class="aneed"><b>LINE配信ボタンの実機確認</b> — Todoist で今日の朝、Safari と Chrome でボタンが開くかの実機確認を済ませた。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">日曜日 · 9月27日 2026</span>会議のない日曜です、秀平さん。午後に集荷がひとつあるだけで、あとはひらいています。</span></summary><div class="adetail"><div class="ar"><span class="t">05:00 – 12:00</span>明け方のサッカーが終われば、昼前まで時刻付きの予定はない。手をつけたい作業からゆっくり始められる。</div><div class="ar"><span class="t">12:00 – 16:00</span>14:00 – 16:00に着物の集荷がひとつ。それ以外の昼はまとまった時間が残る。</div><div class="ar"><span class="t">16:00 以降</span>夕方から夜に時刻付きの予定はなく、ひらいている。明日は午後に会議が2件と、夜に日本代表戦。</div><p class="aneed"><b>育児記録のモニタリング評価が今日締切</b> — Todoistの今日締切に、育児記録のモニタリング評価が1件（19:00・優先度高め）。夜の対応に入る前に済ませておける。</p><p class="aneed"><b>週次バックアップの初回自動実行の確認が今日締切</b> — DRIVEGITの週次bundleバックアップが今日9:00に初めて自動発火する予定。走ったかどうかを今日のうちに読み取りで確認する。優先度3。</p><p class="aneed"><b>Claude Code関連の確認が複数今日締切</b> — MB-077とMB-074の再判定、Cooking-RAGの週次ジョブ、HAEの紐付け確認など、読み取り中心の確認タスクが今日締切に並ぶ。</p></div></details>
+      <details><summary><span class="sumline"><span class="d">土曜日 · 9月26日 2026</span>お宮参りとお食い初め、家族で囲む昼の一日です、秀平さん。</span></summary><div class="adetail"><div class="ar"><span class="t">05:00 – 12:00</span>早朝から昼前までは時刻付きの予定がありません。行事に向けて身支度を整える時間。</div><div class="ar"><span class="t">12:00 – 15:00</span>12:15にお宮参り、続いて13:00からお食い初め。昼の数時間に家族の行事が集まります。</div><div class="ar"><span class="t">15:00 以降</span>行事を終えたあとの外方はひらいています。ゆっくり過ごせる時間。</div><p class="aneed"><b>お宮参りとお食い初めが今日の昼</b> — 今日12:15にお宮参り、13:00からお食い初め。家族が集まる昼の行事で、午後の作業時間は限られる。</p><p class="aneed"><b>コープの注文を今夜21時まで</b> — コープの溩文締切が今日21:00。夜の対応に入る前に済ませておく。</p></div></details>
+    </div>
+
+  </div>
+</section>
+
 </body>
 </html>
