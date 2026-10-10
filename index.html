@@ -3,523 +3,172 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta name="brief-sources" content="cal=12;ok=12;ev=4">
-<title>モーニングブリーフ</title>
+<meta name="brief-mode" content="grok">
+<meta name="color-scheme" content="light dark">
+<title>モーニングブリーフ 2026-10-10</title>
 <style>
-:root{
-  --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --ink-soft:#6B6A63; --ink-grey:#B4B3A8;
-  --hairline:#E4E3DC; --line:#E1E1DF; --clay:#C6613F; --clay-h:#AE5133;
-  --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Noto Serif CJK JP",Georgia,serif;
-  --sans:-apple-system,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;
+:root{ color-scheme:light dark;
+  --bg:#F6F5F1; --card:#FFFFFF; --ink:#22211D; --soft:#5F5D55; --mute:#6B685F; --grid:#D8D5CB;
+  --line:#E3E1D9; --fine:#EFEDE7; --brand:#2F6B4F; --brand-soft:#E7F1EA;
+  --me:#2F5E8C; --me-bg:#E6EEF7; --yu:#A0446A; --yu-bg:#F7E8EE; --both:#6B5A1E; --both-bg:#F5EFD9;
+  --warn:#9A3B2E; --h:44px;
+  --num:"SF Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#151513; --card:#1F1F1C; --ink:#ECEAE3; --soft:#B5B2A7; --mute:#8E8B81;
+    --line:#34332E; --fine:#2A2925; --grid:#3F3E38; --brand:#7CC49C; --brand-soft:#1E2C24;
+    --me:#8DB8E6; --me-bg:#1C2A3A; --yu:#E79AB9; --yu-bg:#3A1F2B; --both:#E0C36A; --both-bg:#332B12;
+    --warn:#F08A7A;
+  }
 }
 *{box-sizing:border-box}
-html{color-scheme:light}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
-.band{width:100%}
-.band-top{background:var(--wash);border-bottom:1px solid var(--line)}
-.inner{max-width:860px;margin:0 auto;padding:40px 28px}
-.daydate{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);margin:0 0 10px}
-.headline{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.3;
-  margin:0 0 30px;color:var(--ink);letter-spacing:.01em}
-.terrain{width:100%;height:auto;display:block;margin:0 0 26px}
-.acts{display:flex;gap:0}
-.act{flex:1;padding:0 18px;border-left:1px solid var(--hairline)}
-.act:first-child{padding-left:0;border-left:none}
-.act-time{font-weight:700;font-size:13px;letter-spacing:.03em;color:var(--ink);margin:0 0 6px}
-.act-text{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
-h2.sec{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.09em;
-  color:var(--ink);margin:0 0 18px;text-transform:none}
-.const{margin:0 0 40px}
-.const ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.const li{font-size:12.5px;color:var(--ink-soft);border:1px solid var(--hairline);
-  border-radius:4px;padding:3px 10px;background:var(--wash)}
-/* 予定 */
-.plans{margin:0 0 40px}
-.pl-item{display:flex;gap:12px;padding:0 0 16px}
-.pl-num{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:12px;font-weight:600;min-width:20px;padding-top:2px}
-.pl-title{font-weight:600;font-size:14.5px;color:var(--ink);margin:0 0 2px}
-.pl-sent{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
-.src{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--ink-grey);text-underline-offset:2px}
-/* lists */
-.lst{margin:0 0 40px}
-.item{display:flex;gap:12px;padding:0 0 18px}
-.num{font-variant-numeric:tabular-nums;color:var(--ink-grey);font-size:12px;font-weight:600;min-width:20px;padding-top:2px}
-.item-title{font-weight:600;font-size:14.5px;color:var(--ink);margin:0 0 3px;line-height:1.45}
-.item-sent{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
-.calm{font-size:14px;color:var(--ink-soft)}
-/* archive */
-.arch{border-top:1px solid var(--hairline);padding:14px 0}
-.arch summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:3px}
-.arch summary::-webkit-details-marker{display:none}
-.arch-date{font-size:12px;color:var(--ink-grey);letter-spacing:.03em}
-.arch-head{font-size:14px;color:var(--ink);font-weight:600;line-height:1.5}
-.arch-body{padding:14px 0 4px}
-.a-const{font-size:12.5px;color:var(--ink-soft);margin:0 0 10px}
-.a-acts{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
-.a-act{display:flex;gap:10px;font-size:13px}
-.a-time{font-variant-numeric:tabular-nums;color:var(--ink-soft);min-width:96px;font-weight:600}
-.a-text{color:var(--ink-soft)}
-.a-sub{font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--ink);margin:10px 0 6px}
-.a-li{font-size:13px;color:var(--ink-soft);line-height:1.65;margin:0 0 5px}
-.a-li b{color:var(--ink);font-weight:600}
-@media (max-width:640px){
-  .inner{padding:30px 16px}
-  .headline{font-size:30px}
-  .acts{flex-direction:column;gap:0}
-  .act{border-left:none;border-top:1px solid var(--hairline);padding:14px 0}
-  .act:first-child{padding-top:0;border-top:none}
-  .a-time{min-width:80px}
-}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Segoe UI",sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:720px;margin:0 auto;padding:28px 16px 56px}
+header{margin:0 0 20px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--brand);margin:0}
+h1{font-size:26px;line-height:1.3;margin:4px 0 0;letter-spacing:-.01em}
+h1 small{font-size:15px;font-weight:600;color:var(--soft);margin-left:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;margin:0 0 16px}
+h2{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--soft);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+h2 .count{font-family:var(--num);font-size:11px;font-weight:600;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:0 8px}
+.focus{background:var(--brand-soft);border-color:transparent}
+.focus h2{color:var(--brand)}
+.focus ol{margin:0;padding-left:1.3em;font-size:16px;font-weight:600}
+.focus li{margin:0 0 4px}
+/* スケジュールビュー（2 レーン） */
+.lanes-head{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;margin:0 0 8px}
+.lane-name{font-size:12px;font-weight:700;text-align:center;border-radius:6px;padding:3px 0}
+.lane-name.me{color:var(--me);background:var(--me-bg)}
+.lane-name.yu{color:var(--yu);background:var(--yu-bg)}
+.allday{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;margin:0 0 10px}
+.allday .lbl{font-size:10.5px;color:var(--mute);text-align:right;padding-top:4px}
+.allday .cell{display:flex;flex-direction:column;gap:4px}
+.chip{font-size:12px;border-radius:6px;padding:3px 8px;border:1px solid var(--line)}
+.chip.me{border-left:3px solid var(--me)} .chip.yu{border-left:3px solid var(--yu)} .chip.both{background:var(--both-bg)}
+.grid{position:relative;display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;
+  /* 表示範囲は 6:00〜23:00 */ height:calc(17 * var(--h))}
+.hours{position:relative}
+.hours span{position:absolute;right:4px;font-family:var(--num);font-size:11px;color:var(--mute);
+  transform:translateY(-50%);top:calc((var(--t) - 6) * var(--h))}
+.lane{position:relative;overflow:hidden;border-left:1px solid var(--line);
+  background:repeating-linear-gradient(to bottom,var(--grid) 0 1px,transparent 1px var(--h))}
+.ev{position:absolute;left:calc(3px + var(--c,0) * 100% / var(--n,1));width:calc(100% / var(--n,1) - 6px);top:calc((var(--s) - 6) * var(--h) + 1px);
+  height:calc((var(--e) - var(--s)) * var(--h) - 2px);min-height:20px;overflow:hidden;
+  border-radius:6px;padding:3px 7px;font-size:12px;line-height:1.35;z-index:1}
+.ev b{font-family:var(--num);font-size:11px;font-weight:600;opacity:.85;margin-right:5px}
+.ev.long b{display:block;margin:0}
+.ev .nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.ev.short{padding:1px 6px;line-height:1.3;white-space:nowrap;text-overflow:ellipsis}
+.ev.short .nm{display:inline}
+.ev.both b::before,.chip.both::before{content:"共 ";font-weight:700}
+.lane.me .ev{background:var(--me-bg);color:var(--ink);border-left:3px solid var(--me)}
+.lane.yu .ev{background:var(--yu-bg);color:var(--ink);border-left:3px solid var(--yu)}
+.ev.both{background:var(--both-bg) !important;border-left-color:var(--both) !important}
+.empty{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:12px;color:var(--mute)}
+.legend{font-size:11px;color:var(--mute);margin:10px 0 0}
+/* リスト */
+ul.list{list-style:none;margin:0;padding:0}
+ul.list li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--fine);font-size:14.5px}
+ul.list li:first-child{border-top:0;padding-top:0}
+.tag{flex:none;font-size:11px;font-weight:700;border-radius:4px;padding:1px 7px;background:var(--fine);color:var(--soft)}
+.tag.due{background:var(--brand-soft);color:var(--brand)}
+.tag.over{color:var(--warn);background:transparent;border:1px solid var(--warn)}
+.sub{color:var(--mute);font-size:12.5px}
+.none{color:var(--mute);font-size:14px;margin:0}
+.tomorrow li .who{flex:none;font-size:11px;font-weight:700}
+.who.me{color:var(--me)} .who.yu{color:var(--yu)}
+footer{font-size:11px;color:var(--mute);text-align:center;margin-top:24px}
+@media (max-width:420px){ :root{--h:40px} h1{font-size:23px}
+  .lanes-head,.allday,.grid{grid-template-columns:38px 1fr 1fr;gap:4px}
+  .ev{padding:3px 5px;border-left-width:2px !important} }
 </style>
 </head>
 <body>
-<div class="band band-top"><div class="inner">
-<div class="daydate">土曜日 · 10月10日 2026</div>
-<h1 class="headline">午前にひとつ用事を済ませれば、あとは一日が開けています、shuheiさん。</h1>
-<svg class="terrain" viewBox="0 0 840 170" role="img" aria-label="きょうの地形">
-<path d="M0,134 C70,134 104,106 140,106 C180,106 210,132 270,132 C340,132 372,108 420,108 C520,108 540,130 620,130 C700,130 764,132 840,132"
- fill="none" stroke="#2E2C27" stroke-width="2" stroke-linecap="round"/>
-<circle cx="140" cy="106" r="7" fill="#2E2C27"/>
-<circle cx="420" cy="108" r="8" fill="#2E2C27"/>
-<g stroke="#C6613F" stroke-width="1.6" stroke-linecap="round" fill="none">
- <circle cx="700" cy="54" r="12"/>
- <line x1="700" y1="30" x2="700" y2="37"/>
- <line x1="700" y1="71" x2="700" y2="78"/>
- <line x1="676" y1="54" x2="683" y2="54"/>
- <line x1="717" y1="54" x2="724" y2="54"/>
- <line x1="683" y1="37" x2="688" y2="42"/>
- <line x1="712" y1="42" x2="717" y2="37"/>
-</g>
-</svg>
-<div class="acts">
-<div class="act"><div class="act-time">07:00 – 09:00</div><div class="act-text">朝いちばんはジム。静かな土曜の始まり。</div></div>
-<div class="act"><div class="act-time">10:30 – 11:30</div><div class="act-text">午前なかばに予防接種の予定がひとつ。外出はこのくらい。</div></div>
-<div class="act"><div class="act-time">11:30 以降</div><div class="act-text">午後はまるごと空いています。手をつけたい作業に向けられる時間。</div></div>
+<div class="page">
+
+<header>
+<p class="kicker">MORNING BRIEF</p>
+<!-- ▼置換: 日付 -->
+<h1>10月10日<small>土曜日</small></h1>
+<!-- ▲置換 -->
+</header>
+
+<section class="card focus">
+<h2>今日いちばん大事なこと</h2>
+<!-- ▼置換: 1〜3 項目 -->
+<ol>
+<li>保育園申請書類を仕上げる</li>
+<li>IPA試験申込（10/24まで）を確認する</li>
+<li>杏の体重測定（15:00）</li>
+</ol>
+<!-- ▲置換 -->
+</section>
+
+<section class="card">
+<h2>今日のスケジュール</h2>
+<div class="lanes-head"><span></span><span class="lane-name me">自分</span><span class="lane-name yu">Yuri</span></div>
+<div class="allday">
+<span class="lbl">終日</span>
+<!-- ▼置換: 終日の予定（無ければ div の中を空にする） -->
+<div class="cell"></div>
+<div class="cell"></div>
+<!-- ▲置換 -->
 </div>
-</div></div>
-
-<div class="band"><div class="inner">
-
-<section class="const">
-<h2 class="sec">常設</h2>
-<ul><li>ジム（07:00 – 09:00）</li></ul>
+<div class="grid">
+<div class="hours">
+<span style="--t:6">6:00</span><span style="--t:8">8:00</span><span style="--t:10">10:00</span><span style="--t:12">12:00</span><span style="--t:14">14:00</span><span style="--t:16">16:00</span><span style="--t:18">18:00</span><span style="--t:20">20:00</span><span style="--t:22">22:00</span>
+</div>
+<!-- ▼置換: 自分のレーン -->
+<div class="lane me">
+<div class="ev long" style="--s:7;--e:9"><b>07:00–09:00</b><span class="nm">ジム</span></div>
+</div>
+<!-- ▲置換 -->
+<!-- ▼置換: Yuri のレーン -->
+<div class="lane yu">
+<div class="ev long" style="--s:10.5;--e:11.5"><b>10:30–11:30</b><span class="nm">インフルワクチン</span></div>
+</div>
+<!-- ▲置換 -->
+</div>
+<p class="legend">「共」＝2 人に関わる予定（ファミリー）</p>
 </section>
 
-<!-- ══════ タイムラインブロック v4.1(自己完結・このコメントから END まで verbatim で挿入) ══════ -->
-<style>
-/* tlx: timeline block v4.1 — ページ側クラスに依存しない(テンプレートは日々変わるため)。
-   見出し・セクション間隔はページの h2 / section に合わせてある(13px/600/.09em・margin 40px)。
-   色は **すべて .tlx スコープの CSS 変数** を経由する(規則の中に色を直書きしない)。
-   ダークは末尾の 1 ブロックで **変数だけを差し替える**=セレクタを再記述しないので、
-   片方のテーマだけ直して他方が置き去りになる事故が起きない(旧 v3.1 の失敗様式)。
-   ただし発火は **ホストの opt-in 属性**(`data-tlx-theme="dark"`)だけ=`prefers-color-scheme` は使わない。
-   実ホスト(Cowork のブリーフ)は dark 未対応(メディアクエリ 0 件・実測)のため、
-   OS がダークだとブロックだけが反転して cream 地に黒箱が乗る(見出し 1.16:1・実測)。
-   既定は常にライト=ホストと必ず一致する。
-   ブランド色は LINE カードと同じ morning green(製品として 1 色に揃える・decisions D55)。
-   v4.1(MB-036): 予定の **帰属カレンダー** をキー `c` で受け取り、題名の後ろへ二次トーンで
-   添える(`.tlx-cal`)。読者が朝いちばんに知りたいのは「何が・いつ」で、「誰の予定か」は二次情報=
-   タイトルと同じ強さで並べない(色は増やさず既存トークンの範囲)。`c` が無くても描画は v4.0 と
-   完全に同じ(後方互換=旧データ・過去日の再描画が壊れない)。ただし **仕様上は全イベントに `c` を
-   書く**(`my予定` 由来も `"c":"my予定"` と明示する・v3.6.0/decisions D62)=省略に意味を持たせない。
-   「省略=my予定」という旧規則は撤回した(無ラベルが「自分の予定」なのか「書き忘れ」なのか、
-   読者にも検査にも区別できないため)。
-   uiux 是正(2026-08-25・未配備のため版は据え置き): 1チップの区切り罫を --tlx-mute へ(非テキスト 3:1)
-   2レーン幅フック .tlx-nocal を追加(狭レーンでの字切れ) 3.tlx-cal の効かない縮み宣言を削除
-   4sr-only の読み上げ順を「題名 →(重要)→(帰属)」へ。 */
-.tlx{
-  --tlx-ink:#2E2C27; --tlx-soft:#6B6A63; --tlx-mute:#86847B; --tlx-dim:#57564F;
-  --tlx-warn:#9A3B2E; --tlx-line:#E4E3DC; --tlx-line-fine:#EFEEE8;
-  --tlx-card:#FFFFFF; --tlx-card-past:#F4F4F1; --tlx-chip:#F9F9F7;
-  --tlx-brand:#3E7B4C; --tlx-brand-soft:#EEF5EA; --tlx-on-brand:#FFFFFF;
-  --tlx-num:"SF Mono","Cascadia Mono","Consolas",ui-monospace,monospace;
-  margin:0 0 40px}
-.tlx-h{font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.09em;color:var(--tlx-ink);margin:0 0 18px;
-  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.tlx-date{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--tlx-soft)}
-.tlx-warn{font-size:12.5px;color:var(--tlx-warn);margin:-8px 0 14px}
-.tlx-allday{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-.tlx-allday:empty{display:none}
-.tlx-chip{font-size:12.5px;line-height:1.5;color:var(--tlx-soft);border:1px solid var(--tlx-line);border-radius:4px;
-  padding:3px 10px;background:var(--tlx-chip)}
-.tlx-chip b{font-weight:600;color:var(--tlx-soft);margin-right:7px;font-size:11.5px;letter-spacing:.04em}
-.tlx-wrap{position:relative}
-.tlx-canvas{position:relative;margin-left:52px;border-left:1px solid var(--tlx-line)}
-.tlx-hour{position:absolute;left:0;right:0;border-top:1px solid var(--tlx-line-fine);pointer-events:none}
-.tlx-hour.tlx-major{border-top-color:var(--tlx-line)}
-/* 時刻ルーラー(v4.0 のシグネチャ): 左の時刻列を「目盛のある定規」にする。
-   数字は等幅 tabular で桁を揃え、major(3 時間ごと)だけ軸へ届く短い tick を出す。
-   DOM は v3.1 のまま(.tlx-hour / .tlx-hlabel)=JS を変えずに見た目だけを起こす。 */
-.tlx-hlabel{position:absolute;left:-52px;width:44px;text-align:right;top:-0.65em;
-  font-family:var(--tlx-num);font-size:11px;color:var(--tlx-soft);font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.tlx-hour.tlx-major .tlx-hlabel::after{content:"";position:absolute;right:-9px;top:.65em;width:7px;
-  border-top:1px solid var(--tlx-line)}
-.tlx-gap{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:flex-start;
-  pointer-events:none}
-.tlx-gap span{font-size:11px;color:var(--tlx-soft);letter-spacing:.04em;padding-left:4px}
-.tlx-gap::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--tlx-line-fine)}
-.tlx-ev{position:absolute;border-radius:6px;background:var(--tlx-card);border:1px solid var(--tlx-line);
-  border-left:3px solid var(--tlx-ink);padding:5px 9px 5px 10px;overflow:hidden;min-height:26px}
-.tlx-ev .tlx-time{display:block;font-family:var(--tlx-num);font-size:11px;font-weight:700;color:var(--tlx-soft);
-  font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1.4}
-.tlx-ev .tlx-title{font-size:12.5px;font-weight:600;color:var(--tlx-ink);line-height:1.45;
-  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.tlx-ev.tlx-compact{display:flex;align-items:center;gap:8px;padding-top:2px;padding-bottom:2px}
-.tlx-ev.tlx-compact .tlx-time{flex:none}
-.tlx-ev.tlx-compact .tlx-title{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block;min-width:0}
-/* 狭いレーンでは時刻を視覚的にだけ隠す(支援技術には残す・位置で時刻が読めるのは晴眼者だけのため) */
-.tlx-ev.tlx-tiny .tlx-time{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.tlx-ev.tlx-narrow{padding:3px 5px 3px 6px}
-.tlx-ev.tlx-narrow .tlx-title{font-size:11.5px;line-height:1.35;-webkit-line-clamp:3;letter-spacing:-.01em}
-.tlx-ev.tlx-narrow .tlx-time{font-size:10px}
-/* 帰属カレンダー(v4.1・MB-036 / uiux 是正 2026-08-25): 二次情報なので **時刻と同じ二次トーン**
-   (--tlx-soft)・11px(.tlx-time / .tlx-hlabel と同値=級数の刻みを増やさない)でタイトルの後ろに置く。
-   **狭いときはラベルは「縮む」のではなく「消える」**: inline の span では min-width / overflow /
-   text-overflow は効かない(computed display:inline・scrollWidth=0 を実測)=書いても偽の安心にしかならず、
-   宣言ごと外した。切れるくらいなら消す(消えても sr-only と title 属性に残る)。
-   消す条件は 3 つ: .tlx-narrow(canvas 幅 < 340px=モバイル条件)/.tlx-tiny(compact かつレーン幅 < 130px)
-   /**.tlx-nocal(レーン幅 < 200px・uiux 是正で追加)**。narrow は canvas 幅・tiny は compact バー限定なので、
-   canvas 340–480px × 3 レーンの帯(バー 144–166px)はどちらにも掛からず、60 分バーで題名が 2 行になって
-   ラベルがバー下端を +1.5px 超えて半分に切れていた(canvas 422px/バー 152px・実測)。
-   チップ側は本文自体が --tlx-soft で同色同トーン=従属関係が出ないため、色ではなく **細い区切り罫**
-   で分節する。1px の罫は **非テキスト=WCAG 1.4.11 の 3:1** が基準(4.5 ではない)なので --tlx-mute を使う
-   (chip 地に対し light 3.56 / dark 5.21・実測)。--tlx-line は 1.22 / 1.24 で 3:1 に届かず、罫が見えない。 */
-.tlx-cal{font-size:11px;color:var(--tlx-soft);margin-left:6px;white-space:nowrap;font-weight:500}
-.tlx-ev.tlx-compact .tlx-cal{margin-left:5px}
-.tlx-ev.tlx-narrow .tlx-cal,.tlx-ev.tlx-tiny .tlx-cal{display:none}
-.tlx-ev.tlx-nocal .tlx-cal{display:none}
-.tlx-ev.tlx-past .tlx-cal{color:var(--tlx-dim)}
-.tlx-chip .tlx-cal{margin-left:6px;padding-left:6px;border-left:1px solid var(--tlx-mute)}
-/* 「重要」と「進行中」は色を増やさず **形** で分ける(どちらもブランド色):
-   重要(hi)=太い左罫 4px + ◆ / 進行中(live)=基底の左罫 3px + 現在時刻ラインの丸。
-   live は幅を宣言しない=重要かつ進行中のとき 4px(重要さ)が残る。 */
-.tlx-ev.tlx-hi{background:var(--tlx-brand-soft);border-left-width:4px;border-left-color:var(--tlx-brand)}
-.tlx-pri{color:var(--tlx-brand);font-size:10px}
-.tlx-ev.tlx-past .tlx-pri{color:var(--tlx-soft)}
-/* narrow でも ◆ は消さない(重要さは色を増やさず形で伝える=◆ が消えると hi は
-   「太い左罫」だけになり、past で罫が mute へ落ちる回で手掛かりが 0 になる)。 */
-.tlx-ev.tlx-narrow .tlx-pri{font-size:9px}
-.tlx-ev.tlx-lo{border-left-style:dashed;border-left-color:var(--tlx-mute)}
-.tlx-ev.tlx-lo .tlx-title{color:var(--tlx-dim);font-weight:500}
-.tlx-ev.tlx-past .tlx-title{font-weight:600}
-.tlx-ev.tlx-lo.tlx-past .tlx-title{font-weight:500}
-.tlx-chip-hi{border-left:4px solid var(--tlx-brand);padding-left:9px}
-/* past は **色だけ**を減衰させる(border-left-width を書かない)=重要かつ過去のとき
-   .tlx-hi の 4px が残り、「重要だった」ことが読める。 */
-.tlx-ev.tlx-past{background:var(--tlx-card-past);border-left-color:var(--tlx-mute);border-left-style:solid}
-.tlx-ev.tlx-past .tlx-title{color:var(--tlx-dim)}
-.tlx-ev.tlx-past .tlx-time{color:var(--tlx-soft)}
-.tlx-ev.tlx-live{border-left-color:var(--tlx-brand)}
-.tlx-now{position:absolute;left:0;right:0;border-top:2px solid var(--tlx-brand);z-index:9;pointer-events:none}
-.tlx-now::before{content:"";position:absolute;left:-5px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--tlx-brand)}
-.tlx-nowlabel{position:absolute;right:0;top:-9px;transform:translateY(-100%);
-  font-family:var(--tlx-num);font-size:11px;font-weight:700;color:var(--tlx-on-brand);background:var(--tlx-brand);
-  border-radius:4px;padding:1px 7px;font-variant-numeric:tabular-nums;letter-spacing:.03em}
-.tlx-now.tlx-now-low .tlx-nowlabel{top:4px;transform:none}
-.tlx-empty{font-size:13.5px;color:var(--tlx-soft);padding:2px 0}
-@media (max-width:640px){
-  .tlx-canvas{margin-left:46px}
-  .tlx-hlabel{left:-46px;width:38px}
-  .tlx-ev{padding:4px 7px 4px 8px}
-}
-/* ダーク: **変数の差し替えだけ**(規則を 1 つも再記述しない)。--tlx-num はライトと同値を
-   明示して 14 本を揃える(テーマ間で本数が食い違うと、片側だけ足した token に気づけない)。
-   発火は **ホストが宣言したときだけ**=<section class="tlx" data-tlx-theme="dark">。
-   (OS 設定では発火しない。ホストがライト固定なら、ブロックもライトのまま。) */
-.tlx[data-tlx-theme="dark"]{
-  --tlx-ink:#EDEBE5; --tlx-soft:#A8A69D; --tlx-mute:#8E8B83; --tlx-dim:#C9C6BD;
-  --tlx-warn:#F0A58C; --tlx-line:#2C2A26; --tlx-line-fine:#232220;
-  --tlx-card:#1E1D1A; --tlx-card-past:#232220; --tlx-chip:#191816;
-  --tlx-brand:#7FBF8C; --tlx-brand-soft:#1C2A1F; --tlx-on-brand:#0F1A12;
-  --tlx-num:"SF Mono","Cascadia Mono","Consolas",ui-monospace,monospace}
-</style>
-<section class="tlx" id="tlx">
-  <h2 class="tlx-h">きょうのタイムライン<span class="tlx-date" id="tlx-date"></span></h2>
-  <p class="tlx-warn" id="tlx-warn" hidden></p>
-  <div class="tlx-allday" id="tlx-allday"></div>
-  <div class="tlx-wrap"><div class="tlx-canvas" id="tlx-canvas"></div></div>
-</section>
-<script type="application/json" id="tlx-data">
-{"date": "2026-10-10", "events": [{"s": "10:30", "e": "11:30", "t": "予防接種", "p": "high", "c": "家族(1)"}], "allday": [{"t": "ジム（07:00 – 09:00）", "c": "my予定"}]}
-</script>
-<script>
-(function(){
-  "use strict";
-  var root=document.getElementById("tlx"),node=document.getElementById("tlx-data");
-  if(!root||!node)return;
-  var data;try{data=JSON.parse(node.textContent)}catch(err){root.style.display="none";return}
-  function two(n){return (n<10?"0":"")+n}
-  function fmt(m){return two(Math.floor(m/60)%24)+":"+two(m%60)}
-  var WD=["日","月","火","水","木","金","土"];
-  // 帰属カレンダー(v4.1): 表示は二次トーンの小さなラベル(aria-hidden)+ **常設の sr-only**。
-  // .tlx-pri(◆+「(重要)」)と同型=表示幅で読み上げが消える/二重に読まれる の両方を構造的に排除する。
-  function addCal(parent,label){
-    if(!label)return;
-    var cl=document.createElement("span");cl.className="tlx-cal";
-    cl.setAttribute("aria-hidden","true");cl.textContent=label;parent.appendChild(cl);
-    var sc=document.createElement("span");
-    sc.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
-    sc.textContent="("+label+")";parent.appendChild(sc);
-  }
-  // ---- データ正規化。深夜跨ぎ(e<=s)は 24:00 でクランプして題名に印を付ける(無言で捨てない)
-  var evs=[];
-  (data.events||[]).forEach(function(v){
-    var a=String(v.s).split(":"),b=String(v.e).split(":");
-    var s=(+a[0])*60+(+a[1]),e=(+b[0])*60+(+b[1]),t=String(v.t||""),over=false;
-    if(!isFinite(s)||!isFinite(e))return;
-    if(e<=s){e=24*60;over=true}
-    var pr=String(v.p||"").toLowerCase();pr=(pr==="high"?"hi":pr==="low"?"lo":"");
-    evs.push({s:Math.max(0,s),e:Math.min(24*60,e),t:t+(over?"(翌日まで)":""),raw:t,p:pr,c:String(v.c||"")});
-  });
-  var allday=data.allday||[];
-  // ---- 日付表示(ページの日付とデータの日付が食い違っても読者が気づけるように)
-  var now=new Date();
-  var today=now.getFullYear()+"-"+two(now.getMonth()+1)+"-"+two(now.getDate());
-  var isToday=(data.date===today);
-  var dEl=document.getElementById("tlx-date");
-  var dm=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(data.date||""));
-  if(dm){
-    var dd=new Date(+dm[1],+dm[2]-1,+dm[3]);
-    dEl.textContent=(+dm[2])+"/"+(+dm[3])+"("+WD[dd.getDay()]+")";
-  }
-  // 警告文は **HTML に静的に持たない**(v4.1・MB-038)。中継の本文抽出はタグを剥がすだけで
-  // `hidden` 属性を見ないため、静的に置くと「画面に出していない文」が毎朝の LINE 通知本文へ
-  // 混入する(2026-08-25 実測・4 日連続)。必要なときだけ JS が textContent で入れる。
-  if(!isToday&&dm){var wEl=document.getElementById("tlx-warn");
-    wEl.textContent="このページは本日分ではありません。";wEl.hidden=false}
-  var alBox=document.getElementById("tlx-allday");
-  allday.forEach(function(x){
-    var txt=(x&&typeof x==="object")?String(x.t||""):String(x);
-    var hp=(x&&typeof x==="object")&&String(x.p||"").toLowerCase()==="high";
-    var cv=(x&&typeof x==="object")?String(x.c||""):"";
-    if(!txt)return;
-    var c=document.createElement("span");c.className="tlx-chip"+(hp?" tlx-chip-hi":"");
-    var b=document.createElement("b");b.textContent="終日";c.appendChild(b);
-    if(hp){var d=document.createElement("span");d.className="tlx-pri";d.setAttribute("aria-hidden","true");
-      d.textContent="◆ ";c.appendChild(d);
-      var sr0=document.createElement("span");
-      sr0.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
-      sr0.textContent="(重要)";c.appendChild(sr0)}
-    c.appendChild(document.createTextNode(txt));addCal(c,cv);alBox.appendChild(c);
-  });
-  var canvas=document.getElementById("tlx-canvas");
-  if(!evs.length){
-    var em=document.createElement("p");em.className="tlx-empty";
-    em.textContent=allday.length?"時刻指定の予定はありません。":"今日の予定はありません。";
-    canvas.parentNode.replaceChild(em,canvas);
-    return;
-  }
-  evs.sort(function(a,b){return a.s-b.s||b.e-a.e});
-  // ---- 重なりクラスタごとにレーン割当(レーン数はクラスタ単位)
-  var cluster=[],clusterEnd=-1;
-  function closeCluster(){
-    var lanes=[];
-    cluster.forEach(function(ev){
-      var lane=-1;
-      for(var L=0;L<lanes.length;L++){if(lanes[L]<=ev.s){lane=L;break}}
-      if(lane<0){lane=lanes.length;lanes.push(0)}
-      lanes[lane]=ev.e;ev.lane=lane;
-    });
-    cluster.forEach(function(ev){ev.n=lanes.length});
-    cluster=[];
-  }
-  evs.forEach(function(ev){
-    if(cluster.length&&ev.s>=clusterEnd){closeCluster();clusterEnd=-1}
-    cluster.push(ev);clusterEnd=Math.max(clusterEnd,ev.e);
-  });
-  if(cluster.length)closeCluster();
-  // ---- 表示窓=[最初の予定-1h, 最後の予定+1h](最小 8 時間・現在時刻を必ず含む)
-  var minS=Math.min.apply(null,evs.map(function(v){return v.s}));
-  var maxE=Math.max.apply(null,evs.map(function(v){return v.e}));
-  var nowMin=now.getHours()*60+now.getMinutes();
-  var h0=Math.floor(minS/60)-1,h1=Math.ceil(maxE/60)+1;
-  if(isToday){h0=Math.min(h0,Math.floor(nowMin/60));h1=Math.max(h1,Math.ceil(nowMin/60))}
-  h0=Math.max(0,h0);h1=Math.min(24,h1);
-  while(h1-h0<8){if(h1<24)h1++;else if(h0>0)h0--;else break}
-  var winS=h0*60,winE=h1*60;
-  // ---- 空白帯の畳み込み: 予定が無い 2h 超の区間は固定高にして、密度を上げる
-  var PXH=44,PXM=PXH/60,GAPH=30,GAP_MIN=120;
-  var busy=[];
-  evs.forEach(function(v){
-    var s=Math.max(v.s,winS),e=Math.min(v.e,winE);
-    if(e<=s)return;
-    if(busy.length&&s<=busy[busy.length-1][1])busy[busy.length-1][1]=Math.max(busy[busy.length-1][1],e);
-    else busy.push([s,e]);
-  });
-  if(isToday&&nowMin>=winS&&nowMin<=winE){   // 現在時刻は畳まない(now が隠れないように)
-    busy.push([Math.max(winS,nowMin-1),Math.min(winE,nowMin+1)]);
-    busy.sort(function(a,b){return a[0]-b[0]});
-    var merged=[];
-    busy.forEach(function(b){
-      if(merged.length&&b[0]<=merged[merged.length-1][1])merged[merged.length-1][1]=Math.max(merged[merged.length-1][1],b[1]);
-      else merged.push([b[0],b[1]]);
-    });
-    busy=merged;
-  }
-  var segs=[],cur=winS;
-  busy.forEach(function(b){
-    if(b[0]>cur)segs.push({s:cur,e:b[0],gap:(b[0]-cur)>=GAP_MIN});
-    segs.push({s:b[0],e:b[1],gap:false});cur=b[1];
-  });
-  if(cur<winE)segs.push({s:cur,e:winE,gap:(winE-cur)>=GAP_MIN});
-  var top=0;
-  segs.forEach(function(g){g.top=top;g.h=g.gap?GAPH:(g.e-g.s)*PXM;top+=g.h});
-  canvas.style.height=top+"px";
-  function y(m){
-    m=Math.max(winS,Math.min(winE,m));
-    for(var i=0;i<segs.length;i++){
-      var g=segs[i];
-      if(m<=g.e||i===segs.length-1){
-        if(g.gap)return g.top+g.h*((m-g.s)/Math.max(1,g.e-g.s));
-        return g.top+(m-g.s)*PXM;
-      }
-    }
-    return top;
-  }
-  // ---- 時間軸・空白帯
-  segs.forEach(function(g){
-    if(g.gap){
-      var gd=document.createElement("div");gd.className="tlx-gap";
-      gd.style.top=g.top+"px";gd.style.height=g.h+"px";
-      var sp=document.createElement("span");
-      sp.textContent="空き "+(Math.round((g.e-g.s)/6)/10)+"h";
-      gd.appendChild(sp);canvas.appendChild(gd);
-      var lb0=document.createElement("div");lb0.className="tlx-hour";lb0.style.top=g.top+"px";
-      var l0=document.createElement("span");l0.className="tlx-hlabel";l0.textContent=fmt(g.s);
-      lb0.appendChild(l0);canvas.appendChild(lb0);
-      return;
-    }
-    for(var h=Math.ceil(g.s/60);h*60<=g.e&&h<h1;h++){
-      if(h*60<g.s)continue;
-      var line=document.createElement("div");
-      line.className="tlx-hour"+(h%3===0?" tlx-major":"");
-      line.style.top=y(h*60)+"px";
-      var lab=document.createElement("span");lab.className="tlx-hlabel";lab.textContent=two(h)+":00";
-      line.appendChild(lab);canvas.appendChild(line);
-    }
-  });
-  // ---- イベント
-  var nodes=[];
-  evs.forEach(function(v){
-    var el=document.createElement("div");
-    var ytop=y(v.s),hpx=Math.max(y(v.e)-ytop,26);
-    var live=isToday&&v.s<=nowMin&&nowMin<v.e;
-    el.className="tlx-ev"+(v.p?" tlx-"+v.p:"")+(hpx<44?" tlx-compact":"")+((isToday&&v.e<=nowMin)?" tlx-past":"")+(live?" tlx-live":"");
-    el.style.top=ytop+"px";el.style.height=hpx+"px";
-    el.title=fmt(v.s)+" – "+fmt(v.e)+" "+v.raw+(v.c?" ["+v.c+"]":"");
-    var tm=document.createElement("span");tm.className="tlx-time";tm.textContent=fmt(v.s)+" – "+fmt(v.e);
-    var tt=document.createElement("span");tt.className="tlx-title";
-    if(v.p==="hi"){var pd=document.createElement("span");pd.className="tlx-pri";
-      pd.setAttribute("aria-hidden","true");pd.textContent="◆ ";tt.appendChild(pd)}
-    tt.appendChild(document.createTextNode(v.t));
-    if(v.p==="hi"){var sr=document.createElement("span");
-      sr.style.cssText="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)";
-      sr.textContent="(重要)";tt.appendChild(sr)}
-    // 帰属カレンダーは **.tlx-title の内側**(題名テキストの後ろ)へ差す。兄弟に置くと別行になり、
-    // hpx<44 の compact バー(60 分予定=最頻)では overflow:hidden に切られて見えない。
-    // **「(重要)」より後ろ**に置く=読み上げ順は v4.0 と同じ「題名 →(重要)」で、帰属はその後に続く
-    //(重要さは帰属より先に伝える)。**終日チップとは本文の位置が違う**=チップは ◆ が題名の前に
-    // 立つ体裁なので「終日 →(重要)→ 本文 →(帰属)」、バーは「題名 →(重要)→(帰属)」。
-    // 揃えているのは「(重要)が(帰属)より先」の一点だけ(D-49e/f/g が実行して読み上げ列を固定する)。
-    addCal(tt,v.c);
-    el.appendChild(tm);el.appendChild(tt);canvas.appendChild(el);
-    nodes.push({el:el,ev:v,top:ytop,h:hpx});
-  });
-  // min-height で伸びた短時間の予定が同レーンの次と重なるのを押し下げて解消
-  var byLane={};
-  nodes.forEach(function(o){(byLane[o.ev.lane]=byLane[o.ev.lane]||[]).push(o)});
-  Object.keys(byLane).forEach(function(k){
-    var arr=byLane[k].sort(function(a,b){return a.top-b.top}),prev=null;
-    arr.forEach(function(o){
-      if(prev&&o.top<prev.top+prev.h+2){o.top=prev.top+prev.h+2;o.el.style.top=o.top+"px"}
-      prev=o;
-    });
-  });
-  // ---- 横幅: 3 レーン以上/狭幅では等分をやめ階段オフセット(題名の可読幅を確保)
-  function layout(){
-    var w=canvas.offsetWidth||600,narrow=w<340;
-    nodes.forEach(function(o){
-      var lane=o.ev.lane,n=o.ev.n,el=o.el;
-      el.style.left="calc("+(lane*100/n)+"% + "+(lane===0?4:3)+"px)";
-      el.style.width="calc("+(100/n)+"% - "+(n>1?7:8)+"px)";el.style.zIndex="2";
-      el.className=el.className.replace(" tlx-narrow","")+((narrow&&n>=3)?" tlx-narrow":"");
-      // 帰属ラベルは **レーン幅(バーの実幅)** で落とす。narrow は canvas 幅・tiny は compact バー限定の
-      // ため、canvas 340–480px × 3 レーンの帯はどちらにも掛からず、ラベルが切れて残っていた(uiux 是正)。
-      el.className=el.className.replace(" tlx-nocal","")+((el.offsetWidth<200)?" tlx-nocal":"");
-      if(el.className.indexOf("tlx-compact")>=0){
-        var tiny=el.offsetWidth<130;
-        el.className=el.className.replace(" tlx-tiny","")+(tiny?" tlx-tiny":"");
-      }
-    });
-  }
-  layout();window.addEventListener("resize",layout);
-  // ---- 現在時刻ライン(日付も毎回再判定=日跨ぎで前日データに線を引かない)
-  function drawNow(){
-    var old=canvas.querySelector(".tlx-now");if(old)old.parentNode.removeChild(old);
-    var n2=new Date(),t2=n2.getFullYear()+"-"+two(n2.getMonth()+1)+"-"+two(n2.getDate());
-    if(data.date!==t2)return;
-    var mm=n2.getHours()*60+n2.getMinutes();
-    if(mm<winS||mm>winE)return;
-    var ln=document.createElement("div"),ty=y(mm);
-    ln.className="tlx-now"+(ty<16?" tlx-now-low":"");ln.style.top=ty+"px";
-    var lb=document.createElement("span");lb.className="tlx-nowlabel";lb.textContent=fmt(mm);
-    ln.appendChild(lb);canvas.appendChild(ln);
-  }
-  drawNow();setInterval(drawNow,60000);
-})();
-</script>
-<!-- ══════ END タイムラインブロック ══════ -->
-
-<section class="plans">
-<h2 class="sec">予定</h2>
-<div class="pl-item"><span class="pl-num">01</span>
-  <div class="pl-body"><div class="pl-title">予防接種</div>
-  <div class="pl-sent">10:30 – 11:30、<span class="src">カレンダー(家族(1))</span>の予定。1時間ほどで戻れる見込み。</div></div></div>
-<div class="pl-item"><span class="pl-num">—</span>
-  <div class="pl-body"><div class="pl-title">明日</div>
-  <div class="pl-sent">未明 01:30 – 03:30 にサッカー（<span class="src">カレンダー(Barcelona)</span>、対 Getafe）、朝 07:00 – 09:00 にジム（<span class="src">カレンダー(my予定)</span>）。</div></div></div>
+<section class="card">
+<!-- ▼置換: 件数 -->
+<h2>要対応メール <span class="count">0</span></h2>
+<!-- ▲置換 -->
+<!-- ▼置換: メール（無ければ <p class="none">ありません</p>） -->
+<p class="none">ありません</p>
+<!-- ▲置換 -->
 </section>
 
-<section class="lst">
-<h2 class="sec">注意が要ること</h2>
-<div class="item"><span class="num">01</span><div class="item-body"><div class="item-title">保育園の申請書類を作成</div><div class="item-sent">Todoistで今日が期限。提出期限のある書類なので、土曜のうちに手をつけておくと落ち着く。</div></div></div>
-<div class="item"><span class="num">02</span><div class="item-body"><div class="item-title">IPA試験の申込は10/24まで</div><div class="item-sent">Todoistに今日のリマインダー。申込期間は10/24まで。まだ余裕はあるが、忘れないうちに手続きを。</div></div></div>
-<div class="item"><span class="num">03</span><div class="item-body"><div class="item-title">会社メールの休暇の扱いを見直す</div><div class="item-sent">Todoistで今日が期限。終日休暇だけでなく、時間指定の休暇（例: 12:00 – 18:00）はその時間で登録する形に変える検討。</div></div></div>
-<div class="item"><span class="num">04</span><div class="item-body"><div class="item-title">RAG取り込みをGrokで試す案を確認</div><div class="item-sent">Todoistで今日が期限。いまGeminiで回している取り込み処理を、コストの安いGrokのサブスクで賄えるか確認したい。</div></div></div>
-<div class="item"><span class="num">05</span><div class="item-body"><div class="item-title">モーニングブリーフの生成をGrokへ移す検討</div><div class="item-sent">Todoistで今日が期限。配信のLINEとホスティングのGitHubはそのままに、生成側だけGrokへ切り替える案。</div></div></div>
-<div class="item"><span class="num">06</span><div class="item-body"><div class="item-title">ジーナ式 OI-091 旧経路の整理</div><div class="item-sent">Todoistで今日が期限。新経路が2週安定したか確かめたうえで、呼び出し元のない旧経路の関数と検査を整理する作業。</div></div></div>
+<section class="card">
+<!-- ▼置換: 件数 -->
+<h2>タスク <span class="count">5</span></h2>
+<!-- ▲置換 -->
+<!-- ▼置換: タスク -->
+<ul class="list">
+<li><span class="tag due">07:00</span><span>duolingo</span></li>
+<li><span class="tag due">15:00</span><span>杏 体重測定</span></li>
+<li><span class="tag due">18:00</span><span>夜保湿（メラノ）</span></li>
+<li><span class="tag">期日</span><span>保育園申請書類作成</span></li>
+<li><span class="tag">期日</span><span>IPA試験申込期間10/24まで</span></li>
+</ul>
+<!-- ▲置換 -->
 </section>
 
-<section class="lst">
-<h2 class="sec">片付いたこと</h2>
-<div class="item"><span class="num">01</span><div class="item-body"><div class="item-title">skyticketのパスワード変更と履歴確認</div><div class="item-sent">Todoistで完了済み。パスワードを変え、予約履歴も確認した。</div></div></div>
-<div class="item"><span class="num">02</span><div class="item-body"><div class="item-title">配送の受取場所を再設定</div><div class="item-sent">Todoistで完了済み。荷物の受け取り場所を設定し直した。</div></div></div>
+<section class="card">
+<h2>明日の予定</h2>
+<!-- ▼置換: 明日の予定 -->
+<ul class="list tomorrow">
+<li><span class="who me">自分</span><span class="tag">07:00</span><span>ジム</span></li>
+</ul>
+<!-- ▲置換 -->
 </section>
 
-<section class="lst">
-<h2 class="sec">これまでのブリーフ</h2>
-<details class="arch"><summary><span class="arch-date">金曜日 · 10月9日 2026</span><span class="arch-head">予定 5 件・終日 1 件・常設 1 件・今日締切 17 件</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）</div><div class="a-acts"><div class="a-act"><span class="a-time">09:30 – 10:30</span><span class="a-text">打合せ</span></div><div class="a-act"><span class="a-time">10:30 – 12:00</span><span class="a-text">打合せ</span></div><div class="a-act"><span class="a-time">14:00 – 14:30</span><span class="a-text">打合せ</span></div></div></div></details>
-<details class="arch"><summary><span class="arch-date">木曜日 · 10月8日 2026</span><span class="arch-head">予定 3 件・終日 0 件・常設 1 件・今日締切 17 件</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）</div><div class="a-acts"><div class="a-act"><span class="a-time">13:30 – 14:00</span><span class="a-text">打合せ</span></div><div class="a-act"><span class="a-time">14:00 – 16:00</span><span class="a-text">打合せ</span></div><div class="a-act"><span class="a-time">15:00 – 16:00</span><span class="a-text">コープ配達</span></div></div></div></details>
-<details class="arch"><summary><span class="arch-date">水曜日 · 10月7日 2026</span><span class="arch-head">朝はジム、昼前と昼過ぎに会議がひとつずつ。合間の時間は自分のために使えます、shuheiさん。</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）／日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">07:00 – 11:00</span><span class="a-text">ジムで一日を始めたあと、10時から会議がひとつ入ります。</span></div><div class="a-act"><span class="a-time">13:00 – 16:00</span><span class="a-text">昼過ぎに会議がひとつ、続けて移動の時間になります。</span></div><div class="a-act"><span class="a-time">16:00 以降</span><span class="a-text">夕方からは予定が空きます。手をつけたいことに向けられる時間です。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>ビズリーチのログインパスワードを設定</b> — Todoistで明日が期限。ビズリーチがGitHubなどでのログイン提供を10/13に終了するため、それまでにパスワードでのログインへ切り替えておく。</div><div class="a-li"><b>明日の配達受け取りが会議と重なる</b> — 明日はコープ配達が15:00 – 16:00、14:00 – 16:00の会議と重なる。在宅や受け取りの段取りを先に決めておくと当日が楽。</div><div class="a-sub">片付いたこと</div><div class="a-li"><b>GitHubの権限承認と認証を完了</b> — 昨日、GitHub App の更新された権限の確認・承認と、認証コードの入力をTodoistで完了。</div><div class="a-li"><b>スニダンの2段階認証を設定</b> — 昨日、2段階認証の設定をTodoistで完了。</div></div></details>
-<details class="arch"><summary><span class="arch-date">火曜日 · 10月6日 2026</span><span class="arch-head">午前から昼過ぎまで予定が続き、夕方からは手が空きます、shuheiさん。</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）／日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">07:00 – 11:00</span><span class="a-text">ジムのあと、子育て学級が午前いっぱい続きます。</span></div><div class="a-act"><span class="a-time">11:00 – 15:00</span><span class="a-text">会議が2枠。14時の子育て学級と後半が重なります。</span></div><div class="a-act"><span class="a-time">15:00 以降</span><span class="a-text">予定は入っていません。明日の申込開始に向けて使える時間です。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>育児記録スコアリングの評価ロジック見直し</b> — Todoist で今日が期限。ラストミルクの時刻ではなく、授乳量・睡眠量・体重増加から動的に判定するスコアリングへ作り替える検討と実装を、過去スコアの再計算まで進める。</div><div class="a-li"><b>IPA試験の申込が明日から</b> — IPA試験の申込期間が明日10/7に始まる（10/24まで）。応用情報・支援士の過去問を毎日解いている流れで、申込の手続きを。</div><div class="a-li"><b>仕事部屋のボタン電池を交換</b> — Todoist で今日が期限。デバイスの電池残量の通知を受けて登録した、一度きりのタスク。</div></div></details>
-<details class="arch"><summary><span class="arch-date">月曜日 · 10月5日 2026</span><span class="arch-head">会議は午後の一時間半だけ。月曜の大半は、あなたの時間です、しゅうへいさん。</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）／日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">07:00 – 09:00</span><span class="a-text">朝いちばんはジム。身体を起こすところから一日が始まります。</span></div><div class="a-act"><span class="a-time">14:00 – 15:30</span><span class="a-text">午後に会議が二件。14:30から少し重なって、ひと続きの時間になります。</span></div><div class="a-act"><span class="a-time">19:30 – 21:30</span><span class="a-text">夜は日本代表戦（対ニュージーランド）。手を離してゆっくり観られます。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>daznを今日中に解約</b> — Todoistで今日が期限。放っておくと自動で更新されるので、今日のうちに解約まで済ませておく。</div><div class="a-li"><b>Cloud Run ジョブ失敗のログ確認</b> — Todoistで今日の期限。失敗アラート自体は解決済みだが、ログの確認と後片付けが残っている。</div><div class="a-li"><b>token_monitor の7日連続判定</b> — Todoistで&lt;3:00に予約。自動実行の結果を見て、7日連続で正常なら積み残しの項目を閉じるか判断する。</div></div></details>
-<details class="arch"><summary><span class="arch-date">日曜日 · 10月4日 2026</span><span class="arch-head">日曜はほとんど予定が空いています、shuheiさん。気になっていたことに手をつける一日に。</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）／日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">01:00 – 09:00</span><span class="a-text">未明から早朝は動きのある時間帯。それを過ぎると、一日はゆるやかに開ける。</span></div><div class="a-act"><span class="a-time">09:00 – 17:00</span><span class="a-text">日中に決まった予定はない。溜まっていた確認ごとや片付けに充てられる時間。</span></div><div class="a-act"><span class="a-time">17:00 以降</span><span class="a-text">夜は記録と学習で静かに締める。急ぐ用事はない。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>送付されたファイルを今日中にダウンロード</b> — Todoistの今日の締切に、勤務先から送られたファイルの確認がある。有効期間が今日までで、過ぎると取得できなくなる。</div><div class="a-li"><b>probePiyologFeed で体重recordとOI-092を確認</b> — Todoistの今日の締切。土曜に記録した体重がフィードの24時間窓から外れる前に、日曜のうちに実行して結果を記録する。</div><div class="a-li"><b>GCP請求が予算100%到達の見込み</b> — Todoistの今日の締切。Googleの請求アラートが予算の100%到達見込みを知らせている。コストの状況を確認しておく内容。</div><div class="a-li"><b>morning-brief の Staleness watchdog 失敗を確認</b> — Todoistの今日の締切。GitHub Actions の Staleness watchdog が失敗した通知が届いており、原因の確認が要りそう。</div><div class="a-li"><b>dazn を今日中に解約</b> — Todoistで今日が期限。継続課金の解約手続きを今日のうちに済ませておく。</div><div class="a-sub">片付いたこと</div><div class="a-li"><b>イングランドがアウェイで3-0勝利</b> — 未明のサッカーは、イングランドがアウェイで3-0の快勝。結果は確定している。</div></div></details>
-<details class="arch"><summary><span class="arch-date">土曜日 · 10月3日 2026</span><span class="arch-head">午後に予定がひとつ、あとはひらいた土曜日です、shuheiさん。</span></summary>
-<div class="arch-body"><div class="a-const">常設: ジム（07:00 – 09:00）／日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">07:00 – 09:00</span><span class="a-text">朝はジムで体を動かすところから始まる。</span></div><div class="a-act"><span class="a-time">09:00 – 14:00</span><span class="a-text">昼は予定がなく、手をつけたい作業にあてられる時間。</span></div><div class="a-act"><span class="a-time">14:00 – 18:00</span><span class="a-text">午後はヒモ家族のオンライン通話が4時間つづく。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>rag-recipe の gmail-todo ジョブが失敗</b> — 今朝2時55分ごろ、rag-recipe プロジェクトの Cloud Run ジョブ「gmail-todo」が失敗したという通知がGmailに届いている。深刻度は付いていないが、Gmail→カレンダー連携にかかわるジョブなので、再実行するか原因を確認しておきたい。</div></div></details>
-<details class="arch"><summary><span class="arch-date">金曜日 · 10月2日 2026</span><span class="arch-head">予定 2 件・終日 1 件・常設 1 件・今日締切 13 件</span></summary>
-<div class="arch-body"><div class="a-const">常設: 常設: なし</div><div class="a-acts"><div class="a-act"><span class="a-time">07:00 – 09:00</span><span class="a-text">ジム</span></div><div class="a-act"><span class="a-time">21:00 – 22:00</span><span class="a-text">コープ注文締切</span></div></div></div></details>
-<details class="arch"><summary><span class="arch-date">木曜日 · 10月1日 2026</span><span class="arch-head">会議はひとつだけの静かな一日、秀平さん。午後に用が重なるほかは、時間を自分の作業に向けられる。</span></summary>
-<div class="arch-body"><div class="a-const">常設: 日課: 学習・トレーニング・スキンケア・ペットの世話ほか（毎日）</div><div class="a-acts"><div class="a-act"><span class="a-time">7:00 – 9:00</span><span class="a-text">朝いちばんはジムから。体を整えてから一日に入る。</span></div><div class="a-act"><span class="a-time">13:00 – 16:00</span><span class="a-text">昼過ぎに短い会議がひとつ。15時台は配達の受け取りと通院（仮）が同じ帯に重なる。</span></div><div class="a-act"><span class="a-time">19:00 以降</span><span class="a-text">夜はサッカー日本代表の試合。明日は会議が続くので、早めに休むと楽。</span></div></div><div class="a-sub">注意が要ること</div><div class="a-li"><b>配達と通院（仮）が15時に重なる</b> — 配達の受け取りと通院（仮）が、ともに15:00 – 16:00。在宅が要る用と外出が同じ帯にあるので、時間をずらすか段取りを先に決めておく。</div><div class="a-li"><b>明日は会議が続く一日</b> — 明日は9:30から16:00にかけて会議が5件。今日のうちに資料や返信を片づけておくと当日が軽くなる。夜21:00には宅配の注文締切もある。</div></div></details>
-</section>
-
-</div></div>
+<footer>Grok で生成</footer>
+</div>
 </body>
 </html>
