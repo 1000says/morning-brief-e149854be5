@@ -207,7 +207,26 @@ jobs:
           if [ -z "$marker" ]; then
             marker="$(printf '%s' "$sli4_tag" | sed -n "s/.*content='\([^']*\)'.*/\1/p")"
           fi
-          if [ -z "$marker" ]; then
+          # Grok 版と外部参照（全モード）は grok-check.py が判定する（DEC-2026-10-12-sli4-grok）。grok の印 1 語で素通りさせない。
+          # 判定器の不在は赤（SLI-5/6 と同じ）。ブリーフ日は if の外で求める（set -u・8/17 と同じ型を避ける）。
+          g_ymd="$(git log -1 --format=%s --grep='^brief: ' -- index.html 2>/dev/null | sed -n 's/^brief: \([0-9-]\{10\}\).*/\1/p' || true)"
+          if [ -f .github/scripts/grok-check.py ]; then
+            g_out="$(python3 .github/scripts/grok-check.py index.html "$g_ymd" "${EXPECT_CAL_GROK:-6}" 2>/dev/null || echo "BAD runner")"
+          else
+            g_out="BAD absent"
+          fi
+          echo "SLI-4 grok-check $g_out"
+          case "$g_out" in NOTGROK*) g_out="" ;; esac
+          if [ -n "$g_out" ]; then
+            case "$g_out" in
+              OK*) echo "| 参照ソース | Grok 版・契約どおり（${g_out#OK }） | 🟢 |" >> "$GITHUB_STEP_SUMMARY" ;;
+              WARN*) echo "::warning::${TAG}SLI-4 Grok 版: ${g_out#WARN }"
+                echo "| 参照ソース | Grok 版・${g_out%% |*} | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
+              *) echo "::error::${TAG}SLI-4 Grok 版の契約違反（${g_out#BAD }）。grok-brief/ の指示とテンプレートを確認する（DEC-2026-10-12-sli4-grok）。"
+                echo "| 参照ソース | ${g_out%% |*} | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+                fail=1 ;;
+            esac
+          elif [ -z "$marker" ]; then
             # 2026-08-18: 移行完了（公開ページに marker 実在を実測）につき WARN -> FAIL へ昇格。
             # WARN のままだと「生成側が MB-023 を失った」状態が緑で通り続ける＝
             # 12 カレンダー化も redaction 契約も消えたのに誰も気づかない（最も危険な沈黙）。
@@ -273,10 +292,8 @@ jobs:
               echo "\`lastTriggerAt\`（無人発火の証拠）・\`lastResult\`・\`generations\` を確認する。"
               echo "\`lastTriggerAt\` が 2 時間以上進んでいなければ、トリガが停止／自動無効化された疑い。"
               echo ""
-              echo "SLI-4 が鳴った場合は **claude.ai の定期タスク本文**を確認する"
-              echo "（実効 SoT はそこにしかない。リポジトリ側の COWORK-PROMPT.md は stale＝D49）。"
-              echo "稼働値の写しは docs/handoff/cowork/COWORK-TASK-LIVE.md、貼り替え用は COWORK-TASK-NEXT.md。"
-              echo "**読み戻しは必ず別会話で行う**（同一会話の自己申告は証拠にならない＝D50）。"
+              echo "SLI-4 が鳴った場合は Drive の grok-brief/（指示とテンプレート）と grok.com の自動化の参照文を確認する"
+              echo "（DEC-2026-10-10-grok-generator・DEC-2026-10-12-sli4-grok。理由語の意味は .github/scripts/grok-check.py の冒頭）。"
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi

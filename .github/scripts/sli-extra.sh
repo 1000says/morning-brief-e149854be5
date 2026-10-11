@@ -54,8 +54,13 @@ sli5() {
       echo "::warning::${TAG}SLI-5 判定器は在るが実行できない（python3 不在・クラッシュを疑う）。"
       echo "| タイムライン | 判定器 実行不能 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
     MISSING*)
-      echo "::warning::${TAG}SLI-5 タイムラインのブロックが無い（tlx-canvas 不在）。生成側の指示文から落ちた疑い。"
-      echo "| タイムライン | ブロック不在 | 🟡 未導入/欠落 |" >> "$GITHUB_STEP_SUMMARY" ;;
+      if grep -q '<meta[^>]*name="brief-mode"[^>]*content="grok"' index.html 2>/dev/null; then
+        # Grok 版（DEC-2026-10-10-grok-generator）は 2 レーンの表示でタイムラインのブロックを持たない＝設計どおり。警告にしない。
+        echo "| タイムライン | Grok 版（ブロック無し・設計） | ⚪ |" >> "$GITHUB_STEP_SUMMARY"
+      else
+        echo "::warning::${TAG}SLI-5 タイムラインのブロックが無い（tlx-canvas 不在）。生成側の指示文から落ちた疑い。"
+        echo "| タイムライン | ブロック不在 | 🟡 未導入/欠落 |" >> "$GITHUB_STEP_SUMMARY"
+      fi ;;
     NOJSON*)
       echo "::warning::${TAG}SLI-5 ブロックはあるがデータ JSON が無い（何も描画されない）。"
       echo "| タイムライン | JSON 不在 | 🟡 |" >> "$GITHUB_STEP_SUMMARY" ;;
