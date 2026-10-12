@@ -50,10 +50,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
-      - name: Stage only index.html for publishing
+        with:
+          fetch-depth: 0        # 過去分（archive/）を index.html の履歴から作るため（MB-117）
+      - name: Stage index.html, shared assets and the archive
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p _site
           cp index.html _site/
+          # 共通部品（MB-117・DEC-2026-10-12-brief-archive）。頁は無くても読める＝付随物。
+          if [ -d assets ]; then mkdir -p _site/assets && { cp assets/brief.css assets/brief.js _site/assets/ || echo "::warning::assets copy failed"; }; fi
+          # 過去分: 直近 14 日の頁と一覧。各頁と一覧に guard.js を掛け、落ちた頁は載せない（build-archive.py の中）。
+          # 失敗しても index.html の配備は止めない（付随機能）。無いことは staleness の SLI-8 が赤にする。
+          python3 .github/scripts/build-archive.py _site || echo "::warning::build-archive failed (archive is not published this time)"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

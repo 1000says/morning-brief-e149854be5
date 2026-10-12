@@ -180,14 +180,62 @@ sli7() {
   esac
 }
 
+sli8() {
+  # ---------- SLI-8: 共通部品と過去分（MB-117・DEC-2026-10-12-brief-archive） ----------
+  # 共通部品（assets/brief.{css,js}）は頁の外にあり、SLI-2（index.html のバイト一致）では見えない。
+  # 欠けても古くても頁は読めるので、ここで見ないと「アイコン・帯・ナビが無言で消える」（Fable 条件 c）。
+  # 過去分は pages.yml のビルドが作る。失敗しても index.html は配備する設計なので、無いことはここで赤にする。
+  local base="${PAGES_URL:-https://1000says.github.io/morning-brief-e149854be5/}"
+  local f code
+  if grep -q 'href="assets/brief.css"' index.html 2>/dev/null; then
+    for f in assets/brief.css assets/brief.js; do
+      if [ ! -f "$f" ]; then
+        echo "::error::${TAG}SLI-8 共通部品 $f が repo に無い（頁が参照しているのに配備できない）。site/assets/ を配信 repo へ push する。"
+        echo "| 共通部品 | $f が repo に無い | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+        fail=1; continue
+      fi
+      code="$(curl -sS -o sli8.live -w '%{http_code}' --retry 3 --retry-delay 5 --max-time 30 "${base}${f}" 2>/dev/null || echo 000)"
+      if [ "$code" != "200" ]; then
+        echo "::error::${TAG}SLI-8 共通部品 $f が公開 URL で HTTP $code（期待 200）。"
+        echo "| 共通部品 | $f が HTTP $code | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+        fail=1
+      elif [ "$(git hash-object "$f")" != "$(git hash-object sli8.live)" ]; then
+        echo "::error::${TAG}SLI-8 共通部品 $f の公開物が repo と一致しない（配備されていない）。"
+        echo "| 共通部品 | $f が不一致 | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+        fail=1
+      else
+        echo "SLI-8 asset $f ok"
+      fi
+    done
+  else
+    echo "SLI-8 asset skip（index.html は共通部品を参照していない版）"
+    echo "| 共通部品 | 参照しない版 | ⚪ |" >> "$GITHUB_STEP_SUMMARY"
+  fi
+  code="$(curl -sS -o sli8.json -w '%{http_code}' --retry 3 --retry-delay 5 --max-time 30 "${base}archive/index.json" 2>/dev/null || echo 000)"
+  if [ "$code" != "200" ]; then
+    echo "::error::${TAG}SLI-8 過去分の一覧 archive/index.json が HTTP $code。pages.yml の build-archive が失敗している疑い（Deploy page のログを見る）。"
+    echo "| 過去分 | 一覧が HTTP $code | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+    fail=1
+  elif ! python3 -c 'import json,sys; d=json.load(open("sli8.json",encoding="utf-8")); sys.exit(0 if isinstance(d,list) and len(d)>0 else 1)' 2>/dev/null; then
+    echo "::error::${TAG}SLI-8 過去分の一覧が空か壊れている。"
+    echo "| 過去分 | 一覧が空・不正 | 🔴 |" >> "$GITHUB_STEP_SUMMARY"
+    fail=1
+  else
+    echo "SLI-8 archive ok"
+    echo "| 過去分 | 一覧あり | 🟢 |" >> "$GITHUB_STEP_SUMMARY"
+  fi
+  rm -f sli8.live sli8.json
+}
+
 case "${1:-all}" in
   sli5) sli5 ;;
   sli6) sli6 ;;
   sli7) sli7 ;;
-  all)  sli5; sli6; sli7 ;;
+  sli8) sli8 ;;
+  all)  sli5; sli6; sli7; sli8 ;;
   *)
     # 契約外の引数＝呼び出し側と本体の版がずれている。黙って何もしないと**ゲートが消える**。
-    echo "::error::sli-extra.sh: 不明な引数 '${1}'（sli5|sli6|sli7|all）。workflow と判定本体の契約がずれている。"
+    echo "::error::sli-extra.sh: 不明な引数 '${1}'（sli5|sli6|sli7|sli8|all）。workflow と判定本体の契約がずれている。"
     exit 2 ;;
 esac
 exit "$fail"

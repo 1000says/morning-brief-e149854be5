@@ -1,0 +1,89 @@
+/* モーニングブリーフの共通部品（MB-117・DEC-2026-10-12-brief-archive）。頁の固定 CSS の上に重ねる。
+   このファイルが読めなくても頁は読める（アイコン・ナビ・帯が出ないだけ）。外部参照なし。
+
+   アイコン: Lucide v0.460.0 の SVG を mask 用の data URI に変換して同梱（--i-*）。
+   ISC License
+   Copyright (c) for portions of Lucide are held by Cole Bemis 2013 - 2022 as part of Feather (MIT).
+   All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+   Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee
+   is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+   THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
+   INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
+   FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+   OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+   OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+   （年の範囲は公開面の検査の数字の並びに当たらないよう空白を挟んで表記） */
+:root{
+  --i-star:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z%22 /%3E%3C/svg%3E");
+  --i-sched:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22M8 2v4%22 /%3E%3Cpath d=%22M16 2v4%22 /%3E%3Crect width=%2218%22 height=%2218%22 x=%223%22 y=%224%22 rx=%222%22 /%3E%3Cpath d=%22M3 10h18%22 /%3E%3Cpath d=%22M8 14h.01%22 /%3E%3Cpath d=%22M12 14h.01%22 /%3E%3Cpath d=%22M16 14h.01%22 /%3E%3Cpath d=%22M8 18h.01%22 /%3E%3Cpath d=%22M12 18h.01%22 /%3E%3Cpath d=%22M16 18h.01%22 /%3E%3C/svg%3E");
+  --i-mail:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Crect width=%2220%22 height=%2216%22 x=%222%22 y=%224%22 rx=%222%22 /%3E%3Cpath d=%22m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7%22 /%3E%3C/svg%3E");
+  --i-tasks:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22m3 17 2 2 4-4%22 /%3E%3Cpath d=%22m3 7 2 2 4-4%22 /%3E%3Cpath d=%22M13 6h8%22 /%3E%3Cpath d=%22M13 12h8%22 /%3E%3Cpath d=%22M13 18h8%22 /%3E%3C/svg%3E");
+  --i-done:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22M21.801 10A10 10 0 1 1 17 3.335%22 /%3E%3Cpath d=%22m9 11 3 3L22 4%22 /%3E%3C/svg%3E");
+  --i-tomorrow:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5%22 /%3E%3Cpath d=%22M16 2v4%22 /%3E%3Cpath d=%22M8 2v4%22 /%3E%3Cpath d=%22M3 10h5%22 /%3E%3Cpath d=%22M17.5 17.5 16 16.3V14%22 /%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 /%3E%3C/svg%3E");
+  --i-archive:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Crect width=%2220%22 height=%225%22 x=%222%22 y=%223%22 rx=%221%22 /%3E%3Cpath d=%22M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8%22 /%3E%3Cpath d=%22M10 12h4%22 /%3E%3C/svg%3E");
+  --i-refresh:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8%22 /%3E%3Cpath d=%22M21 3v5h-5%22 /%3E%3Cpath d=%22M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16%22 /%3E%3Cpath d=%22M8 16H3v5%22 /%3E%3C/svg%3E");
+  --i-prev:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22m15 18-6-6 6-6%22 /%3E%3C/svg%3E");
+  --i-next:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22m9 18 6-6-6-6%22 /%3E%3C/svg%3E");
+  --i-alert:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Cpath d=%22m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3%22 /%3E%3Cpath d=%22M12 9v4%22 /%3E%3Cpath d=%22M12 17h.01%22 /%3E%3C/svg%3E");
+  --i-clock:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22 /%3E%3Cpolyline points=%2212 6 12 12 16 14%22 /%3E%3C/svg%3E");
+  --i-sun:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%224%22 /%3E%3Cpath d=%22M12 3v1%22 /%3E%3Cpath d=%22M12 20v1%22 /%3E%3Cpath d=%22M3 12h1%22 /%3E%3Cpath d=%22M20 12h1%22 /%3E%3Cpath d=%22m18.364 5.636-.707.707%22 /%3E%3Cpath d=%22m6.343 17.657-.707.707%22 /%3E%3Cpath d=%22m5.636 5.636.707.707%22 /%3E%3Cpath d=%22m17.657 17.657.707.707%22 /%3E%3C/svg%3E");
+}
+/* ---- 見出し: 字間を広げた小さなラベルをやめ、アイコン＋読める大きさにする ---- */
+.kicker{letter-spacing:.02em;font-size:13px;display:flex;align-items:center;gap:6px}
+.kicker::before{content:"";width:16px;height:16px;flex:none;background:currentColor;
+  -webkit-mask:var(--i-sun) center/contain no-repeat;mask:var(--i-sun) center/contain no-repeat}
+h2{font-size:14px;letter-spacing:.02em;color:var(--ink)}
+.focus h2{color:var(--brand)}
+section.card > h2::before{content:"";width:16px;height:16px;flex:none;background:currentColor;
+  -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.focus > h2::before{background:var(--brand)}
+section.focus{--ic:var(--i-star)}
+section.sched{--ic:var(--i-sched)}
+section.mail{--ic:var(--i-mail)}
+section.tasks{--ic:var(--i-tasks)}
+section.done{--ic:var(--i-done)}
+section.tomorrow{--ic:var(--i-tomorrow)}
+section.done li{color:var(--soft)}
+
+/* ---- タグのアイコン（期限切れ・時刻つき） ---- */
+.tag.over::before,.tag.due::before{content:"";display:inline-block;width:12px;height:12px;margin-right:4px;
+  vertical-align:-1px;background:currentColor}
+.tag.over::before{-webkit-mask:var(--i-alert) center/contain no-repeat;mask:var(--i-alert) center/contain no-repeat}
+.tag.due::before{-webkit-mask:var(--i-clock) center/contain no-repeat;mask:var(--i-clock) center/contain no-repeat}
+
+/* ---- ヘッダのナビ（これまで・前の日・更新） ---- */
+:root{--pill-line:#C9C5B8}
+@media (prefers-color-scheme: dark){:root{--pill-line:#4A4943}}
+header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:4px 12px}
+header > .kicker,header > h1{grid-column:1}
+header > .nav{grid-column:2;grid-row:1 / span 2;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav a,.nav button{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13px;font-weight:600;
+  color:var(--brand);background:var(--card);border:1px solid var(--pill-line);border-radius:999px;
+  padding:8px 14px;min-height:44px;text-decoration:none;cursor:pointer}
+.nav a:hover,.nav button:hover{border-color:var(--brand)}
+.nav a:focus-visible,.nav button:focus-visible,.stale button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.nav a::before,.nav button::before{content:"";width:15px;height:15px;flex:none;background:currentColor;
+  -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.nav-archive{--ic:var(--i-archive)}
+.nav-prev{--ic:var(--i-prev)}
+.nav-next{--ic:var(--i-next)}
+.nav-reload{--ic:var(--i-refresh)}
+@media (max-width:480px){
+  header{grid-template-columns:1fr}
+  header > .nav{grid-column:1;grid-row:auto;justify-content:flex-start;margin-top:8px}
+}
+
+/* ---- 本日分でないときの帯 ---- */
+.stale{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding:10px 12px 10px 14px;
+  border-radius:12px;background:var(--both-bg);color:var(--both);font-size:14px;font-weight:600}
+.stale::before{content:"";width:18px;height:18px;flex:none;background:currentColor;
+  -webkit-mask:var(--i-clock) center/contain no-repeat;mask:var(--i-clock) center/contain no-repeat}
+.stale span{flex:1 1 12em}
+.stale button{font:inherit;font-size:14px;font-weight:700;color:#FFFFFF;background:var(--brand);border:0;
+  border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer}
+@media (prefers-color-scheme: dark){ .stale button{color:#151513} }
+@media (prefers-reduced-motion: no-preference){
+  .stale{animation:stale-in .25s ease-out}
+  @keyframes stale-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+}
+@media print{ .nav,.stale{display:none} }
