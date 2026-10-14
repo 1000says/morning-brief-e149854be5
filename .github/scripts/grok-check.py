@@ -37,7 +37,8 @@ ALLOWED_CLASSES = {
     "tomorrow", "nm", "none", "page", "tag", "due", "over", "who", "empty", "sub",
 }
 # テンプレートの <style> 本体の sha256（改行は LF にそろえる）。テンプレートの CSS を変えたらここも同時に直す。
-STYLE_SHA256 = {"3c829fc4a8c77ba47bcd4247ca18c86c532c6f906eb68bd6c534590f2b56da2d"}  # 2026-10-10 版
+STYLE_SHA256 = {"3c829fc4a8c77ba47bcd4247ca18c86c532c6f906eb68bd6c534590f2b56da2d",  # 2026-10-10 版
+                "4f95d988e4ac523f227279a2ed3c6dcdd00d788cc2add9d595dab6fe6ef324c0"}  # 2026-10-14 版（短い予定の見え方・MB-121）
 ALLOWED_META_NAMES = {"viewport", "color-scheme", "brief-mode", "brief-sources"}
 STYLE_ATTR_RE = re.compile(r"^\s*(--[a-z]+\s*:\s*-?[0-9.]+\s*;?\s*)+$")
 # CSS・属性値に出てはいけない外部参照・実行の形（全モード共通）
