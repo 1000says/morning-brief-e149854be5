@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <meta name="brief-mode" content="grok">
 <!-- ▼置換: 参照ソース（cal は 6 のまま・ok は実際に読めたカレンダーの数・ev は今日の時刻つき予定の件数） -->
-<meta name="brief-sources" content="cal=6;ok=6;ev=6">
+<meta name="brief-sources" content="cal=6;ok=6;ev=5">
 <!-- ▲置換 -->
 <meta name="color-scheme" content="light dark">
-<title>モーニングブリーフ 2026-10-14</title>
+<title>モーニングブリーフ 2026-10-15</title>
 <!-- ▼置換: 日付（今日の YYYY-MM-DD・title と同じ日） -->
-<script type="application/json" id="tlx-data">{"date":"2026-10-14"}</script>
+<script type="application/json" id="tlx-data">{"date":"2026-10-15"}</script>
 <!-- ▲置換 -->
 <style>
 :root{ color-scheme:light dark;
@@ -59,17 +60,32 @@ h2 .count{font-family:var(--num);font-size:11px;font-weight:600;color:var(--mute
 .hours{position:relative}
 .hours span{position:absolute;right:4px;font-family:var(--num);font-size:11px;color:var(--mute);
   transform:translateY(-50%);top:calc((var(--t) - 6) * var(--h))}
-.lane{position:relative;overflow:hidden;border-left:1px solid var(--line);
+.lane{position:relative;border-left:1px solid var(--line);
   background:repeating-linear-gradient(to bottom,var(--grid) 0 1px,transparent 1px var(--h))}
+/* 予定名を先・時刻を後に描く（カレンダーアプリと同じ）。30 分未満は 30 分の高さで描く。短い予定は 1 行で、時刻が入らなければ時刻を隠す */
 .ev{position:absolute;left:calc(3px + var(--c,0) * 100% / var(--n,1));width:calc(100% / var(--n,1) - 6px);top:calc((var(--s) - 6) * var(--h) + 1px);
-  height:calc((var(--e) - var(--s)) * var(--h) - 2px);min-height:20px;overflow:hidden;
-  border-radius:6px;padding:3px 7px;font-size:12px;line-height:1.35;z-index:1}
-.ev b{font-family:var(--num);font-size:11px;font-weight:600;opacity:.85;margin-right:5px}
-.ev.long b{display:block;margin:0}
-.ev .nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.ev.short{padding:1px 6px;line-height:1.3;white-space:nowrap;text-overflow:ellipsis}
-.ev.short .nm{display:inline}
-.ev.both b::before,.chip.both::before{content:"共 ";font-weight:700}
+  height:calc((var(--e) - var(--s)) * var(--h) - 2px);min-height:calc(var(--h) / 2 - 2px);overflow:hidden;
+  display:flex;flex-direction:column;border-radius:6px;padding:3px 7px;font-size:12px;line-height:1.35;z-index:1}
+.ev .nm{order:-1;flex:none;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.ev b{font-family:var(--num);font-size:11px;font-weight:500;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev.short{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:5px;row-gap:99px;padding:1px 6px;line-height:1.3;white-space:nowrap}
+.ev.short .nm{display:block;flex:0 1 auto;min-width:0;text-overflow:ellipsis}
+.ev.short b{flex:none}
+.chip.both::before{content:"共 ";font-weight:700}
+.ev.both .nm::before{content:"共";font-size:10px;font-weight:700;margin-right:2px}
+/* 予定の吹き出し: タップ（共通の JS がある頁はクリックで .open）でその場で広げ、名前と時刻を全文出す */
+.ev{cursor:pointer}
+html:not(.ev-js) .ev:hover,.ev.open{z-index:5;height:auto;min-height:max(calc(var(--h) / 2 - 2px),calc((var(--e) - var(--s)) * var(--h) - 2px));
+  width:max-content;min-width:calc(100% / var(--n,1) - 6px);max-width:min(240px,calc(200% - 100% * var(--c,0) / var(--n,1) - 6px));
+  flex-direction:column;flex-wrap:nowrap;row-gap:1px;white-space:normal;padding:4px 8px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+html:not(.ev-js) .lane.yu .ev:hover,.lane.yu .ev.open{left:auto;right:calc(3px + (var(--n,1) - 1 - var(--c,0)) * 100% / var(--n,1));
+  max-width:min(240px,calc(200% - 100% * (var(--n,1) - 1 - var(--c,0)) / var(--n,1) - 6px))}
+html:not(.ev-js) .ev:hover .nm,.ev.open .nm{display:block;-webkit-line-clamp:none;overflow:visible;flex:none}
+html:not(.ev-js) .ev:hover b,.ev.open b{white-space:normal;overflow:visible}
+html:not(.ev-js) .lane.me .ev:hover,.lane.me .ev.open{box-shadow:0 0 0 1.5px var(--me),0 6px 18px rgba(0,0,0,.35)}
+html:not(.ev-js) .lane.yu .ev:hover,.lane.yu .ev.open{box-shadow:0 0 0 1.5px var(--yu),0 6px 18px rgba(0,0,0,.35)}
+html:not(.ev-js) .ev.both:hover,.ev.both.open{box-shadow:0 0 0 1.5px var(--both),0 6px 18px rgba(0,0,0,.35)}
+.ev.open.up{top:auto;bottom:calc((23 - max(var(--e),var(--s) + .5)) * var(--h) + 1px)}
 .lane.me .ev{background:var(--me-bg);color:var(--ink);border-left:3px solid var(--me)}
 .lane.yu .ev{background:var(--yu-bg);color:var(--ink);border-left:3px solid var(--yu)}
 .ev.both{background:var(--both-bg) !important;border-left-color:var(--both) !important}
@@ -91,35 +107,37 @@ footer{font-size:11px;color:var(--mute);text-align:center;margin-top:24px}
   .lanes-head,.allday,.grid{grid-template-columns:38px 1fr 1fr;gap:4px}
   .ev{padding:3px 5px;border-left-width:2px !important} }
 </style>
+<link rel="stylesheet" href="assets/brief.css">
+<script src="assets/brief.js" defer></script>
 </head>
 <body>
 <div class="page">
 
 <header>
-<p class="kicker">MORNING BRIEF</p>
+<p class="kicker">朝のブリーフ</p>
 <!-- ▼置換: 日付 -->
-<h1>10月14日<small>（水）</small></h1>
+<h1>10月15日<small>（木）</small></h1>
 <!-- ▲置換 -->
+<nav class="nav"><a class="nav-archive" href="archive/">これまでのブリーフ</a></nav>
 </header>
 
 <section class="card focus">
 <h2>今日いちばん大事なこと</h2>
 <!-- ▼置換: 1〜3 項目 -->
 <ol>
-<li>出社して会議と移動がある</li>
-<li>ジムと配送の確認</li>
-<li>Yuriの眼科</li>
+<li>ピノグリのワクチン接種と杏の4ヶ月健診</li>
+<li>過去問と健康管理のタスクを進める</li>
 </ol>
 <!-- ▲置換 -->
 </section>
 
-<section class="card">
+<section class="card sched">
 <h2>今日のスケジュール</h2>
 <div class="lanes-head"><span></span><span class="lane-name me">自分</span><span class="lane-name yu">Yuri</span></div>
 <div class="allday">
 <span class="lbl">終日</span>
 <!-- ▼置換: 終日の予定（無ければ div の中を空にする） -->
-<div class="cell"><span class="chip me">出社</span><span class="chip me">配送</span></div>
+<div class="cell"><span class="chip me">配送</span></div>
 <div class="cell"></div>
 <!-- ▲置換 -->
 </div>
@@ -129,34 +147,34 @@ footer{font-size:11px;color:var(--mute);text-align:center;margin-top:24px}
 </div>
 <!-- ▼置換: 自分のレーン -->
 <div class="lane me">
-<div class="ev long" style="--s:6;--e:13;--c:0;--n:2"><b>05:00–13:00</b><span class="nm">配送</span></div>
-<div class="ev long" style="--s:7;--e:9;--c:1;--n:2"><b>07:00–09:00</b><span class="nm">ジム</span></div>
-<div class="ev short" style="--s:9.5;--e:10;--c:1;--n:2"><b>09:30–10:00</b><span class="nm">会議</span></div>
-<div class="ev long" style="--s:11;--e:13;--c:1;--n:2"><b>11:00–13:00</b><span class="nm">移動</span></div>
-<div class="ev long" style="--s:13;--e:14"><b>13:00–14:00</b><span class="nm">会議</span></div>
+<div class="ev long" style="--s:7;--e:9"><b>07:00–09:00</b><span class="nm">ジム</span></div>
+<div class="ev long" style="--s:9;--e:10.5;--c:0;--n:2"><b>09:00–10:30</b><span class="nm">ピノグリワクチン</span></div>
+<div class="ev long" style="--s:9;--e:12;--c:1;--n:2"><b>09:00–12:00</b><span class="nm">配送</span></div>
+<div class="ev long" style="--s:15;--e:16"><b>15:00–16:00</b><span class="nm">コープ配達</span></div>
 </div>
 <!-- ▲置換 -->
 <!-- ▼置換: Yuri のレーン -->
 <div class="lane yu">
-<div class="ev long" style="--s:15;--e:16"><b>15:00–16:00</b><span class="nm">仮 眼科</span></div>
+<div class="ev short" style="--s:13.5;--e:14"><b>13:30–14:00</b><span class="nm">杏 4ヶ月健診</span></div>
 </div>
 <!-- ▲置換 -->
 </div>
 <p class="legend">「共」＝2 人に関わる予定（ファミリー）</p>
 </section>
 
-<section class="card">
+<section class="card mail">
 <!-- ▼置換: 件数 -->
-<h2>要対応メール <span class="count">1</span></h2>
+<h2>要対応メール <span class="count">2</span></h2>
 <!-- ▲置換 -->
 <!-- ▼置換: メール（無ければ「ありません」の段落だけ） -->
 <ul class="list">
-<li><span class="tag">楽天証券</span><span>ログイン通知<span class="sub"> 心当たりなければパスワード再設定</span></span></li>
+<li><span class="tag">GitHub</span><span>ページビルド失敗の通知</span></li>
+<li><span class="tag">minne</span><span>2要素認証設定のお願い</span></li>
 </ul>
 <!-- ▲置換 -->
 </section>
 
-<section class="card">
+<section class="card tasks">
 <!-- ▼置換: 件数 -->
 <h2>タスク <span class="count">8</span></h2>
 <!-- ▲置換 -->
@@ -164,24 +182,33 @@ footer{font-size:11px;color:var(--mute);text-align:center;margin-top:24px}
 <ul class="list">
 <li><span class="tag due">04:00</span><span>応用情報過去問10</span></li>
 <li><span class="tag due">04:00</span><span>支援士過去問10</span></li>
-<li><span class="tag due">05:00</span><span>血糖値（朝）</span></li>
+<li><span class="tag due">05:00</span><span>サプリ補充</span></li>
 <li><span class="tag due">05:00</span><span>ピノグリごはん</span></li>
 <li><span class="tag due">07:00</span><span>duolingo</span></li>
 <li><span class="tag due">09:00</span><span>ジム前ストレッチ</span></li>
 <li><span class="tag due">12:00</span><span>血糖値（昼）</span></li>
-<li><span class="tag">今日</span><span>焼きナス</span></li>
+<li><span class="tag due">17:00</span><span>血糖値（夜）</span></li>
 </ul>
 <!-- ▲置換 -->
 </section>
 
-<section class="card">
+<section class="card done">
+<h2>片付いたこと</h2>
+<!-- ▼置換: 片付いたこと（昨日 Todoist で完了したタスク・最大 5 件。無ければ「ありません」の段落だけ） -->
+<p class="none">ありません</p>
+<!-- ▲置換 -->
+</section>
+
+<section class="card tomorrow">
 <h2>明日の予定</h2>
 <!-- ▼置換: 明日の予定 -->
 <ul class="list tomorrow">
 <li><span class="who me">自分</span><span class="tag">07:00</span><span>ジム</span></li>
-<li><span class="who me">自分</span><span class="tag">09:00</span><span>ピノグリワクチン</span></li>
-<li><span class="who yu">Yuri</span><span class="tag">13:30</span><span>杏 4ヶ月健診</span></li>
-<li><span class="who me">自分</span><span class="tag">15:00</span><span>コープ配達</span></li>
+<li><span class="who me">自分</span><span class="tag">09:30</span><span>会議</span></li>
+<li><span class="who me">自分</span><span class="tag">11:00</span><span>会議</span></li>
+<li><span class="who me">自分</span><span class="tag">14:00</span><span>会議</span></li>
+<li><span class="who me">自分</span><span class="tag">15:00</span><span>会議</span></li>
+<li><span class="who me">自分</span><span class="tag">21:00</span><span>コープ注文締切</span></li>
 </ul>
 <!-- ▲置換 -->
 </section>
