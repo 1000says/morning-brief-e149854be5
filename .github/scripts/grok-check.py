@@ -28,18 +28,25 @@ EV_MAX = 20  # 1 レーンの予定の上限（実測は最大 6 件/日。超�
 ALLOWED_TAGS = {
     "html", "head", "meta", "title", "style", "script", "body", "div", "header", "footer",
     "section", "h1", "h2", "p", "small", "b", "span", "ol", "ul", "li",
+    "link", "nav", "a",  # MB-117: 共通部品の参照とナビ（値は下の ASSET_* と NAV_HREF で完全一致に縛る）
 }
-ALLOWED_ATTRS = {"charset", "class", "content", "id", "name", "lang", "style", "type"}
+ALLOWED_ATTRS = {"charset", "class", "content", "id", "name", "lang", "style", "type", "rel", "href", "src", "defer"}
+# MB-117（DEC-2026-10-12-brief-archive）: 同一オリジンの共通部品。Grok 版は「両方無い」か「ちょうど 1 本ずつ」だけを許す。
+ASSET_LINK = {"rel": "stylesheet", "href": "assets/brief.css"}
+ASSET_SCRIPT = {"src": "assets/brief.js", "defer": ""}
+NAV_HREF = "archive/"
+ROBOTS = "noindex, nofollow"
 # テンプレート・指示・実出力（2026-10-11）に現れるクラスの和。増やすときはテンプレートと同時に。
 ALLOWED_CLASSES = {
     "allday", "card", "focus", "cell", "chip", "me", "yu", "both", "count", "ev", "long", "short",
     "grid", "hours", "kicker", "lane", "lane-name", "lanes-head", "lbl", "legend", "list",
     "tomorrow", "nm", "none", "page", "tag", "due", "over", "who", "empty", "sub",
+    "sched", "mail", "tasks", "done", "nav", "nav-archive",
 }
 # テンプレートの <style> 本体の sha256（改行は LF にそろえる）。テンプレートの CSS を変えたらここも同時に直す。
 STYLE_SHA256 = {"3c829fc4a8c77ba47bcd4247ca18c86c532c6f906eb68bd6c534590f2b56da2d",  # 2026-10-10 版
                 "7106f01c84e4c17ba0ad9f22e9da05a6e8846b1723c3f0c792928c7828526ed8"}  # 2026-10-14 版（短い予定の見え方と吹き出し・MB-121）
-ALLOWED_META_NAMES = {"viewport", "color-scheme", "brief-mode", "brief-sources"}
+ALLOWED_META_NAMES = {"viewport", "color-scheme", "brief-mode", "brief-sources", "robots"}
 STYLE_ATTR_RE = re.compile(r"^\s*(--[a-z]+\s*:\s*-?[0-9.]+\s*;?\s*)+$")
 # CSS・属性値に出てはいけない外部参照・実行の形（全モード共通）
 EXT_RE = re.compile(r"url\s*\(|@import|@font-face|expression\s*\(|javascript:|https?://|(?<![:\w])//[a-z0-9]",
@@ -56,6 +63,11 @@ class Walker(HTMLParser):
         self.bad = set()
         self.metas = []          # (name, content)
         self.scripts = []        # attrs dict
+        self.script_texts = {}   # script の添字 -> 中身があるか
+        self._script_text_i = None
+        self.links = []
+        self.anchors = []
+        self.n_start = 0
         self.tlx_text = None
         self.styles = []
         self.stack = []          # (tag, lane or None)
@@ -75,6 +87,7 @@ class Walker(HTMLParser):
         return None
 
     def handle_starttag(self, tag, attrs):
+        self.n_start += 1
         a = {k.lower(): (v or "") for k, v in attrs}
         if tag not in ALLOWED_TAGS:
             self.bad.add("tag:" + safe(tag))
@@ -114,15 +127,20 @@ class Walker(HTMLParser):
                 if nm not in ALLOWED_META_NAMES:
                     self.bad.add("meta:" + safe(nm))
                 self.metas.append((nm, a.get("content", "")))
+        if tag == "link":
+            self.links.append(a)
+        if tag == "a":
+            self.anchors.append(a)
         if tag == "script":
             self.scripts.append(a)
+            self._script_text_i = len(self.scripts) - 1
             if a.get("id") == "tlx-data":
                 self._in_tlx = True
                 self._buf = []
         if tag == "style":
             self._in_style = True
             self._buf = []
-        if tag not in ("meta",):
+        if tag not in ("meta", "link"):
             self.stack.append((tag, lane))
 
     def handle_startendtag(self, tag, attrs):
@@ -131,6 +149,8 @@ class Walker(HTMLParser):
             self.stack.pop()
 
     def handle_endtag(self, tag):
+        if tag == "script":
+            self._script_text_i = None
         if tag == "script" and self._in_tlx:
             self.tlx_text = "".join(self._buf)
             self._in_tlx = False
@@ -142,7 +162,14 @@ class Walker(HTMLParser):
                 del self.stack[i:]
                 break
 
+    def handle_comment(self, data):
+        # 許すのはテンプレートの置換の印（▼置換: … ／ ▲置換）だけ
+        if not re.match(r"\s*[▼▲]置換", data):
+            self.bad.add("comment")
+
     def handle_data(self, data):
+        if self._script_text_i is not None and data.strip():
+            self.script_texts[self._script_text_i] = True
         if self._in_tlx or self._in_style:
             self._buf.append(data)
 
@@ -177,7 +204,9 @@ def main(argv):
     except Exception:
         print("BAD unreadable")
         return 0
-    nocomment = re.sub(r"<!--.*?-->", "", html, flags=re.S)
+    # コメントを正規表現で先に消さない（属性値の中の "<!--" と "-->" の間に要素を隠せた・G2 P0①）。
+    # 文字列の検査は生の HTML に掛け、コメントは構文解析（Walker.handle_comment）で置換の印だけを許す。
+    nocomment = html
     mode = mode_of(nocomment)
 
     # 全モード共通: CSS の外部参照・meta refresh
@@ -207,6 +236,12 @@ def main(argv):
     except Exception:
         bad.append("parse")
     bad.extend(sorted(w.bad))
+    # 解析器とブラウザの解釈のずれを塞ぐ（G3 P0②: `--!>` で閉じるコメントや CDATA の中に script を隠せた）。
+    # ①その形そのものを禁止 ②生の HTML の開始タグの数と、解析器が見た開始タグの数が一致すること
+    if "<![" in html or "--!>" in html:
+        bad.append("markup")
+    if len(re.findall(r"<[A-Za-z]", html)) != w.n_start:
+        bad.append("parse-mismatch")
 
     # 構造の印（テンプレート準拠）
     if w.ids.get("tlx-data", 0) != 1:
@@ -215,10 +250,22 @@ def main(argv):
         bad.append("lanes-head")
     if sorted(w.lanes) != ["me", "yu"]:
         bad.append("lanes")
-    # script は tlx-data の JSON 1 本だけ
-    if len(w.scripts) != 1 or w.scripts[0].get("id") != "tlx-data" or \
-            w.scripts[0].get("type", "").lower() != "application/json":
+    # script は tlx-data の JSON 1 本＋（共通部品を使う版は）assets/brief.js を 1 本だけ。中身のある script は tlx-data だけ。
+    tlx = [i for i, a in enumerate(w.scripts) if a.get("id") == "tlx-data" and a.get("type", "").lower() == "application/json"]
+    ext = [i for i, a in enumerate(w.scripts) if a == ASSET_SCRIPT]
+    if len(tlx) != 1 or len(w.scripts) != 1 + len(ext) or len(ext) > 1 or any(w.script_texts.get(i) for i in ext):
         bad.append("script")
+    # 共通部品（MB-117）は必須: link は assets/brief.css をちょうど 1 本、script は assets/brief.js をちょうど 1 本、
+    # a は archive/ への 1 本（G3 P1・落としても緑だと導線と帯が無言で消える）
+    if len(w.links) != 1 or w.links[0] != ASSET_LINK:
+        bad.append("link")
+    if len(ext) != 1:
+        bad.append("script")
+    if len(w.anchors) != 1 or w.anchors[0] != {"class": "nav-archive", "href": NAV_HREF}:
+        bad.append("anchor")
+    # 検索エンジンに載せない指定は必須（G2 P0③・旧版は全頁が持っていた）
+    if [c for n, c in w.metas if n == "robots"] != [ROBOTS]:
+        bad.append("robots")
 
     # <style> はテンプレートと 1 文字も違わない（見た目・非表示の仕込みを差し替えさせない）
     if len(w.styles) != 1 or hashlib.sha256(w.styles[0].replace("\r\n", "\n").encode("utf-8")).hexdigest() not in STYLE_SHA256:
@@ -236,6 +283,12 @@ def main(argv):
         bad.append("no-brief-date")
     elif date != b_ymd:
         bad.append("date-drift")
+
+    # 見出しの日付（h1 の「M月D日」）が tlx-data の日付と同じ（日付の置換箇所は 2 か所ある＝片方だけ直す失敗を拾う）
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+        h1 = re.search(r"<h1>\s*(\d{1,2})月(\d{1,2})日", nocomment)
+        if not h1 or (int(h1.group(1)), int(h1.group(2))) != (int(date[5:7]), int(date[8:10])):
+            bad.append("h1-date")
 
     # 件数（brief-sources）。Grok 版でも必須＝指示の喪失と範囲の拡大を自己申告でも拾う
     src = [c for n, c in w.metas if n == "brief-sources"]
