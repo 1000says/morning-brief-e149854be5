@@ -108,4 +108,36 @@
       })
       .catch(function () { /* 一覧が無くても頁は使える */ });
   }
+  // 予定の吹き出し（MB-121）: タップで .open を付けてその場で広げ、外か同じ予定のタップ・Esc で閉じる。
+  // この JS がある頁では :hover で開く CSS を止める（スマホでは :hover がタップ後に残り、閉じられないため）
+  var evs = doc.querySelectorAll(".lane .ev");
+  if (evs.length) {
+    doc.documentElement.classList.add("ev-js");
+    var closeAll = function (keep) {
+      for (var k = 0; k < evs.length; k++) {
+        if (evs[k] !== keep) { evs[k].classList.remove("open", "up"); evs[k].setAttribute("aria-expanded", "false"); }
+      }
+    };
+    Array.prototype.forEach.call(evs, function (ev) {
+      ev.tabIndex = 0;
+      ev.setAttribute("role", "button");
+      ev.setAttribute("aria-expanded", "false");
+      ev.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var willOpen = !ev.classList.contains("open");
+        closeAll(ev);
+        ev.classList.toggle("open", willOpen);
+        ev.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        // 下端（グリッドの外）へはみ出すなら上向きに開く
+        ev.classList.remove("up");
+        var lane = ev.parentNode;
+        if (willOpen && lane && ev.getBoundingClientRect().bottom > lane.getBoundingClientRect().bottom) ev.classList.add("up");
+      });
+      ev.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); ev.click(); }
+      });
+    });
+    doc.addEventListener("click", function () { closeAll(null); });
+    doc.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(null); });
+  }
 })();
